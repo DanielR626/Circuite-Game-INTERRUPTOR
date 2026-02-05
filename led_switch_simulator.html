@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🎮 Circuito con Interruptor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1400px; margin: 0 auto; }
+
+        .game-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 4px solid #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .game-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2em;
+            color: #fff;
+            text-shadow: 4px 4px 0 #000;
+            margin-bottom: 10px;
+        }
+
+        .game-subtitle {
+            color: #fff;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .score-panel {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .score-card {
+            flex: 1;
+            min-width: 200px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 15px;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+            border: 3px solid #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .score-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .score-label {
+            font-size: 0.9em;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .score-value {
+            font-size: 2.5em;
+            font-weight: 900;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 20px;
+        }
+        
+        .panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            border: 4px solid #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .panel-title {
+            font-size: 1.4em;
+            font-weight: 900;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        #protoboard-container {
+            position: relative;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 20px;
+            padding: 60px 40px;
+            min-height: 650px;
+            border: 5px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 150px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        #wire-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .component {
+            position: absolute;
+            z-index: 10;
+            filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.4));
+            cursor: grab;
+        }
+
+        .component:active {
+            cursor: grabbing;
+        }
+
+        /* Battery - Diseño mejorado con colores más suaves */
+        .battery {
+            width: 90px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .battery-body {
+            width: 80px;
+            height: 140px;
+            /* Colores más suaves y profesionales */
+            background: linear-gradient(180deg, #4CAF50 0%, #81C784 50%, #C8E6C9 100%);
+            border: 4px solid #2E7D32;
+            border-radius: 10px;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: inset 0 -20px 40px rgba(0,0,0,0.2);
+        }
+        
+        /* Tapa superior de la batería (terminal positivo) */
+        .battery-body::before {
+            content: '';
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 14px;
+            background: #2E7D32;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .battery-label {
+            text-align: center;
+            color: #fff;
+            font-weight: 900;
+            font-size: 1.8em;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        /* Pines de batería - CORREGIDOS para estar pegados al cuerpo */
+        .battery-pin {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            background: linear-gradient(180deg, #d4d4d4 0%, #888 100%);
+            border-radius: 2px;
+            box-shadow: 2px 0 4px rgba(0,0,0,0.3);
+        }
+        .battery-pin-positive {
+            top: -14px; /* Pegado a la tapa */
+            height: 24px;
+        }
+        .battery-pin-negative {
+            bottom: 0; /* Pegado al fondo de la batería */
+            height: 24px;
+        }
+        
+        /* Signos +/- en la batería */
+        .battery-sign {
+            position: absolute;
+            font-size: 1.1em;
+            font-weight: 900;
+            background: rgba(255,255,255,0.95);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            z-index: 5;
+        }
+        .battery-sign-positive {
+            top: 5px;
+            right: 5px;
+            color: #c0392b;
+            border-color: #c0392b;
+        }
+        .battery-sign-negative {
+            bottom: 5px;
+            right: 5px;
+            color: #2c3e50;
+            border-color: #2c3e50;
+        }
+
+        /* Switch - Mejorado con diseño realista */
+        .switch {
+            width: 120px;
+            text-align: center;
+            position: relative;
+        }
+        .switch-body {
+            width: 100px;
+            height: 70px;
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            border: 4px solid #fff;
+            border-radius: 12px;
+            position: relative;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.2);
+        }
+        .switch-toggle {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            border: 4px solid #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: 900;
+            color: #fff;
+            user-select: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            position: relative;
+            z-index: 15;
+        }
+        .switch.on .switch-toggle {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 30px #2ecc71;
+            animation: switchGlow 1s ease-in-out infinite;
+        }
+        @keyframes switchGlow {
+            0%, 100% { box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 30px #2ecc71; }
+            50% { box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 50px #2ecc71; }
+        }
+        .switch-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e74c3c;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.95em;
+            font-weight: 900;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .switch.on .switch-label {
+            background: #2ecc71;
+            animation: labelPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes labelPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+
+        /* Resistencia - Mejorada con diseño realista */
+        .resistor {
+            width: 130px;
+            text-align: center;
+            position: relative;
+        }
+        .resistor-body {
+            width: 110px;
+            height: 40px;
+            background: linear-gradient(90deg,
+                #FFD89B 0%, #FFF 15%, #FFD89B 25%, #8B4513 30%,
+                #FFD89B 35%, #FFEB3B 40%, #FFD89B 45%, #FF9800 50%,
+                #FFD89B 55%, #FFF 70%, #FFD89B 100%
+            );
+            border-radius: 10px;
+            border: 3px solid #8B4513;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .resistor-label {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff9800;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.95em;
+            font-weight: 900;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* LED - Mejorado con patas realistas */
+        .led {
+            width: 90px;
+            text-align: center;
+            position: relative;
+        }
+        .led-body {
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle at 30% 30%, #ff9999 0%, #ff6b6b 30%, #ee5a6f 60%, #c92a2a 100%);
+            border-radius: 50% 50% 48% 48%;
+            position: relative;
+            margin: 0 auto;
+            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.4),
+                inset 0 -5px 10px rgba(0,0,0,0.2);
+        }
+        /* Brillo del LED */
+        .led-body::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
+            border-radius: 50%;
+        }
+        /* LED encendido */
+        .led.active .led-body {
+            background: radial-gradient(circle at 30% 30%, #ff3333 0%, #ff0000 30%, #ff0000 60%, #cc0000 100%);
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.4),
+                0 0 40px #ff0000,
+                0 0 60px #ff0000,
+                inset 0 -5px 10px rgba(0,0,0,0.2);
+            animation: ledGlow 0.8s ease-in-out infinite;
+        }
+        @keyframes ledGlow {
+            0%, 100% { filter: brightness(1.5); }
+            50% { filter: brightness(2.2); }
+        }
+        /* Patas del LED - CORREGIDAS para estar pegadas correctamente */
+        .led-pin {
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(180deg, #d4d4d4 0%, #888 100%);
+            border-radius: 2px;
+            box-shadow: 2px 0 4px rgba(0,0,0,0.3);
+        }
+        /* Pata larga (positivo) - IZQUIERDA, pegada arriba del LED */
+        .led-pin-long {
+            top: 0;
+            left: 18px;
+            height: 26px;
+        }
+        /* Pata corta (negativo) - DERECHA, pegada abajo del LED */
+        .led-pin-short {
+            bottom: 0;
+            right: 18px;
+            height: 16px;
+        }
+        /* Signos +/- en el LED - posicionados en las patas */
+        .led-sign {
+            position: absolute;
+            font-size: 1em;
+            font-weight: 900;
+            background: rgba(255,0.95);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            z-index: 5;
+        }
+        .led-sign-positive {
+            top: -8px;
+            left: 14px;
+            color: #c0392b;
+            border-color: #c0392b;
+        }
+        .led-sign-negative {
+            bottom: -8px;
+            right: 14px;
+            color: #2c3e50;
+            border-color: #2c3e50;
+        }
+
+        /* Puntos de conexión - AJUSTADOS a las puntas de los pines */
+        .connection-point {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            border: 4px solid #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 15;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+        .connection-point:hover {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            transform: scale(1.4);
+            box-shadow: 0 0 20px rgba(255,215,0,1);
+        }
+        .connection-point.connected {
+            background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+            animation: connectedPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes connectedPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        .connection-point.selected {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            animation: selectedJump 0.6s ease-in-out infinite;
+        }
+        @keyframes selectedJump { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+        /* Tooltip para ayudar a los niños */
+        .connection-point::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .connection-point:hover::after {
+            opacity: 1;
+        }
+
+        /* Mission cards */
+        .mission-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            padding: 18px;
+            margin: 15px 0;
+            border: 3px solid #fff;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .mission-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .mission-card.completed {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            box-shadow: 0 0 30px rgba(132, 250, 76, 0.5);
+        }
+
+        .mission-number {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: 900;
+            font-size: 1.2em;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .mission-card.completed .mission-number {
+            background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+            box-shadow: 0 0 20px rgba(81, 207, 102, 0.6);
+        }
+
+        .mission-card.completed .mission-number::after {
+            content: '✓';
+            font-size: 1.3em;
+        }
+
+        .mission-text {
+            font-weight: 600;
+            color: #333;
+            font-size: 1em;
+            line-height: 1.4;
+        }
+
+        /* Buttons */
+        .btn-game {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            border: 4px solid #fff;
+            width: 100%;
+            margin: 10px 0;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-game:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .status-toast {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 25px 35px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1.2em;
+            border: 4px solid #fff;
+            z-index: 1000;
+            transform: translateX(500px);
+            transition: transform 0.5s;
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .status-toast.show {
+            transform: translateX(0);
+            animation: toastBounce 0.5s ease;
+        }
+
+        @keyframes toastBounce {
+            0% { transform: translateX(500px); }
+            60% { transform: translateX(10px); }
+            80% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .status-toast.success {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #fff;
+        }
+        .status-toast.error {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #fff;
+        }
+        .status-toast.info {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: #fff;
+        }
+        .status-toast.warning {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #333;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border: 3px solid #fff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .info-title {
+            font-weight: 900;
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .info-text {
+            color: #555;
+            font-weight: 600;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border: 3px solid #fff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(00,0,0.2);
+        }
+
+        .circuit-guide {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .circuit-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            border: 3px solid #ddd;
+            transition: all 0.3s;
+        }
+
+        .circuit-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border-color: #667eea;
+        }
+
+        .circuit-symbol {
+            font-size: 3em;
+            margin: 10px 0;
+        }
+
+        .circuit-name {
+            font-weight: 900;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .circuit-detail {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .celebration-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .celebration-overlay.active {
+            display: flex;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .celebration-content {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 60px;
+            border-radius: 30px;
+            text-align: center;
+            border: 6px solid #fff;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .celebration-emoji {
+            font-size: 6em;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .celebration-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2.5em;
+            color: #fff;
+            margin: 25px 0;
+            text-shadow: 5px 5px 0 #000;
+        }
+
+        .celebration-text {
+            font-size: 1.3em;
+            color: #fff;
+            margin-bottom: 25px;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        /* Ajustes para responsividad */
+        @media (max-width: 1200px) {
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+            #protoboard-container {
+                flex-direction: column;
+                gap: 120px;
+                padding: 50px 30px;
+            }
+            .game-title {
+                font-size: 1.8em;
+            }
+            .game-subtitle {
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .score-panel {
+                flex-direction: column;
+            }
+            #protoboard-container {
+                padding: 40px 20px;
+                min-height: 600px;
+                gap: 100px;
+            }
+            .battery-body {
+                width: 70px;
+                height: 120px;
+            }
+            .led-body {
+                width: 60px;
+                height: 60px;
+            }
+            .battery-pin-positive,
+            .battery-pin-negative {
+                height: 40px;
+            }
+            .led-pin-long {
+                height: 45px;
+            }
+            .led-pin-short {
+                height: 32px;
+            }
+            .circuit-guide {
+                grid-template-columns: 1fr;
+            }
+            .score-value {
+                font-size: 2.2em;
+            }
+            .panel-title {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .game-title {
+                font-size: 1.5em;
+            }
+            .game-subtitle {
+                font-size: 1em;
+            }
+            #protoboard-container {
+                padding: 35px 15px;
+                min-height: 550px;
+                gap: 90px;
+            }
+            .battery-body {
+                width: 60px;
+                height: 100px;
+            }
+            .led-body {
+                width: 50px;
+                height: 50px;
+            }
+            .battery-pin-positive,
+            .battery-pin-negative {
+                height: 35px;
+            }
+            .led-pin-long {
+                height: 40px;
+            }
+            .led-pin-short {
+                height: 28px;
+            }
+            .score-card {
+                padding: 15px;
+            }
+            .score-label {
+                font-size: 0.8em;
+            }
+            .score-value {
+                font-size: 2em;
+            }
+            .panel-title {
+                font-size: 1.1em;
+            }
+            .mission-card {
+                padding: 15px 12px;
+            }
+            .mission-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
+            .mission-text {
+                font-size: 0.9em;
+            }
+            .btn-game {
+                padding: 15px 25px;
+                font-size: 0.9em;
+            }
+            .info-box, .warning-box {
+                padding: 15px;
+            }
+            .info-title {
+                font-size: 1.1em;
+            }
+            .info-text {
+                font-size: 0.95em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #protoboard-container {
+                padding: 30px 10px;
+                min-height: 500px;
+                gap: 80px;
+            }
+            .battery-body {
+                width: 50px;
+                height: 90px;
+            }
+            .led-body {
+                width: 45px;
+                height: 45px;
+            }
+            .battery-pin-positive,
+            .battery-pin-negative {
+                height: 30px;
+            }
+            .led-pin-long {
+                height: 35px;
+            }
+            .led-pin-short {
+                height: 25px;
+            }
+            .game-title {
+                font-size: 1.3em;
+            }
+            .game-subtitle {
+                font-size: 0.9em;
+            }
+            .score-value {
+                font-size: 1.8em;
+            }
+            .panel-title {
+                font-size: 1em;
+            }
+            .mission-card {
+                padding: 12px 10px;
+            }
+            .mission-number {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9em;
+            }
+            .btn-game {
+                padding: 12px 20px;
+                font-size: 0.8em;
+            }
+            .info-title {
+                font-size: 1em;
+            }
+            .info-text {
+                font-size: 0.9em;
+            }
+        }
+
+        /* Para el arrastre de componentes */
+        .component.dragging {
+            opacity: 0.8;
+            z-index: 100;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="game-header">
+            <div class="game-title">⚡ CIRCUITO CON INTERRUPTOR ⚡</div>
+            <div class="game-subtitle">🎯 Controla cuando encender y apagar el LED</div>
+        </div>
+
+        <div class="score-panel">
+            <div class="score-card">
+                <div class="score-label">🔌 Cables</div>
+                <div class="score-value" id="wire-count">0 / 4</div>
+            </div>
+            <div class="score-card">
+                <div class="score-label">⚡ Interruptor</div>
+                <div class="score-value" id="switch-status">OFF</div>
+            </div>
+            <div class="score-card">
+                <div class="score-label">💡 LED</div>
+                <div class="score-value" id="led-status">OFF</div>
+            </div>
+        </div>
+
+        <div class="game-grid">
+            <div class="panel">
+                <div class="panel-title">🎯 TU MISIÓN</div>
+                
+                <div class="mission-card" id="mission1">
+                    <span class="mission-number">1</span>
+                    <span class="mission-text">Conecta el <strong>+ rojo</strong> de la batería con la <strong>entrada del interruptor</strong></span>
+                </div>
+                
+                <div class="mission-card" id="mission2">
+                    <span class="mission-number">2</span>
+                    <span class="mission-text">Conecta la <strong>salida del interruptor</strong> con un <strong>lado de la resistencia</strong></span>
+                </div>
+                
+                <div class="mission-card" id="mission3">
+                    <span class="mission-number">3</span>
+                    <span class="mission-text">Conecta el <strong>otro lado de la resistencia</strong> con el <strong>+ del LED</strong> (pata larga)</span>
+                </div>
+
+                <div class="mission-card" id="mission4">
+                    <span class="mission-number">4</span>
+                    <span class="mission-text">Conecta el <strong>− del LED</strong> (pata corta) con el <strong>− negro</strong> de la batería</span>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-title">📚 Guía de Componentes</div>
+                    <div class="circuit-guide">
+                        <div class="circuit-item">
+                            <div class="circuit-symbol" style="color: #43e97b;">🔋</div>
+                            <div class="circuit-name">Batería</div>
+                            <div class="circuit-detail">Fuente de energía</div>
+                        </div>
+                        <div class="circuit-item">
+                            <div class="circuit-symbol" style="color: #e74c3c;">🔘</div>
+                            <div class="circuit-name">Interruptor</div>
+                            <div class="circuit-detail">Controla el flujo</div>
+                        </div>
+                        <div class="circuit-item">
+                            <div class="circuit-symbol" style="color: #ff9800;">🟫</div>
+                            <div class="circuit-name">Resistencia</div>
+                            <div class="circuit-detail">Protege el LED</div>
+                        </div>
+                        <div class="circuit-item">
+                            <div class="circuit-symbol" style="color: #ff6b6b;">💡</div>
+                            <div class="circuit-name">LED</div>
+                            <div class="circuit-detail">Emite luz</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <div class="info-title">⚠️ IMPORTANTE</div>
+                    <div class="info-text">
+                        <strong>Necesitas 4 cables para completar el circuito.</strong><br>
+                        🔍 Haz clic en el <strong>interruptor</strong> para encender/apagar.<br>
+                        ⚡ Cuando el interruptor esté <strong>ON</strong> y el circuito correcto, ¡el LED se encenderá!
+                    </div>
+                </div>
+
+                <button class="btn-game btn-success" onclick="verifyCircuit()">✓ VERIFICAR CIRCUITO</button>
+                <button class="btn-game btn-danger" onclick="clearWires()">🔄 EMPEZAR DE NUEVO</button>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">🔧 ÁREA DE TRABAJO</div>
+                
+                <div id="protoboard-container">
+                    <svg id="wire-canvas"></svg>
+                    
+                    <!-- Batería con pines corregidos -->
+                    <div class="component battery" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)">
+                        <div class="battery-pin battery-pin-positive"></div>
+                        <div class="connection-point" 
+                             data-component="battery" 
+                             data-terminal="positive"
+                             data-tooltip="+ Positivo Batería"
+                             style="top: -26px; left: 50%; transform: translateX(-50%);"></div>
+                        
+                        <div class="battery-body">
+                            <div class="battery-label">9V</div>
+                            <div class="battery-sign battery-sign-positive">+</div>
+                            <div class="battery-sign battery-sign-negative">−</div>
+                        </div>
+                        
+                        <div class="connection-point" 
+                             data-component="battery" 
+                             data-terminal="negative"
+                             data-tooltip="− Negativo Batería"
+                             style="bottom: -26px; left: 50%; transform: translateX(-50%);"></div>
+                        <div class="battery-pin battery-pin-negative"></div>
+                    </div>
+
+                    <!-- Interruptor -->
+                    <div class="component switch" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)">
+                        <div class="connection-point" 
+                             data-component="switch" 
+                             data-terminal="in"
+                             data-tooltip="Entrada Interruptor"
+                             style="top: 50%; left: -18px; transform: translateY(-50%);"></div>
+                        
+                        <div class="switch-body">
+                            <div class="switch-toggle" onclick="toggleSwitch()">OFF</div>
+                        </div>
+                        <div class="switch-label">APAGADO</div>
+                        
+                        <div class="connection-point" 
+                             data-component="switch" 
+                             data-terminal="out"
+                             data-tooltip="Salida Interruptor"
+                             style="top: 50%; right: -18px; transform: translateY(-50%);"></div>
+                    </div>
+
+                    <!-- Resistencia -->
+                    <div class="component resistor" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)">
+                        <div class="connection-point" 
+                             data-component="resistor" 
+                             data-terminal="left"
+                             data-tooltip="Lado Izquierdo Resistencia"
+                             style="top: 50%; left: -18px; transform: translateY(-50%);"></div>
+                        
+                        <div class="resistor-body"></div>
+                        <div class="resistor-label">330Ω</div>
+                        
+                        <div class="connection-point" 
+                             data-component="resistor" 
+                             data-terminal="right"
+                             data-tooltip="Lado Derecho Resistencia"
+                             style="top: 50%; right: -18px; transform: translateY(-50%);"></div>
+                    </div>
+
+                    <!-- LED con patas corregidas -->
+                    <div class="component led" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)">
+                        <!-- Pata larga (positivo) - IZQUIERDA -->
+                        <div class="led-pin led-pin-long"></div>
+                        <div class="led-sign led-sign-positive">+</div>
+                        <div class="connection-point" 
+                             data-component="led" 
+                             data-terminal="positive"
+                             data-tooltip="+ Positivo LED (pata larga)"
+                             style="top: -28px; left: 18px;"></div>
+                        
+                        <div class="led-body"></div>
+                        
+                        <!-- Pata corta (negativo) - DERECHA -->
+                        <div class="connection-point" 
+                             data-component="led" 
+                             data-terminal="negative"
+                             data-tooltip="− Negativo LED (pata corta)"
+                             style="bottom: -18px; right: 18px;"></div>
+                        <div class="led-sign led-sign-negative">−</div>
+                        <div class="led-pin led-pin-short"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <div class="info-title">🔍 ¿Cómo funciona?</div>
+            <div class="info-text">
+                El interruptor es como una <strong>puerta</strong> para la electricidad.
+                Cuando está <strong>ENCENDIDO (ON)</strong>, la corriente fluye y el LED se ilumina.
+                Cuando está <strong>APAGADO (OFF)</strong>, la corriente se detiene y el LED se apaga.
+                ¡Igual que el interruptor de la luz en tu casa!<br><br>
+                🔴 La <strong>resistencia</strong> protege al LED para que no se queme.<br>
+                ⚡ El circuito debe estar <strong>completo y cerrado</strong> para que funcione.
+            </div>
+        </div>
+    </div>
+
+    <div class="status-toast" id="status-toast"></div>
+    
+    <div class="celebration-overlay" id="celebration">
+        <div class="celebration-content">
+            <div class="celebration-emoji">🎉💡✨</div>
+            <div class="celebration-title">¡PERFECTO!</div>
+            <div class="celebration-text">
+                🌟 ¡Has completado el circuito correctamente! 🌟<br><br>
+                Ahora haz clic en el <strong>interruptor</strong> para encender el LED<br><br>
+                💡 <strong>¡Aprender electrónica es divertido!</strong> 💡
+            </div>
+            <button class="btn-game" onclick="closeCelebration()">🎯 CONTINUAR APRENDIENDO</button>
+        </div>
+    </div>
+
+    <script>
+        let wires = [];
+        let selectedPoint = null;
+        let wireColors = ['#ff4757', '#4ecdc4', '#45b7d1', '#f9ca24'];
+        let currentColorIndex = 0;
+        let switchState = false;
+        let circuitComplete = false;
+        const MAX_WIRES = 4;
+        let draggedElement = null;
+        let offsetX, offsetY;
+        let initialX, initialY;
+        let isDragging = false;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupConnectionPoints();
+            setupDragAndDrop();
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            updateUI();
+            positionComponents();
+        });
+
+        function positionComponents() {
+            const container = document.getElementById('protoboard-container');
+            const containerWidth = container.offsetWidth;
+            const containerHeight = container.offsetHeight;
+            
+            const battery = document.querySelector('.battery');
+            const switchEl = document.querySelector('.switch');
+            const resistor = document.querySelector('.resistor');
+            const led = document.querySelector('.led');
+            
+            battery.style.position = 'absolute';
+            battery.style.left = '50px';
+            battery.style.top = 'calc(50% - 70px)';
+            
+            switchEl.style.position = 'absolute';
+            switchEl.style.left = '220px';
+            switchEl.style.top = 'calc(50% - 35px)';
+            
+            resistor.style.position = 'absolute';
+            resistor.style.left = '400px';
+            resistor.style.top = 'calc(50% - 20px)';
+            
+            led.style.position = 'absolute';
+            led.style.left = 'calc(50% - 45px)';
+            led.style.top = 'calc(50% + 100px)';
+        }
+
+        function resizeCanvas() {
+            const container = document.getElementById('protoboard-container');
+            const canvas = document.getElementById('wire-canvas');
+            canvas.setAttribute('width', container.offsetWidth);
+            canvas.setAttribute('height', container.offsetHeight);
+            redrawWires();
+        }
+
+        function setupConnectionPoints() {
+            const points = document.querySelectorAll('.connection-point');
+            points.forEach(point => {
+                point.addEventListener('click', handlePointClick);
+            });
+        }
+
+        function setupDragAndDrop() {
+            const components = document.querySelectorAll('.component');
+            components.forEach(component => {
+                component.addEventListener('mousedown', startDrag);
+                component.addEventListener('touchstart', startDrag, { passive: false });
+            });
+            
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('touchmove', drag, { passive: false });
+            document.addEventListener('mouseup', stopDrag);
+            document.addEventListener('touchend', stopDrag);
+        }
+
+        function startDrag(e) {
+            e.preventDefault();
+            draggedElement = this;
+            isDragging = true;
+            draggedElement.classList.add('dragging');
+            
+            const rect = draggedElement.getBoundingClientRect();
+            if (e.type === 'touchstart') {
+                offsetX = e.touches[0].clientX - rect.left;
+                offsetY = e.touches[0].clientY - rect.top;
+                initialX = rect.left;
+                initialY = rect.top;
+            } else {
+                offsetX = e.clientX - rect.left;
+                offsetY = e.clientY - rect.top;
+                initialX = rect.left;
+                initialY = rect.top;
+            }
+        }
+
+        function drag(e) {
+            if (!isDragging || !draggedElement) return;
+            e.preventDefault();
+            
+            let clientX, clientY;
+            if (e.type === 'touchmove') {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+            
+            const container = document.getElementById('protoboard-container');
+            const containerRect = container.getBoundingClientRect();
+            
+            // Calcular nueva posición restringida al contenedor
+            let x = clientX - containerRect.left - offsetX;
+            let y = clientY - containerRect.top - offsetY;
+            
+            // Restringir el movimiento dentro del contenedor
+            const maxLeft = 0;
+            const maxRight = containerRect.width - draggedElement.offsetWidth;
+            const maxTop = 0;
+            const maxBottom = containerRect.height - draggedElement.offsetHeight;
+            
+            x = Math.max(maxLeft, Math.min(x, maxRight));
+            y = Math.max(maxTop, Math.min(y, maxBottom));
+            
+            draggedElement.style.left = x + 'px';
+            draggedElement.style.top = y + 'px';
+            
+            // Actualizar las conexiones en tiempo real
+            updateConnections();
+        }
+
+        function updateConnections() {
+            // Solo actualizamos las conexiones si estamos arrastrando
+            if (isDragging && draggedElement) {
+                redrawWires();
+            }
+        }
+
+        function stopDrag() {
+            if (isDragging && draggedElement) {
+                isDragging = false;
+                draggedElement.classList.remove('dragging');
+                
+                // Asegurar que los componentes no se salgan del contenedor
+                const container = document.getElementById('protoboard-container');
+                const containerRect = container.getBoundingClientRect();
+                const rect = draggedElement.getBoundingClientRect();
+                
+                let x = draggedElement.offsetLeft;
+                let y = draggedElement.offsetTop;
+                
+                const maxLeft = 0;
+                const maxRight = containerRect.width - draggedElement.offsetWidth;
+                const maxTop = 0;
+                const maxBottom = containerRect.height - draggedElement.offsetHeight;
+                
+                if (x < maxLeft) x = maxLeft;
+                if (x > maxRight) x = maxRight;
+                if (y < maxTop) y = maxTop;
+                if (y > maxBottom) y = maxBottom;
+                
+                draggedElement.style.left = x + 'px';
+                draggedElement.style.top = y + 'px';
+                
+                // Redibujar las conexiones una vez que se suelta
+                redrawWires();
+            }
+            draggedElement = null;
+        }
+
+        function handlePointClick(e) {
+            const point = e.target;
+            
+            if (wires.length >= MAX_WIRES && !selectedPoint) {
+                showStatus('⚠️ Ya usaste los 4 cables disponibles', 'warning');
+                return;
+            }
+            
+            if (!selectedPoint) {
+                selectedPoint = point;
+                point.classList.add('selected');
+                showStatus('✓ Punto seleccionado, elige el destino', 'info');
+            } else {
+                if (selectedPoint === point) {
+                    selectedPoint.classList.remove('selected');
+                    selectedPoint = null;
+                    showStatus('❌ Selección cancelada', 'info');
+                    return;
+                }
+
+                if (selectedPoint.dataset.component === point.dataset.component) {
+                    selectedPoint.classList.remove('selected');
+                    selectedPoint = null;
+                    showStatus('❌ No puedes conectar el mismo componente consigo mismo', 'error');
+                    return;
+                }
+                
+                createWire(selectedPoint, point);
+                selectedPoint.classList.remove('selected');
+                point.classList.add('connected');
+                selectedPoint.classList.add('connected');
+                selectedPoint = null;
+                
+                updateUI();
+                checkMissions();
+            }
+        }
+
+        function createWire(point1, point2) {
+            const container = document.getElementById('protoboard-container');
+            const containerRect = container.getBoundingClientRect();
+            
+            const rect1 = point1.getBoundingClientRect();
+            const rect2 = point2.getBoundingClientRect();
+            
+            // Determinar color según la conexión
+            let wireColor;
+            const terminal1 = point1.dataset.terminal;
+            const terminal2 = point2.dataset.terminal;
+            
+            if ((terminal1 === 'positive' && terminal2 === 'positive') || 
+                (terminal1 === 'in' && terminal2 === 'positive') ||
+                (terminal1 === 'positive' && terminal2 === 'in')) {
+                wireColor = '#ff4757'; // Rojo para positivo
+            } else if ((terminal1 === 'negative' && terminal2 === 'negative') ||
+                      (terminal1 === 'negative' && terminal2 === 'out') ||
+                      (terminal1 === 'out' && terminal2 === 'negative')) {
+                wireColor = '#2f3542'; // Negro para negativo
+            } else {
+                wireColor = wireColors[currentColorIndex++ % wireColors.length];
+            }
+            
+            const wire = {
+                point1: point1,
+                point2: point2,
+                color: wireColor
+            };
+
+            wires.push(wire);
+            drawWire(wire);
+            showStatus(`🔌 Cable ${wires.length} conectado`, 'success');
+        }
+
+        function drawWire(wire) {
+            const canvas = document.getElementById('wire-canvas');
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            
+            const container = document.getElementById('protoboard-container');
+            const containerRect = container.getBoundingClientRect();
+            
+            const rect1 = wire.point1.getBoundingClientRect();
+            const rect2 = wire.point2.getBoundingClientRect();
+            
+            const x1 = rect1.left - containerRect.left + rect1.width / 2;
+            const y1 = rect1.top - containerRect.top + rect1.height / 2;
+            const x2 = rect2.left - containerRect.left + rect2.width / 2;
+            const y2 = rect2.top - containerRect.top + rect2.height / 2;
+            
+            const dx = x2 - x1;
+            const curve = Math.abs(dx) * 0.3;
+            const d = `M ${x1} ${y1} C ${x1 + curve} ${y1}, ${x2 - curve} ${y2}, ${x2} ${y2}`;
+            
+            path.setAttribute('d', d);
+            path.setAttribute('stroke', wire.color);
+            path.setAttribute('stroke-width', '8');
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke-linecap', 'round');
+            path.setAttribute('opacity', '0.9');
+            
+            canvas.appendChild(path);
+        }
+
+        function redrawWires() {
+            const canvas = document.getElementById('wire-canvas');
+            canvas.innerHTML = '';
+            
+            wires.forEach(wire => {
+                drawWire(wire);
+            });
+        }
+
+        function toggleSwitch() {
+            if (!circuitComplete) {
+                showStatus('⚠️ Primero completa el circuito correctamente', 'warning');
+                return;
+            }
+            
+            switchState = !switchState;
+            const switchEl = document.querySelector('.switch');
+            const switchToggle = document.querySelector('.switch-toggle');
+            const switchLabel = document.querySelector('.switch-label');
+            
+            if (switchState) {
+                switchEl.classList.add('on');
+                switchToggle.textContent = 'ON';
+                switchLabel.textContent = 'ENCENDIDO';
+                showStatus('⚡ Interruptor ENCENDIDO - ¡El LED debería encenderse!', 'success');
+            } else {
+                switchEl.classList.remove('on');
+                switchToggle.textContent = 'OFF';
+                switchLabel.textContent = 'APAGADO';
+                showStatus('⚡ Interruptor APAGADO - El LED se apaga', 'info');
+            }
+            
+            updateUI();
+            updateLED();
+        }
+
+        function updateLED() {
+            const ledEl = document.querySelector('.led');
+            
+            if (circuitComplete && switchState) {
+                ledEl.classList.add('active');
+            } else {
+                ledEl.classList.remove('active');
+            }
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('wire-count').textContent = wires.length + ' / ' + MAX_WIRES;
+            document.getElementById('switch-status').textContent = switchState ? '✅ ON' : '❌ OFF';
+            const ledActive = document.querySelector('.led').classList.contains('active');
+            document.getElementById('led-status').textContent = ledActive ? '✅ ON' : '❌ OFF';
+        }
+
+        function clearWires() {
+            wires = [];
+            document.getElementById('wire-canvas').innerHTML = '';
+            
+            document.querySelectorAll('.connection-point').forEach(point => {
+                point.classList.remove('connected', 'selected');
+            });
+            
+            selectedPoint = null;
+            document.querySelector('.led').classList.remove('active');
+            circuitComplete = false;
+            switchState = false;
+            document.querySelector('.switch').classList.remove('on');
+            document.querySelector('.switch-toggle').textContent = 'OFF';
+            document.querySelector('.switch-label').textContent = 'APAGADO';
+            
+            ['mission1', 'mission2', 'mission3', 'mission4'].forEach(id => {
+                document.getElementById(id).classList.remove('completed');
+            });
+            
+            updateUI();
+            showStatus('🔄 Circuito reiniciado - ¡Intenta de nuevo!', 'info');
+        }
+
+        function checkMissions() {
+            const connections = {};
+            wires.forEach(wire => {
+                const key1 = wire.point1.dataset.component + '-' + wire.point1.dataset.terminal;
+                const key2 = wire.point2.dataset.component + '-' + wire.point2.dataset.terminal;
+                
+                if (!connections[key1]) connections[key1] = [];
+                if (!connections[key2]) connections[key2] = [];
+                
+                connections[key1].push(key2);
+                connections[key2].push(key1);
+            });
+
+            const m1 = checkPath(connections, 'battery-positive', 'switch-in');
+            const m2 = checkPath(connections, 'switch-out', 'resistor-left') || checkPath(connections, 'switch-out', 'resistor-right');
+            const m3 = (checkPath(connections, 'resistor-left', 'led-positive') && !checkPath(connections, 'resistor-right', 'led-positive')) ||
+                       (checkPath(connections, 'resistor-right', 'led-positive') && !checkPath(connections, 'resistor-left', 'led-positive'));
+            const m4 = checkPath(connections, 'led-negative', 'battery-negative');
+
+            document.getElementById('mission1').classList.toggle('completed', m1);
+            document.getElementById('mission2').classList.toggle('completed', m2);
+            document.getElementById('mission3').classList.toggle('completed', m3);
+            document.getElementById('mission4').classList.toggle('completed', m4);
+        }
+
+        function verifyCircuit() {
+            if (wires.length < MAX_WIRES) {
+                showStatus(`❌ Te faltan ${MAX_WIRES - wires.length} cable(s) por conectar`, 'error');
+                return;
+            }
+
+            const connections = {};
+            wires.forEach(wire => {
+                const key1 = wire.point1.dataset.component + '-' + wire.point1.dataset.terminal;
+                const key2 = wire.point2.dataset.component + '-' + wire.point2.dataset.terminal;
+                
+                if (!connections[key1]) connections[key1] = [];
+                if (!connections[key2]) connections[key2] = [];
+                
+                connections[key1].push(key2);
+                connections[key2].push(key1);
+            });
+
+            const m1 = checkPath(connections, 'battery-positive', 'switch-in');
+            const m2 = checkPath(connections, 'switch-out', 'resistor-left') || checkPath(connections, 'switch-out', 'resistor-right');
+            const m3 = (checkPath(connections, 'resistor-left', 'led-positive') && !checkPath(connections, 'resistor-right', 'led-positive')) ||
+                       (checkPath(connections, 'resistor-right', 'led-positive') && !checkPath(connections, 'resistor-left', 'led-positive'));
+            const m4 = checkPath(connections, 'led-negative', 'battery-negative');
+
+            if (m1 && m2 && m3 && m4) {
+                circuitComplete = true;
+                document.getElementById('celebration').classList.add('active');
+                updateLED();
+                showStatus('✅ ¡CIRCUITO CORRECTO! Ahora haz clic en el interruptor para encender el LED', 'success');
+            } else {
+                circuitComplete = false;
+                document.querySelector('.led').classList.remove('active');
+                let message = '❌ Circuito incorrecto. ';
+                if (!m1) message += '🔴 Conecta batería (+) con interruptor. ';
+                if (!m2) message += '🟡 Conecta interruptor con resistencia. ';
+                if (!m3) message += '🟠 Conecta resistencia con LED (+). ';
+                if (!m4) message += '⚫ Conecta LED (-) con batería (-).';
+                showStatus(message, 'error');
+            }
+            updateUI();
+        }
+
+        function checkPath(connections, start, end) {
+            if (!connections[start]) return false;
+            return connections[start].includes(end);
+        }
+
+        function closeCelebration() {
+            document.getElementById('celebration').classList.remove('active');
+        }
+
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('status-toast');
+            statusEl.textContent = message;
+            statusEl.className = 'status-toast ' + type;
+            
+            setTimeout(() => statusEl.classList.add('show'), 100);
+            setTimeout(() => statusEl.classList.remove('show'), 4000);
+        }
+    </script>
+</body>
+</html>
