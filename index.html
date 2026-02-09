@@ -14,7 +14,7 @@
             min-height: 100vh;
             padding: 20px;
             overflow-x: hidden;
-            touch-action: manipulation;
+            touch-action: none;
         }
 
         .container { max-width: 1400px; margin: 0 auto; }
@@ -116,6 +116,7 @@
             gap: 150px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.4);
             overflow: hidden;
+            touch-action: none;
         }
 
         #wire-canvas {
@@ -133,6 +134,7 @@
             z-index: 10;
             filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.4));
             cursor: grab;
+            user-select: none;
         }
 
         .component:active {
@@ -267,6 +269,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             position: relative;
             z-index: 15;
+            touch-action: manipulation;
         }
         .switch.on .switch-toggle {
             background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
@@ -430,8 +433,8 @@
         /* Puntos de conexión - AJUSTADOS para móviles */
         .connection-point {
             position: absolute;
-            width: 35px; /* Aumentado para pantallas táctiles */
-            height: 35px; /* Aumentado para pantallas táctiles */
+            width: 35px;
+            height: 35px;
             background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
             border: 4px solid #fff;
             border-radius: 50%;
@@ -439,6 +442,7 @@
             z-index: 15;
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            touch-action: manipulation;
         }
         .connection-point:hover {
             background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
@@ -549,6 +553,7 @@
             font-size: 1.1em;
             transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            touch-action: manipulation;
         }
 
         .btn-game:hover {
@@ -988,7 +993,7 @@
                     <svg id="wire-canvas"></svg>
                     
                     <!-- Batería con pines corregidos -->
-                    <div class="component battery" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)">
+                    <div class="component battery">
                         <div class="battery-pin battery-pin-positive"></div>
                         <div class="connection-point" 
                              data-component="battery" 
@@ -1011,7 +1016,7 @@
                     </div>
 
                     <!-- Interruptor -->
-                    <div class="component switch" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)">
+                    <div class="component switch">
                         <div class="connection-point" 
                              data-component="switch" 
                              data-terminal="in"
@@ -1019,7 +1024,7 @@
                              style="top: 50%; left: -22px; transform: translateY(-50%);"></div>
                         
                         <div class="switch-body">
-                            <div class="switch-toggle" onclick="toggleSwitch()">OFF</div>
+                            <div class="switch-toggle" onclick="toggleSwitch(event)">OFF</div>
                         </div>
                         <div class="switch-label">APAGADO</div>
                         
@@ -1031,7 +1036,7 @@
                     </div>
 
                     <!-- Resistencia -->
-                    <div class="component resistor" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)">
+                    <div class="component resistor">
                         <div class="connection-point" 
                              data-component="resistor" 
                              data-terminal="left"
@@ -1049,7 +1054,7 @@
                     </div>
 
                     <!-- LED con patas corregidas -->
-                    <div class="component led" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)">
+                    <div class="component led">
                         <!-- Pata larga (positivo) - IZQUIERDA -->
                         <div class="led-pin led-pin-long"></div>
                         <div class="led-sign led-sign-positive">+</div>
@@ -1112,8 +1117,8 @@
         const MAX_WIRES = 4;
         let draggedElement = null;
         let offsetX, offsetY;
-        let initialX, initialY;
         let isDragging = false;
+        let touchIdentifier = null;
 
         document.addEventListener('DOMContentLoaded', () => {
             setupConnectionPoints();
@@ -1157,15 +1162,14 @@
             canvas.setAttribute('width', container.offsetWidth);
             canvas.setAttribute('height', container.offsetHeight);
             redrawWires();
+            positionComponents();
         }
 
         function setupConnectionPoints() {
             const points = document.querySelectorAll('.connection-point');
             points.forEach(point => {
                 point.addEventListener('click', handlePointClick);
-                // Añadimos eventos específicos para dispositivos táctiles
-                point.addEventListener('touchstart', handlePointTouchStart);
-                point.addEventListener('touchend', handlePointTouchEnd);
+                point.addEventListener('touchstart', handlePointTouchStart, { passive: false });
             });
         }
 
@@ -1180,36 +1184,47 @@
             document.addEventListener('touchmove', drag, { passive: false });
             document.addEventListener('mouseup', stopDrag);
             document.addEventListener('touchend', stopDrag);
+            document.addEventListener('touchcancel', stopDrag);
         }
 
         function startDrag(e) {
             e.preventDefault();
+            e.stopPropagation();
+            
+            // Verificar si el clic/touch es en el interruptor
+            if (e.target && e.target.classList.contains('switch-toggle')) {
+                return;
+            }
+            
             draggedElement = this;
             isDragging = true;
             draggedElement.classList.add('dragging');
             
             const rect = draggedElement.getBoundingClientRect();
+            
             if (e.type === 'touchstart') {
-                offsetX = e.touches[0].clientX - rect.left;
-                offsetY = e.touches[0].clientY - rect.top;
-                initialX = rect.left;
-                initialY = rect.top;
+                const touch = e.touches[0];
+                offsetX = touch.clientX - rect.left;
+                offsetY = touch.clientY - rect.top;
+                touchIdentifier = touch.identifier;
             } else {
                 offsetX = e.clientX - rect.left;
-                offsetY = e - rect.top;
-                initialX = rect.left;
-                initialY = rect.top;
+                offsetY = e.clientY - rect.top;
             }
         }
 
         function drag(e) {
             if (!isDragging || !draggedElement) return;
             e.preventDefault();
+            e.stopPropagation();
             
             let clientX, clientY;
+            
             if (e.type === 'touchmove') {
-                clientX = e.touches[0].clientX;
-                clientY = e.touches[0].clientY;
+                const touch = Array.from(e.touches).find(t => t.identifier === touchIdentifier);
+                if (!touch) return;
+                clientX = touch.clientX;
+                clientY = touch.clientY;
             } else {
                 clientX = e.clientX;
                 clientY = e.clientY;
@@ -1218,7 +1233,7 @@
             const container = document.getElementById('protoboard-container');
             const containerRect = container.getBoundingClientRect();
             
-            // Calcular nueva posición restringida al contenedor
+            // Calcular nueva posición
             let x = clientX - containerRect.left - offsetX;
             let y = clientY - containerRect.top - offsetY;
             
@@ -1235,90 +1250,29 @@
             draggedElement.style.top = y + 'px';
             
             // Actualizar las conexiones en tiempo real
-            updateConnections();
+            redrawWires();
         }
 
-        function updateConnections() {
-            // Solo actualizamos las conexiones si estamos arrastrando
-            if (isDragging && draggedElement) {
-                redrawWires();
-            }
-        }
-
-        function stopDrag() {
+        function stopDrag(e) {
             if (isDragging && draggedElement) {
                 isDragging = false;
                 draggedElement.classList.remove('dragging');
-                
-                // Asegurar que los componentes no se salgan del contenedor
-                const container = document.getElementById('protoboard-container');
-                const containerRect = container.getBoundingClientRect();
-                const rect = draggedElement.getBoundingClientRect();
-                
-                let x = draggedElement.offsetLeft;
-                let y = draggedElement.offsetTop;
-                
-                const maxLeft = 0;
-                const maxRight = containerRect.width - draggedElement.offsetWidth;
-                const maxTop = 0;
-                const maxBottom = containerRect.height - draggedElement.offsetHeight;
-                
-                if (x < maxLeft) x = maxLeft;
-                if (x > maxRight) x = maxRight;
-                if (y < maxTop) y = maxTop;
-                if (y > maxBottom) y = maxBottom;
-                
-                draggedElement.style.left = x + 'px';
-                draggedElement.style.top = y + 'px';
-                
-                // Redibujar las conexiones una vez que se suelta
                 redrawWires();
             }
             draggedElement = null;
+            touchIdentifier = null;
         }
 
-        // Manejadores específicos para dispositivos táctiles
         function handlePointTouchStart(e) {
             e.preventDefault();
-            const point = e.target;
-            
-            if (wires.length >= MAX_WIRES && !selectedPoint) {
-                showStatus('⚠️ Ya usaste los 4 cables disponibles', 'warning');
-                return;
-            }
-            
-            if (!selectedPoint) {
-                selectedPoint = point;
-                point.classList.add('selected');
-                showStatus('✓ Punto seleccionado, elige el destino', 'info');
-            }
-        }
-
-        function handlePointTouchEnd(e) {
-            e.preventDefault();
-            const point = e.target;
-            
-            if (selectedPoint && selectedPoint !== point) {
-                if (selectedPoint.dataset.component === point.dataset.component) {
-                    selectedPoint.classList.remove('selected');
-                    selectedPoint = null;
-                    showStatus('❌ No puedes conectar el mismo componente consigo mismo', 'error');
-                    return;
-                }
-                
-                createWire(selectedPoint, point);
-                selectedPoint.classList.remove('selected');
-                point.classList.add('connected');
-                selectedPoint.classList.add('connected');
-                selectedPoint = null;
-                
-                updateUI();
-                checkMissions();
-            }
+            e.stopPropagation();
+            handlePointClick(e);
         }
 
         function handlePointClick(e) {
             e.preventDefault();
+            e.stopPropagation();
+            
             const point = e.target;
             
             if (wires.length >= MAX_WIRES && !selectedPoint) {
@@ -1354,6 +1308,38 @@
                 updateUI();
                 checkMissions();
             }
+        }
+
+        function toggleSwitch(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            if (!circuitComplete) {
+                showStatus('⚠️ Primero completa el circuito correctamente', 'warning');
+                return;
+            }
+            
+            switchState = !switchState;
+            const switchEl = document.querySelector('.switch');
+            const switchToggle = document.querySelector('.switch-toggle');
+            const switchLabel = document.querySelector('.switch-label');
+            
+            if (switchState) {
+                switchEl.classList.add('on');
+                switchToggle.textContent = 'ON';
+                switchLabel.textContent = 'ENCENDIDO';
+                showStatus('⚡ Interruptor ENCENDIDO - ¡El LED debería encenderse!', 'success');
+            } else {
+                switchEl.classList.remove('on');
+                switchToggle.textContent = 'OFF';
+                switchLabel.textContent = 'APAGADO';
+                showStatus('⚡ Interruptor APAGADO - El LED se apaga', 'info');
+            }
+            
+            updateUI();
+            updateLED();
         }
 
         function createWire(point1, point2) {
@@ -1427,33 +1413,6 @@
             wires.forEach(wire => {
                 drawWire(wire);
             });
-        }
-
-        function toggleSwitch() {
-            if (!circuitComplete) {
-                showStatus('⚠️ Primero completa el circuito correctamente', 'warning');
-                return;
-            }
-            
-            switchState = !switchState;
-            const switchEl = document.querySelector('.switch');
-            const switchToggle = document.querySelector('.switch-toggle');
-            const switchLabel = document.querySelector('.switch-label');
-            
-            if (switchState) {
-                switchEl.classList.add('on');
-                switchToggle.textContent = 'ON';
-                switchLabel.textContent = 'ENCENDIDO';
-                showStatus('⚡ Interruptor ENCENDIDO - ¡El LED debería encenderse!', 'success');
-            } else {
-                switchEl.classList.remove('on');
-                switchToggle.textContent = 'OFF';
-                switchLabel.textContent = 'APAGADO';
-                showStatus('⚡ Interruptor APAGADO - El LED se apaga', 'info');
-            }
-            
-            updateUI();
-            updateLED();
         }
 
         function updateLED() {
@@ -1550,7 +1509,6 @@
             if (m1 && m2 && m3 && m4) {
                 circuitComplete = true;
                 document.getElementById('celebration').classList.add('active');
-                updateLED();
                 showStatus('✅ ¡CIRCUITO CORRECTO! Ahora haz clic en el interruptor para encender el LED', 'success');
             } else {
                 circuitComplete = false;
