@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🎮 Circuito con Interruptor</title>
+    <title>⚡ CIRCUITO CON INTERRUPTOR ⚡</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -12,7 +12,7 @@
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
             overflow-x: hidden;
             touch-action: none;
             position: relative;
@@ -43,9 +43,9 @@
             66% { transform: translateY(-50px) translateX(-100px) rotate(240deg); }
         }
 
-        .container { 
-            max-width: 1400px; 
-            margin: 0 auto; 
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
             position: relative;
             z-index: 1;
         }
@@ -53,14 +53,15 @@
         .game-header {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
             text-align: center;
             border: 4px solid #fff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
             animation: headerPulse 3s ease-in-out infinite;
             position: relative;
             overflow: hidden;
+            min-height: 80px;
         }
 
         .game-header::before {
@@ -75,8 +76,8 @@
         }
 
         @keyframes headerPulse {
-            0%, 100% { box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-            50% { box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6); }
+            0%, 100% { box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+            50% { box-shadow: 0 12px 35px rgba(245, 87, 108, 0.6); }
         }
 
         @keyframes shine {
@@ -86,13 +87,14 @@
 
         .game-title {
             font-family: 'Press Start 2P', cursive;
-            font-size: 2em;
+            font-size: 1.5em;
             color: #fff;
             text-shadow: 4px 4px 0 #000, 0 0 20px #f5576c;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             animation: titleBounce 2s ease-in-out infinite;
             position: relative;
             z-index: 1;
+            text-align: center;
         }
 
         @keyframes titleBounce {
@@ -102,33 +104,36 @@
 
         .game-subtitle {
             color: #fff;
-            font-size: 1.2em;
+            font-size: 1em;
             font-weight: 600;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             position: relative;
             z-index: 1;
+            text-align: center;
         }
 
         .score-panel {
             display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
+            justify-content: center;
         }
-        
+
         .score-card {
             flex: 1;
-            min-width: 200px;
+            min-width: 150px;
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             border-radius: 15px;
-            padding: 20px;
+            padding: 15px;
             color: #fff;
             text-align: center;
             border: 3px solid #fff;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            height: 100%;
         }
 
         .score-card::before {
@@ -156,19 +161,20 @@
         }
 
         .score-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
         .score-label {
-            font-size: 0.9em;
+            font-size: 0.8em;
             font-weight: 600;
             text-transform: uppercase;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 5px;
         }
-        
+
         .score-value {
-            font-size: 2.5em;
+            font-size: 2.2em;
             font-weight: 900;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
             animation: scoreUpdate 0.5s ease;
@@ -176,45 +182,51 @@
 
         @keyframes scoreUpdate {
             0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.15); }
             100% { transform: scale(1); }
         }
 
         .game-grid {
             display: grid;
-            grid-template-columns: 400px 1fr;
-            gap: 20px;
+            grid-template-columns: 1fr;
+            gap: 15px;
         }
-        
+
+        @media (min-width: 768px) {
+            .game-grid {
+                grid-template-columns: 350px 1fr;
+            }
+        }
+
         .panel {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 25px;
-            border: 4px solid #fff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            padding: 15px;
+            border: 3px solid #fff;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             animation: panelSlideIn 0.6s ease-out;
         }
 
         @keyframes panelSlideIn {
-            from { 
-                opacity: 0; 
+            from {
+                opacity: 0;
                 transform: translateY(20px);
             }
-            to { 
-                opacity: 1; 
+            to {
+                opacity: 1;
                 transform: translateY(0);
             }
         }
 
         .panel-title {
-            font-size: 1.4em;
+            font-size: 1.2em;
             font-weight: 900;
             color: #667eea;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
         }
 
         .panel-title::after {
@@ -223,30 +235,30 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
+            width: 50px;
+            height: 3px;
             background: linear-gradient(90deg, #667eea, #764ba2);
             border-radius: 2px;
             animation: titleUnderline 2s ease-in-out infinite;
         }
 
         @keyframes titleUnderline {
-            0%, 100% { width: 60px; }
-            50% { width: 100px; }
+            0%, 100% { width: 50px; }
+            50% { width: 80px; }
         }
 
         #protoboard-container {
             position: relative;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            border-radius: 20px;
-            padding: 60px 40px;
-            min-height: 650px;
+            border-radius: 15px;
+            padding: 30px;
+            min-height: 450px;
             border: 5px solid #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 150px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4), inset 0 0 50px rgba(255,255,255,0.05);
+            gap: 100px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4), inset 0 0 35px rgba(255,255,255,0.05);
             overflow: hidden;
             touch-action: none;
         }
@@ -259,9 +271,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
-                repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 20px),
-                repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 20px);
+            background-image:
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 15px),
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 15px);
             pointer-events: none;
         }
 
@@ -285,7 +297,7 @@
         }
 
         .component:hover {
-            filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.6));
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
         }
 
         .component:active {
@@ -298,7 +310,7 @@
             text-align: center;
             position: relative;
         }
-        
+
         .battery-body {
             width: 80px;
             height: 140px;
@@ -315,7 +327,7 @@
             0%, 100% { box-shadow: inset 0 -20px 40px rgba(0,0,0,0.2), 0 0 10px rgba(67, 233, 123, 0.3); }
             50% { box-shadow: inset 0 -20px 40px rgba(0,0,0,0.2), 0 0 25px rgba(67, 233, 123, 0.6); }
         }
-        
+
         .battery-body::before {
             content: '';
             position: absolute;
@@ -327,12 +339,12 @@
             background: #2c3e50;
             border-radius: 4px 4px 0 0;
         }
-        
+
         .battery-label {
             text-align: center;
             color: #fff;
             font-weight: 900;
-            font-size: 1.8em;
+            font-size: 1.6em;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -345,7 +357,7 @@
             0%, 100% { transform: translate(-50%, -50%) scale(1); }
             50% { transform: translate(-50%, -50%) scale(1.05); }
         }
-        
+
         .battery-pin {
             position: absolute;
             left: 50%;
@@ -355,17 +367,17 @@
             border-radius: 2px;
             box-shadow: 2px 0 4px rgba(0,0,0,0.3);
         }
-        
+
         .battery-pin-positive {
             top: -14px;
             height: 24px;
         }
-        
+
         .battery-pin-negative {
             bottom: 0;
             height: 24px;
         }
-        
+
         .battery-sign {
             position: absolute;
             font-size: 1.1em;
@@ -387,14 +399,14 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
-        
+
         .battery-sign-positive {
             top: 5px;
             right: 5px;
             color: #c0392b;
             border-color: #c0392b;
         }
-        
+
         .battery-sign-negative {
             bottom: 5px;
             right: 5px;
@@ -408,7 +420,7 @@
             text-align: center;
             position: relative;
         }
-        
+
         .switch-body {
             width: 100px;
             height: 70px;
@@ -422,7 +434,7 @@
             justify-content: center;
             box-shadow: inset 0 -10px 20px rgba(0,0,0,0.2);
         }
-        
+
         .switch-toggle {
             width: 50px;
             height: 50px;
@@ -451,7 +463,7 @@
         .switch-toggle:active {
             transform: scale(0.95);
         }
-        
+
         .switch.on .switch-toggle {
             background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
             box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 30px #2ecc71, 0 0 50px #2ecc71;
@@ -469,29 +481,29 @@
             75% { transform: rotate(-15deg); }
             100% { transform: rotate(0deg); }
         }
-        
+
         .switch-label {
             position: absolute;
-            bottom: -30px;
+            bottom: -25px;
             left: 50%;
             transform: translateX(-50%);
             background: #e74c3c;
             color: #fff;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 0.95em;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
             font-weight: 900;
             border: 3px solid #fff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             transition: all 0.4s ease;
         }
-        
+
         .switch.on .switch-label {
             background: #2ecc71;
             animation: labelPulse 1.5s ease-in-out infinite;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3), 0 0 20px rgba(46, 204, 113, 0.6);
         }
-        
+
         @keyframes labelPulse {
             0%, 100% { transform: translateX(-50%) scale(1); }
             50% { transform: translateX(-50%) scale(1.08); }
@@ -503,7 +515,7 @@
             text-align: center;
             position: relative;
         }
-        
+
         .resistor-body {
             width: 110px;
             height: 40px;
@@ -523,17 +535,17 @@
         .resistor-body:hover {
             transform: scale(1.05);
         }
-        
+
         .resistor-label {
             position: absolute;
-            top: -35px;
+            top: -30px;
             left: 50%;
             transform: translateX(-50%);
             background: #ff9800;
             color: #fff;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 0.95em;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
             font-weight: 900;
             border: 3px solid #fff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
@@ -551,7 +563,7 @@
             text-align: center;
             position: relative;
         }
-        
+
         .led-body {
             width: 70px;
             height: 70px;
@@ -567,7 +579,7 @@
         .led-body:hover {
             transform: scale(1.05);
         }
-        
+
         .led-body::before {
             content: '';
             position: absolute;
@@ -578,7 +590,7 @@
             background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
             border-radius: 50%;
         }
-        
+
         .led.active .led-body {
             background: radial-gradient(circle at 30% 30%, #ff3333 0%, #ff0000 30%, #ff0000 60%, #cc0000 100%);
             box-shadow:
@@ -600,7 +612,7 @@
             50% { transform: scale(1.15); }
             100% { transform: scale(1); }
         }
-        
+
         .led-pin {
             position: absolute;
             width: 4px;
@@ -608,19 +620,19 @@
             border-radius: 2px;
             box-shadow: 2px 0 4px rgba(0,0,0,0.3);
         }
-        
+
         .led-pin-long {
             top: 0;
             left: 18px;
             height: 26px;
         }
-        
+
         .led-pin-short {
             bottom: 0;
             right: 18px;
             height: 16px;
         }
-        
+
         .led-sign {
             position: absolute;
             font-size: 1em;
@@ -636,14 +648,14 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
             z-index: 5;
         }
-        
+
         .led-sign-positive {
             top: -8px;
             left: 14px;
             color: #c0392b;
             border-color: #c0392b;
         }
-        
+
         .led-sign-negative {
             bottom: -8px;
             right: 14px;
@@ -654,8 +666,8 @@
         /* Puntos de conexión mejorados */
         .connection-point {
             position: absolute;
-            width: 35px;
-            height: 35px;
+            width: 30px;
+            height: 30px;
             background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
             border: 4px solid #fff;
             border-radius: 50%;
@@ -665,41 +677,41 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.4);
             touch-action: manipulation;
         }
-        
+
         .connection-point:hover {
             background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
-            transform: scale(1.5);
+            transform: scale(1.4);
             box-shadow: 0 0 25px rgba(255,215,0,1), 0 6px 15px rgba(0,0,0,0.5);
             animation: pointHover 0.6s ease-in-out infinite;
         }
 
         @keyframes pointHover {
-            0%, 100% { transform: scale(1.5); }
-            50% { transform: scale(1.6); }
+            0%, 100% { transform: scale(1.4); }
+            50% { transform: scale(1.5); }
         }
-        
+
         .connection-point.connected {
             background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
             animation: connectedPulse 1.5s ease-in-out infinite;
             box-shadow: 0 0 20px rgba(81, 207, 102, 0.8), 0 4px 10px rgba(0,0,0,0.4);
         }
-        
-        @keyframes connectedPulse { 
+
+        @keyframes connectedPulse {
             0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(81, 207, 102, 0.8); }
             50% { transform: scale(1.25); box-shadow: 0 0 30px rgba(81, 207, 102, 1); }
         }
-        
+
         .connection-point.selected {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             animation: selectedJump 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
             box-shadow: 0 0 30px rgba(79, 172, 254, 1), 0 6px 15px rgba(0,0,0,0.5);
         }
-        
-        @keyframes selectedJump { 
+
+        @keyframes selectedJump {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.4) translateY(-5px); }
         }
-        
+
         .connection-point::after {
             content: attr(data-tooltip);
             position: absolute;
@@ -708,9 +720,9 @@
             transform: translateX(-50%);
             background: rgba(0,0,0,0.9);
             color: white;
-            padding: 8px 12px;
+            padding: 6px 10px;
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 12px;
             white-space: nowrap;
             opacity: 0;
             pointer-events: none;
@@ -719,7 +731,7 @@
             font-weight: 600;
             border: 2px solid #ffd700;
         }
-        
+
         .connection-point:hover::after {
             opacity: 1;
         }
@@ -727,14 +739,15 @@
         /* Mission cards mejoradas */
         .mission-card {
             background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            border-radius: 15px;
-            padding: 18px;
-            margin: 15px 0;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 12px 0;
             border: 3px solid #fff;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             position: relative;
             overflow: hidden;
+            font-size: 0.9em;
         }
 
         .mission-card::before {
@@ -753,13 +766,13 @@
         }
 
         .mission-card:hover {
-            transform: translateX(8px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: translateX(6px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
         .mission-card.completed {
             background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-            box-shadow: 0 0 35px rgba(132, 250, 176, 0.7);
+            box-shadow: 0 0 30px rgba(132, 250, 176, 0.7);
             animation: missionComplete 0.6s ease-out;
         }
 
@@ -771,16 +784,16 @@
 
         .mission-number {
             display: inline-flex;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
             border-radius: 50%;
             align-items: center;
             justify-content: center;
-            margin-right: 12px;
+            margin-right: 10px;
             font-weight: 900;
-            font-size: 1.2em;
+            font-size: 1.1em;
             border: 3px solid #fff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
@@ -792,7 +805,7 @@
 
         .mission-card.completed .mission-number {
             background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
-            box-shadow: 0 0 25px rgba(81, 207, 102, 0.8);
+            box-shadow: 0 0 20px rgba(81, 207, 102, 0.8);
             animation: numberCelebrate 0.6s ease-out;
         }
 
@@ -804,13 +817,13 @@
 
         .mission-card.completed .mission-number::after {
             content: '✓';
-            font-size: 1.3em;
+            font-size: 1.2em;
         }
 
         .mission-text {
             font-weight: 600;
             color: #333;
-            font-size: 1em;
+            font-size: 0.9em;
             line-height: 1.4;
         }
 
@@ -819,7 +832,7 @@
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: #fff;
             border: none;
-            padding: 18px 35px;
+            padding: 14px 25px;
             border-radius: 50px;
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
@@ -827,8 +840,8 @@
             text-transform: uppercase;
             border: 4px solid #fff;
             width: 100%;
-            margin: 10px 0;
-            font-size: 1.1em;
+            margin: 8px 0;
+            font-size: 1em;
             transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             touch-action: manipulation;
@@ -850,13 +863,13 @@
         }
 
         .btn-game:hover::before {
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
         }
 
         .btn-game:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
 
         .btn-game:active {
@@ -866,7 +879,7 @@
         .btn-success {
             background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
         }
-        
+
         .btn-danger {
             background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
         }
@@ -874,18 +887,19 @@
         /* Toast mejorado */
         .status-toast {
             position: fixed;
-            top: 100px;
-            right: 20px;
-            padding: 25px 35px;
-            border-radius: 20px;
+            top: 80px;
+            right: 15px;
+            padding: 20px 25px;
+            border-radius: 15px;
             font-weight: 700;
-            font-size: 1.2em;
+            font-size: 1em;
             border: 4px solid #fff;
             z-index: 1000;
             transform: translateX(500px);
             transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            max-width: 450px;
+            max-width: 400px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            font-size: 0.95em;
         }
 
         .status-toast.show {
@@ -904,17 +918,17 @@
             background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
             color: #fff;
         }
-        
+
         .status-toast.error {
             background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             color: #fff;
         }
-        
+
         .status-toast.info {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: #fff;
         }
-        
+
         .status-toast.warning {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             color: #333;
@@ -923,39 +937,39 @@
         .info-box {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             border: 3px solid #fff;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
         }
 
         .info-box:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         .info-title {
             font-weight: 900;
             color: #333;
-            margin-bottom: 12px;
-            font-size: 1.3em;
+            margin-bottom: 10px;
+            font-size: 1.1em;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-        
+
         .info-text {
             color: #555;
             font-weight: 600;
-            font-size: 1.05em;
+            font-size: 0.95em;
             line-height: 1.6;
         }
 
         .warning-box {
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
             border: 3px solid #fff;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             animation: warningPulse 2s ease-in-out infinite;
         }
@@ -968,28 +982,28 @@
         .circuit-guide {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
+            gap: 12px;
+            margin: 15px 0;
         }
 
         .circuit-item {
             background: #fff;
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 10px;
+            padding: 12px;
             text-align: center;
             border: 3px solid #ddd;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         .circuit-item:hover {
-            transform: translateY(-8px) rotate(2deg);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transform: translateY(-5px) rotate(2deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             border-color: #667eea;
         }
 
         .circuit-symbol {
-            font-size: 3em;
-            margin: 10px 0;
+            font-size: 2.2em;
+            margin: 8px 0;
             animation: symbolFloat 3s ease-in-out infinite;
         }
 
@@ -1001,13 +1015,13 @@
         .circuit-name {
             font-weight: 900;
             color: #333;
-            font-size: 1.1em;
+            font-size: 1em;
         }
 
         .circuit-detail {
-            font-size: 0.85em;
+            font-size: 0.8em;
             color: #666;
-            margin-top: 5px;
+            margin-top: 4px;
         }
 
         /* Overlay de celebración mejorado */
@@ -1037,11 +1051,11 @@
 
         .celebration-content {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 60px;
-            border-radius: 30px;
+            padding: 45px;
+            border-radius: 25px;
             text-align: center;
-            border: 8px solid #fff;
-            max-width: 600px;
+            border: 6px solid #fff;
+            max-width: 550px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             animation: celebrationPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             position: relative;
@@ -1071,7 +1085,7 @@
         }
 
         .celebration-emoji {
-            font-size: 6em;
+            font-size: 4.5em;
             animation: celebrationBounce 1s ease-in-out infinite;
             position: relative;
             z-index: 1;
@@ -1085,9 +1099,9 @@
 
         .celebration-title {
             font-family: 'Press Start 2P', cursive;
-            font-size: 2.5em;
+            font-size: 2em;
             color: #fff;
-            margin: 25px 0;
+            margin: 20px 0;
             text-shadow: 5px 5px 0 #000, 0 0 30px #f5576c;
             position: relative;
             z-index: 1;
@@ -1100,9 +1114,9 @@
         }
 
         .celebration-text {
-            font-size: 1.3em;
+            font-size: 1.1em;
             color: #fff;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-weight: 600;
             line-height: 1.6;
             position: relative;
@@ -1127,10 +1141,10 @@
         /* Indicador de progreso */
         .progress-bar {
             width: 100%;
-            height: 8px;
+            height: 6px;
             background: rgba(255,255,255,0.2);
             border-radius: 10px;
-            margin: 15px 0;
+            margin: 10px 0;
             overflow: hidden;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
         }
@@ -1150,73 +1164,134 @@
             }
             #protoboard-container {
                 flex-direction: column;
-                gap: 120px;
-                padding: 50px 30px;
+                gap: 100px;
+                padding: 40px 25px;
             }
             .game-title {
-                font-size: 1.8em;
+                font-size: 1.4em;
             }
             .game-subtitle {
-                font-size: 1.1em;
+                font-size: 1em;
             }
         }
 
         @media (max-width: 768px) {
             .game-title {
-                font-size: 1.5em;
+                font-size: 1.2em;
             }
             .score-panel {
                 flex-direction: column;
             }
             #protoboard-container {
-                padding: 40px 20px;
-                min-height: 600px;
-                gap: 100px;
+                padding: 30px 20px;
+                min-height: 400px;
+                gap: 80px;
             }
             .battery-body {
-                width: 70px;
-                height: 120px;
+                width: 65px;
+                height: 110px;
             }
             .led-body {
-                width: 60px;
-                height: 60px;
+                width: 55px;
+                height: 55px;
             }
             .circuit-guide {
                 grid-template-columns: 1fr;
             }
             .connection-point {
-                width: 40px !important;
-                height: 40px !important;
+                width: 35px !important;
+                height: 35px !important;
             }
-            .celebration-content {
-                padding: 40px;
+            .score-value {
+                font-size: 1.8em;
             }
-            .celebration-title {
-                font-size: 2em;
+            .panel-title {
+                font-size: 1em;
+            }
+            .mission-card {
+                padding: 12px 10px;
+            }
+            .mission-number {
+                width: 30px;
+                height: 30px;
+                font-size: 1em;
+            }
+            .mission-text {
+                font-size: 0.85em;
+            }
+            .btn-game {
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+            .info-box, .warning-box {
+                padding: 12px;
+            }
+            .info-title {
+                font-size: 1em;
+            }
+            .info-text {
+                font-size: 0.9em;
             }
         }
 
         @media (max-width: 480px) {
             #protoboard-container {
-                padding: 30px 15px;
-                min-height: 550px;
-                gap: 80px;
+                padding: 25px 15px;
+                min-height: 380px;
+                gap: 70px;
+            }
+            .battery-body {
+                width: 55px;
+                height: 95px;
+            }
+            .led-body {
+                width: 45px;
+                height: 45px;
+            }
+            .battery-pin-positive,
+            .battery-pin-negative {
+                height: 30px;
+            }
+            .led-pin-long {
+                height: 35px;
+            }
+            .led-pin-short {
+                height: 25px;
             }
             .game-title {
-                font-size: 1.3em;
+                font-size: 1.1em;
             }
+            .game-subtitle {
+                font-size: 0.9em;
+            }
+            .score-value {
+                font-size: 1.6em;
+            }
+            .panel-title {
+                font-size: 0.9em;
+            }
+            .mission-card {
+                padding: 10px 8px;
+            }
+            .mission-number {
+                width: 25px;
+                height: 25px;
+                font-size: 0.9em;
+            }
+            .btn-game {
+                padding: 10px 15px;
+                font-size: 0.8em;
+            }
+            .info-title {
+                font-size: 0.9em;
+            }
+            .info-text {
+                font-size: 0.85em;
+            }
+            /* Aumentar aún más el tamaño de los puntos de conexión para móviles pequeños */
             .connection-point {
-                width: 45px !important;
-                height: 45px !important;
-            }
-            .celebration-content {
-                padding: 30px;
-            }
-            .celebration-title {
-                font-size: 1.5em;
-            }
-            .celebration-emoji {
-                font-size: 4em;
+                width: 40px !important;
+                height: 40px !important;
             }
         }
 
@@ -1247,7 +1322,7 @@
             background: #667eea;
             color: white;
             font-size: 0.7em;
-            padding: 3px 8px;
+            padding: 2px 6px;
             border-radius: 10px;
             opacity: 0;
             transition: opacity 0.3s;
@@ -1280,14 +1355,14 @@
 
         .modal-content {
             background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
-            border-radius: 25px;
-            padding: 40px;
+            border-radius: 20px;
+            padding: 35px;
             max-width: 700px;
             width: 90%;
             max-height: 85vh;
             overflow-y: auto;
-            border: 6px solid #667eea;
-            box-shadow: 0 25px 70px rgba(0,0,0,0.6);
+            border: 5px solid #667eea;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
             animation: modalPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             position: relative;
         }
@@ -1300,17 +1375,17 @@
 
         .modal-close {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 12px;
+            right: 12px;
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: white;
             border: none;
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            font-size: 1.8em;
+            font-size: 1.6em;
             cursor: pointer;
-            border: 4px solid white;
+            border: 3px solid white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             transition: all 0.3s ease;
             font-weight: bold;
@@ -1318,26 +1393,26 @@
         }
 
         .modal-close:hover {
-            transform: rotate(90deg) scale(1.15);
+            transform: rotate(90deg) scale(1.1);
             background: linear-gradient(135deg, #c0392b, #a93226);
         }
 
         .modal-title {
-            font-size: 2.2em;
+            font-size: 1.8em;
             font-weight: 900;
             background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .modal-symbol {
-            font-size: 5.5em;
+            font-size: 4.5em;
             text-align: center;
-            margin: 25px 0;
+            margin: 20px 0;
             filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
             animation: symbolRotate 3s ease-in-out infinite;
         }
@@ -1348,28 +1423,28 @@
         }
 
         .modal-section {
-            margin: 25px 0;
-            padding: 20px;
+            margin: 20px 0;
+            padding: 15px;
             background: white;
-            border-radius: 15px;
-            border-left: 6px solid #667eea;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
         }
 
         .modal-section:hover {
-            transform: translateX(5px);
+            transform: translateX(3px);
             box-shadow: 0 6px 20px rgba(0,0,0,0.12);
         }
 
         .modal-section h3 {
             color: #667eea;
             font-weight: 900;
-            margin-bottom: 12px;
-            font-size: 1.4em;
+            margin-bottom: 10px;
+            font-size: 1.2em;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .modal-section h3::before {
@@ -1379,34 +1454,34 @@
 
         .modal-section p {
             color: #555;
-            line-height: 1.8;
+            line-height: 1.7;
             font-weight: 600;
-            font-size: 1.05em;
+            font-size: 1em;
         }
 
         .modal-section ul {
-            margin: 15px 0 15px 25px;
+            margin: 12px 0 12px 20px;
             color: #555;
         }
 
         .modal-section li {
-            margin: 10px 0;
+            margin: 8px 0;
             font-weight: 600;
-            line-height: 1.6;
+            line-height: 1.5;
             position: relative;
-            padding-left: 10px;
+            padding-left: 8px;
         }
 
         .modal-section li::marker {
             color: #667eea;
-            font-size: 1.2em;
+            font-size: 1.1em;
         }
 
         /* Tabla de código de colores */
         .color-code-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 15px 0;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border-radius: 10px;
             overflow: hidden;
@@ -1415,17 +1490,17 @@
         .color-code-table th {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 15px;
+            padding: 12px;
             font-weight: 900;
             text-align: left;
-            font-size: 1.1em;
+            font-size: 1em;
         }
 
         .color-code-table td {
-            padding: 12px 15px;
+            padding: 10px 12px;
             border-bottom: 2px solid #f0f0f0;
             font-weight: 600;
-            font-size: 1.05em;
+            font-size: 0.95em;
         }
 
         .color-code-table tr:hover {
@@ -1439,28 +1514,28 @@
 
         .color-sample {
             display: inline-block;
-            width: 35px;
-            height: 25px;
-            border-radius: 6px;
-            margin-right: 12px;
-            border: 3px solid #333;
+            width: 30px;
+            height: 20px;
+            border-radius: 5px;
+            margin-right: 10px;
+            border: 2px solid #333;
             vertical-align: middle;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .circuit-symbol-svg {
             width: 100%;
-            max-width: 320px;
-            margin: 25px auto;
+            max-width: 300px;
+            margin: 20px auto;
             display: block;
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
             background: white;
-            padding: 20px;
-            border-radius: 15px;
+            padding: 15px;
+            border-radius: 12px;
         }
 
         .modal-content::-webkit-scrollbar {
-            width: 12px;
+            width: 10px;
         }
 
         .modal-content::-webkit-scrollbar-track {
@@ -1479,26 +1554,66 @@
 
         @media (max-width: 768px) {
             .modal-content {
-                padding: 30px 20px;
+                padding: 25px 15px;
                 max-height: 90vh;
             }
-
             .modal-title {
-                font-size: 1.8em;
+                font-size: 1.5em;
             }
-
             .modal-symbol {
-                font-size: 4em;
+                font-size: 3.5em;
             }
-
             .modal-section {
-                padding: 15px;
+                padding: 12px;
             }
-
             .color-code-table th,
             .color-code-table td {
-                padding: 10px;
-                font-size: 0.95em;
+                padding: 8px;
+                font-size: 0.85em;
+            }
+        }
+
+        /* Ajuste para pantallas muy pequeñas */
+        @media (max-width: 360px) {
+            .game-header {
+                padding: 10px 15px;
+            }
+            .game-title {
+                font-size: 1em;
+            }
+            .game-subtitle {
+                font-size: 0.8em;
+            }
+            .score-panel {
+                gap: 8px;
+            }
+            .score-card {
+                padding: 12px 10px;
+            }
+            .score-value {
+                font-size: 1.5em;
+            }
+            .mission-card {
+                padding: 8px 6px;
+            }
+            .mission-number {
+                width: 22px;
+                height: 22px;
+                font-size: 0.8em;
+            }
+            .info-title {
+                font-size: 0.85em;
+            }
+            .info-text {
+                font-size: 0.8em;
+            }
+            #protoboard-container {
+                padding: 20px 12px;
+                min-height: 350px;
+            }
+            .connection-point {
+                width: 35px !important;
+                height: 35px !important;
             }
         }
     </style>
@@ -1506,7 +1621,7 @@
 <body>
     <!-- Partículas de fondo -->
     <div class="background-particles" id="bg-particles"></div>
-
+    
     <div class="container">
         <div class="game-header">
             <div class="game-title">⚡ CIRCUITO CON INTERRUPTOR ⚡</div>
@@ -1515,7 +1630,7 @@
                 <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
             </div>
         </div>
-
+        
         <div class="score-panel">
             <div class="score-card">
                 <div class="score-label">🔌 Cables</div>
@@ -1530,7 +1645,7 @@
                 <div class="score-value" id="led-status">OFF</div>
             </div>
         </div>
-
+        
         <div class="game-grid">
             <div class="panel">
                 <div class="panel-title">🎯 TU MISIÓN</div>
@@ -1554,7 +1669,7 @@
                     <span class="mission-number">4</span>
                     <span class="mission-text">Conecta el <strong>− del LED</strong> (pata corta) con el <strong>− negro</strong> de la batería</span>
                 </div>
-
+                
                 <div class="info-box">
                     <div class="info-title">📚 Guía de Componentes Interactiva</div>
                     <div class="circuit-guide">
@@ -1580,7 +1695,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="warning-box">
                     <div class="info-title">⚠️ IMPORTANTE</div>
                     <div class="info-text">
@@ -1589,24 +1704,25 @@
                         ⚡ Cuando el interruptor esté <strong>ON</strong> y el circuito correcto, ¡el LED se encenderá!
                     </div>
                 </div>
-
+                
                 <button class="btn-game btn-success" onclick="verifyCircuit()">✓ VERIFICAR CIRCUITO</button>
                 <button class="btn-game btn-danger" onclick="clearWires()">🔄 EMPEZAR DE NUEVO</button>
             </div>
-
+            
             <div class="panel">
                 <div class="panel-title">🔧 ÁREA DE TRABAJO</div>
                 
                 <div id="protoboard-container">
                     <svg id="wire-canvas"></svg>
                     
+                    <!-- Batería con pines corregidos -->
                     <div class="component battery">
                         <div class="battery-pin battery-pin-positive"></div>
                         <div class="connection-point" 
                              data-component="battery" 
                              data-terminal="positive"
                              data-tooltip="+ Positivo Batería"
-                             style="top: -30px; left: 50%; transform: translateX(-50%);"></div>
+                             style="top: -28px; left: 50%; transform: translateX(-50%);"></div>
                         
                         <div class="battery-body">
                             <div class="battery-label">9V</div>
@@ -1618,16 +1734,17 @@
                              data-component="battery" 
                              data-terminal="negative"
                              data-tooltip="− Negativo Batería"
-                             style="bottom: -30px; left: 50%; transform: translateX(-50%);"></div>
+                             style="bottom: -28px; left: 50%; transform: translateX(-50%);"></div>
                         <div class="battery-pin battery-pin-negative"></div>
                     </div>
 
+                    <!-- Interruptor -->
                     <div class="component switch">
                         <div class="connection-point" 
                              data-component="switch" 
                              data-terminal="in"
                              data-tooltip="Entrada Interruptor"
-                             style="top: 50%; left: -22px; transform: translateY(-50%);"></div>
+                             style="top: 50%; left: -20px; transform: translateY(-50%);"></div>
                         
                         <div class="switch-body">
                             <div class="switch-toggle" onclick="toggleSwitch(event)">OFF</div>
@@ -1638,15 +1755,16 @@
                              data-component="switch" 
                              data-terminal="out"
                              data-tooltip="Salida Interruptor"
-                             style="top: 50%; right: -22px; transform: translateY(-50%);"></div>
+                             style="top: 50%; right: -20px; transform: translateY(-50%);"></div>
                     </div>
 
+                    <!-- Resistencia -->
                     <div class="component resistor">
                         <div class="connection-point" 
                              data-component="resistor" 
                              data-terminal="left"
                              data-tooltip="Lado Izquierdo Resistencia"
-                             style="top: 50%; left: -22px; transform: translateY(-50%);"></div>
+                             style="top: 50%; left: -20px; transform: translateY(-50%);"></div>
                         
                         <div class="resistor-body"></div>
                         <div class="resistor-label">330Ω</div>
@@ -1655,32 +1773,35 @@
                              data-component="resistor" 
                              data-terminal="right"
                              data-tooltip="Lado Derecho Resistencia"
-                             style="top: 50%; right: -22px; transform: translateY(-50%);"></div>
+                             style="top: 50%; right: -20px; transform: translateY(-50%);"></div>
                     </div>
 
+                    <!-- LED con patas corregidas -->
                     <div class="component led">
+                        <!-- Pata larga (positivo) - IZQUIERDA -->
                         <div class="led-pin led-pin-long"></div>
                         <div class="led-sign led-sign-positive">+</div>
                         <div class="connection-point" 
                              data-component="led" 
                              data-terminal="positive"
                              data-tooltip="+ Positivo LED (pata larga)"
-                             style="top: -32px; left: 18px;"></div>
+                             style="top: -30px; left: 18px;"></div>
                         
                         <div class="led-body"></div>
                         
+                        <!-- Pata corta (negativo) - DERECHA -->
                         <div class="connection-point" 
                              data-component="led" 
                              data-terminal="negative"
                              data-tooltip="− Negativo LED (pata corta)"
-                             style="bottom: -22px; right: 18px;"></div>
+                             style="bottom: -20px; right: 18px;"></div>
                         <div class="led-sign led-sign-negative">−</div>
                         <div class="led-pin led-pin-short"></div>
                     </div>
                 </div>
             </div>
         </div>
-
+        
         <div class="info-box">
             <div class="info-title">🔍 ¿Cómo funciona?</div>
             <div class="info-text">
@@ -1693,7 +1814,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="status-toast" id="status-toast"></div>
     
     <div class="celebration-overlay" id="celebration">
@@ -1708,7 +1829,7 @@
             <button class="btn-game" onclick="closeCelebration()">🎯 CONTINUAR APRENDIENDO</button>
         </div>
     </div>
-
+    
     <!-- Modal de información educativa de componentes -->
     <div class="info-modal" id="info-modal">
         <div class="modal-content">
@@ -1729,7 +1850,7 @@
         let offsetX, offsetY;
         let isDragging = false;
         let touchIdentifier = null;
-
+        
         // Información educativa completa de componentes
         const componentInfo = {
             battery: {
@@ -1863,13 +1984,13 @@
                                     <tr><td><span class="color-sample" style="background: #FFF; border-color: #000;"></span>Blanco</td><td>9</td><td>-</td></tr>
                                 </tbody>
                             </table>
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 15px;">
-                                <p style="margin: 10px 0; font-size: 1.1em;"><strong>📌 Ejemplo de lectura:</strong></p>
-                                <p style="margin: 5px 0;">Nuestra resistencia de 330Ω tiene:</p>
-                                <p style="margin: 5px 0;">• <strong>Banda 1 (Naranja):</strong> 3</p>
-                                <p style="margin: 5px 0;">• <strong>Banda 2 (Naranja):</strong> 3</p>
-                                <p style="margin: 5px 0;">• <strong>Banda 3 (Café):</strong> ×10</p>
-                                <p style="margin: 10px 0;"><strong>Resultado:</strong> 33 × 10 = <strong>330Ω</strong></p>
+                            <div style="background: #f8f9fa; padding: 12px; border-radius: 10px; margin-top: 12px;">
+                                <p style="margin: 8px 0; font-size: 1em;"><strong>📌 Ejemplo de lectura:</strong></p>
+                                <p style="margin: 4px 0;">Nuestra resistencia de 330Ω tiene:</p>
+                                <p style="margin: 4px 0;">• <strong>Banda 1 (Naranja):</strong> 3</p>
+                                <p style="margin: 4px 0;">• <strong>Banda 2 (Naranja):</strong> 3</p>
+                                <p style="margin: 4px 0;">• <strong>Banda 3 (Café):</strong> ×10</p>
+                                <p style="margin: 8px 0;"><strong>Resultado:</strong> 33 × 10 = <strong>330Ω</strong></p>
                             </div>
                         `
                     },
@@ -1955,7 +2076,6 @@
         function createBackgroundParticles() {
             const container = document.getElementById('bg-particles');
             const particleCount = 20;
-            
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
@@ -1973,7 +2093,6 @@
         function createConfetti() {
             const colors = ['#ff0080', '#ff8c00', '#40e0d0', '#f0f', '#0ff', '#ff0'];
             const confettiCount = 50;
-            
             for (let i = 0; i < confettiCount; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
@@ -1982,7 +2101,6 @@
                 confetti.style.animationDelay = Math.random() * 3 + 's';
                 confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
                 document.body.appendChild(confetti);
-                
                 setTimeout(() => confetti.remove(), 5000);
             }
         }
@@ -1992,12 +2110,10 @@
             const modal = document.getElementById('info-modal');
             const modalBody = document.getElementById('modal-body');
             const info = componentInfo[component];
-            
             let html = `
                 <div class="modal-title">${info.title}</div>
                 <div class="modal-symbol">${info.symbol}</div>
             `;
-            
             info.sections.forEach(section => {
                 html += `<div class="modal-section">`;
                 html += `<h3>${section.title}</h3>`;
@@ -2017,7 +2133,6 @@
                 }
                 html += `</div>`;
             });
-            
             modalBody.innerHTML = html;
             modal.classList.add('active');
         }
@@ -2056,19 +2171,19 @@
             
             battery.style.position = 'absolute';
             battery.style.left = '50px';
-            battery.style.top = 'calc(50% - 70px)';
+            battery.style.top = 'calc(50% - 65px)';
             
             switchEl.style.position = 'absolute';
             switchEl.style.left = '220px';
-            switchEl.style.top = 'calc(50% - 35px)';
+            switchEl.style.top = 'calc(50% - 30px)';
             
             resistor.style.position = 'absolute';
             resistor.style.left = '400px';
-            resistor.style.top = 'calc(50% - 20px)';
+            resistor.style.top = 'calc(50% - 15px)';
             
             led.style.position = 'absolute';
             led.style.left = 'calc(50% - 45px)';
-            led.style.top = 'calc(50% + 100px)';
+            led.style.top = 'calc(50% + 90px)';
         }
 
         function resizeCanvas() {
@@ -2106,6 +2221,7 @@
             e.preventDefault();
             e.stopPropagation();
             
+            // Verificar si el clic/touch es en el interruptor
             if (e.target && e.target.classList.contains('switch-toggle')) {
                 return;
             }
@@ -2147,9 +2263,11 @@
             const container = document.getElementById('protoboard-container');
             const containerRect = container.getBoundingClientRect();
             
+            // Calcular nueva posición
             let x = clientX - containerRect.left - offsetX;
             let y = clientY - containerRect.top - offsetY;
             
+            // Restringir el movimiento dentro del contenedor
             const maxLeft = 0;
             const maxRight = containerRect.width - draggedElement.offsetWidth;
             const maxTop = 0;
@@ -2161,6 +2279,7 @@
             draggedElement.style.left = x + 'px';
             draggedElement.style.top = y + 'px';
             
+            // Actualizar las conexiones en tiempo real
             redrawWires();
         }
 
@@ -2261,6 +2380,7 @@
             const rect1 = point1.getBoundingClientRect();
             const rect2 = point2.getBoundingClientRect();
             
+            // Determinar color según la conexión
             let wireColor;
             const terminal1 = point1.dataset.terminal;
             const terminal2 = point2.dataset.terminal;
@@ -2268,11 +2388,11 @@
             if ((terminal1 === 'positive' && terminal2 === 'positive') || 
                 (terminal1 === 'in' && terminal2 === 'positive') ||
                 (terminal1 === 'positive' && terminal2 === 'in')) {
-                wireColor = '#ff4757';
+                wireColor = '#ff4757'; // Rojo para positivo
             } else if ((terminal1 === 'negative' && terminal2 === 'negative') ||
                       (terminal1 === 'negative' && terminal2 === 'out') ||
                       (terminal1 === 'out' && terminal2 === 'negative')) {
-                wireColor = '#2f3542';
+                wireColor = '#2f3542'; // Negro para negativo
             } else {
                 wireColor = wireColors[currentColorIndex++ % wireColors.length];
             }
@@ -2314,11 +2434,6 @@
             path.setAttribute('stroke-linecap', 'round');
             path.setAttribute('opacity', '0.9');
             
-            // Efecto eléctrico si el circuito está completo y switch encendido
-            if (circuitComplete && switchState) {
-                path.classList.add('wire-electric');
-            }
-            
             canvas.appendChild(path);
         }
 
@@ -2343,10 +2458,7 @@
         }
 
         function updateUI() {
-            const wireCountEl = document.getElementById('wire-count');
-            wireCountEl.textContent = wires.length + ' / ' + MAX_WIRES;
-            wireCountEl.parentElement.classList.add('score-value');
-            
+            document.getElementById('wire-count').textContent = wires.length + ' / ' + MAX_WIRES;
             document.getElementById('switch-status').textContent = switchState ? '✅ ON' : '❌ OFF';
             const ledActive = document.querySelector('.led').classList.contains('active');
             document.getElementById('led-status').textContent = ledActive ? '✅ ON' : '❌ OFF';
