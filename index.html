@@ -15,9 +15,40 @@
             padding: 20px;
             overflow-x: hidden;
             touch-action: none;
+            position: relative;
         }
 
-        .container { max-width: 1400px; margin: 0 auto; }
+        /* Partículas de fondo animadas */
+        .background-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            33% { transform: translateY(-100px) translateX(100px) rotate(120deg); }
+            66% { transform: translateY(-50px) translateX(-100px) rotate(240deg); }
+        }
+
+        .container { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            position: relative;
+            z-index: 1;
+        }
 
         .game-header {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -27,14 +58,46 @@
             text-align: center;
             border: 4px solid #fff;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: headerPulse 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes headerPulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+            50% { box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6); }
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(0deg) translate(-50%, -50%); }
+            100% { transform: rotate(360deg) translate(-50%, -50%); }
         }
 
         .game-title {
             font-family: 'Press Start 2P', cursive;
             font-size: 2em;
             color: #fff;
-            text-shadow: 4px 4px 0 #000;
+            text-shadow: 4px 4px 0 #000, 0 0 20px #f5576c;
             margin-bottom: 10px;
+            animation: titleBounce 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes titleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
         .game-subtitle {
@@ -42,6 +105,8 @@
             font-size: 1.2em;
             font-weight: 600;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
         }
 
         .score-panel {
@@ -61,11 +126,38 @@
             text-align: center;
             border: 3px solid #fff;
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .score-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
+            border-radius: 15px;
+            opacity: 0;
+            z-index: -1;
+            animation: rotateBorder 3s linear infinite;
+            transition: opacity 0.3s;
+        }
+
+        .score-card:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes rotateBorder {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .score-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
         }
 
         .score-label {
@@ -74,10 +166,18 @@
             text-transform: uppercase;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
+        
         .score-value {
             font-size: 2.5em;
             font-weight: 900;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            animation: scoreUpdate 0.5s ease;
+        }
+
+        @keyframes scoreUpdate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
 
         .game-grid {
@@ -92,6 +192,18 @@
             padding: 25px;
             border: 4px solid #fff;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: panelSlideIn 0.6s ease-out;
+        }
+
+        @keyframes panelSlideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
         }
 
         .panel-title {
@@ -101,6 +213,26 @@
             margin-bottom: 20px;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .panel-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            animation: titleUnderline 2s ease-in-out infinite;
+        }
+
+        @keyframes titleUnderline {
+            0%, 100% { width: 60px; }
+            50% { width: 100px; }
         }
 
         #protoboard-container {
@@ -114,9 +246,23 @@
             align-items: center;
             justify-content: center;
             gap: 150px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4), inset 0 0 50px rgba(255,255,255,0.05);
             overflow: hidden;
             touch-action: none;
+        }
+
+        /* Efecto de cuadrícula de circuito */
+        #protoboard-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 20px),
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 20px);
+            pointer-events: none;
         }
 
         #wire-canvas {
@@ -135,13 +281,18 @@
             filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.4));
             cursor: grab;
             user-select: none;
+            transition: filter 0.3s ease;
+        }
+
+        .component:hover {
+            filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.6));
         }
 
         .component:active {
             cursor: grabbing;
         }
 
-        /* Battery - Mejorada con pines pegados correctamente */
+        /* Battery - Mejorada con animación */
         .battery {
             width: 90px;
             text-align: center;
@@ -157,9 +308,14 @@
             position: relative;
             margin: 0 auto;
             box-shadow: inset 0 -20px 40px rgba(0,0,0,0.2);
+            animation: batteryGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes batteryGlow {
+            0%, 100% { box-shadow: inset 0 -20px 40px rgba(0,0,0,0.2), 0 0 10px rgba(67, 233, 123, 0.3); }
+            50% { box-shadow: inset 0 -20px 40px rgba(0,0,0,0.2), 0 0 25px rgba(67, 233, 123, 0.6); }
         }
         
-        /* Tapa superior de la batería (terminal positivo) */
         .battery-body::before {
             content: '';
             position: absolute;
@@ -182,9 +338,14 @@
             left: 50%;
             transform: translate(-50%, -50%);
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: batteryPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes batteryPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
         }
         
-        /* Pines de batería - CORREGIDOS para estar pegados al cuerpo */
         .battery-pin {
             position: absolute;
             left: 50%;
@@ -194,16 +355,17 @@
             border-radius: 2px;
             box-shadow: 2px 0 4px rgba(0,0,0,0.3);
         }
+        
         .battery-pin-positive {
-            top: -14px; /* Pegado a la tapa */
-            height: 24px;
-        }
-        .battery-pin-negative {
-            bottom: 0; /* Pegado al fondo de la batería */
+            top: -14px;
             height: 24px;
         }
         
-        /* Signos +/- en la batería */
+        .battery-pin-negative {
+            bottom: 0;
+            height: 24px;
+        }
+        
         .battery-sign {
             position: absolute;
             font-size: 1.1em;
@@ -218,13 +380,21 @@
             border: 2px solid;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
             z-index: 5;
+            animation: signBounce 2s ease-in-out infinite;
         }
+
+        @keyframes signBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
         .battery-sign-positive {
             top: 5px;
             right: 5px;
             color: #c0392b;
             border-color: #c0392b;
         }
+        
         .battery-sign-negative {
             bottom: 5px;
             right: 5px;
@@ -232,12 +402,13 @@
             border-color: #2c3e50;
         }
 
-        /* Switch - Mejorado con diseño realista */
+        /* Switch - Mejorado con animaciones avanzadas */
         .switch {
             width: 120px;
             text-align: center;
             position: relative;
         }
+        
         .switch-body {
             width: 100px;
             height: 70px;
@@ -251,6 +422,7 @@
             justify-content: center;
             box-shadow: inset 0 -10px 20px rgba(0,0,0,0.2);
         }
+        
         .switch-toggle {
             width: 50px;
             height: 50px;
@@ -258,7 +430,7 @@
             border: 4px solid #fff;
             border-radius: 50%;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -271,15 +443,33 @@
             z-index: 15;
             touch-action: manipulation;
         }
+
+        .switch-toggle:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .switch-toggle:active {
+            transform: scale(0.95);
+        }
+        
         .switch.on .switch-toggle {
             background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 30px #2ecc71;
-            animation: switchGlow 1s ease-in-out infinite;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 30px #2ecc71, 0 0 50px #2ecc71;
+            animation: switchGlow 1s ease-in-out infinite, switchRotate 0.6s ease-out;
         }
+
         @keyframes switchGlow {
             0%, 100% { box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 30px #2ecc71; }
-            50% { box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 50px #2ecc71; }
+            50% { box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 60px #2ecc71, 0 0 80px #2ecc71; }
         }
+
+        @keyframes switchRotate {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            75% { transform: rotate(-15deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
         .switch-label {
             position: absolute;
             bottom: -30px;
@@ -293,22 +483,27 @@
             font-weight: 900;
             border: 3px solid #fff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
         }
+        
         .switch.on .switch-label {
             background: #2ecc71;
             animation: labelPulse 1.5s ease-in-out infinite;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3), 0 0 20px rgba(46, 204, 113, 0.6);
         }
+        
         @keyframes labelPulse {
             0%, 100% { transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.1); }
+            50% { transform: translateX(-50%) scale(1.08); }
         }
 
-        /* Resistencia - Mejorada con diseño realista */
+        /* Resistencia - Mejorada */
         .resistor {
             width: 130px;
             text-align: center;
             position: relative;
         }
+        
         .resistor-body {
             width: 110px;
             height: 40px;
@@ -322,7 +517,13 @@
             position: relative;
             margin: 0 auto;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
         }
+
+        .resistor-body:hover {
+            transform: scale(1.05);
+        }
+        
         .resistor-label {
             position: absolute;
             top: -35px;
@@ -336,14 +537,21 @@
             font-weight: 900;
             border: 3px solid #fff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            animation: resistorLabelFloat 3s ease-in-out infinite;
         }
 
-        /* LED - Mejorado con patas realistas */
+        @keyframes resistorLabelFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-3px); }
+        }
+
+        /* LED - Mejorado con efectos avanzados */
         .led {
             width: 90px;
             text-align: center;
             position: relative;
         }
+        
         .led-body {
             width: 70px;
             height: 70px;
@@ -352,11 +560,14 @@
             position: relative;
             margin: 0 auto;
             border: 3px solid rgba(255,255,255,0.3);
-            box-shadow:
-                0 5px 15px rgba(0,0,0,0.4),
-                inset 0 -5px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4), inset 0 -5px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
         }
-        /* Brillo del LED */
+
+        .led-body:hover {
+            transform: scale(1.05);
+        }
+        
         .led-body::before {
             content: '';
             position: absolute;
@@ -367,21 +578,29 @@
             background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
             border-radius: 50%;
         }
-        /* LED encendido */
+        
         .led.active .led-body {
             background: radial-gradient(circle at 30% 30%, #ff3333 0%, #ff0000 30%, #ff0000 60%, #cc0000 100%);
             box-shadow:
                 0 5px 15px rgba(0,0,0,0.4),
                 0 0 40px #ff0000,
                 0 0 60px #ff0000,
+                0 0 80px rgba(255, 0, 0, 0.5),
                 inset 0 -5px 10px rgba(0,0,0,0.2);
-            animation: ledGlow 0.8s ease-in-out infinite;
+            animation: ledGlow 0.8s ease-in-out infinite, ledExpand 0.6s ease-out;
         }
+
         @keyframes ledGlow {
             0%, 100% { filter: brightness(1.5); }
-            50% { filter: brightness(2.2); }
+            50% { filter: brightness(2.5); }
         }
-        /* Patas del LED - CORREGIDAS para estar pegadas correctamente */
+
+        @keyframes ledExpand {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        
         .led-pin {
             position: absolute;
             width: 4px;
@@ -389,19 +608,19 @@
             border-radius: 2px;
             box-shadow: 2px 0 4px rgba(0,0,0,0.3);
         }
-        /* Pata larga (positivo) - IZQUIERDA, pegada arriba del LED */
+        
         .led-pin-long {
             top: 0;
             left: 18px;
             height: 26px;
         }
-        /* Pata corta (negativo) - DERECHA, pegada abajo del LED */
+        
         .led-pin-short {
             bottom: 0;
             right: 18px;
             height: 16px;
         }
-        /* Signos +/- en el LED - posicionados en las patas */
+        
         .led-sign {
             position: absolute;
             font-size: 1em;
@@ -417,12 +636,14 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
             z-index: 5;
         }
+        
         .led-sign-positive {
             top: -8px;
             left: 14px;
             color: #c0392b;
             border-color: #c0392b;
         }
+        
         .led-sign-negative {
             bottom: -8px;
             right: 14px;
@@ -430,7 +651,7 @@
             border-color: #2c3e50;
         }
 
-        /* Puntos de conexión - AJUSTADOS para móviles */
+        /* Puntos de conexión mejorados */
         .connection-point {
             position: absolute;
             width: 35px;
@@ -440,33 +661,52 @@
             border-radius: 50%;
             cursor: pointer;
             z-index: 15;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             box-shadow: 0 4px 10px rgba(0,0,0,0.4);
             touch-action: manipulation;
         }
+        
         .connection-point:hover {
             background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
-            transform: scale(1.4);
-            box-shadow: 0 0 20px rgba(255,215,0,1);
+            transform: scale(1.5);
+            box-shadow: 0 0 25px rgba(255,215,0,1), 0 6px 15px rgba(0,0,0,0.5);
+            animation: pointHover 0.6s ease-in-out infinite;
         }
+
+        @keyframes pointHover {
+            0%, 100% { transform: scale(1.5); }
+            50% { transform: scale(1.6); }
+        }
+        
         .connection-point.connected {
             background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
             animation: connectedPulse 1.5s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(81, 207, 102, 0.8), 0 4px 10px rgba(0,0,0,0.4);
         }
-        @keyframes connectedPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        
+        @keyframes connectedPulse { 
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(81, 207, 102, 0.8); }
+            50% { transform: scale(1.25); box-shadow: 0 0 30px rgba(81, 207, 102, 1); }
+        }
+        
         .connection-point.selected {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            animation: selectedJump 0.6s ease-in-out infinite;
+            animation: selectedJump 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            box-shadow: 0 0 30px rgba(79, 172, 254, 1), 0 6px 15px rgba(0,0,0,0.5);
         }
-        @keyframes selectedJump { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
-        /* Tooltip para ayudar a los niños */
+        
+        @keyframes selectedJump { 
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.4) translateY(-5px); }
+        }
+        
         .connection-point::after {
             content: attr(data-tooltip);
             position: absolute;
             bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.9);
             color: white;
             padding: 8px 12px;
             border-radius: 8px;
@@ -477,30 +717,56 @@
             transition: opacity 0.3s;
             margin-bottom: 8px;
             font-weight: 600;
+            border: 2px solid #ffd700;
         }
+        
         .connection-point:hover::after {
             opacity: 1;
         }
 
-        /* Mission cards */
+        /* Mission cards mejoradas */
         .mission-card {
             background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
             border-radius: 15px;
             padding: 18px;
             margin: 15px 0;
             border: 3px solid #fff;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .mission-card:hover::before {
+            left: 100%;
         }
 
         .mission-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transform: translateX(8px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .mission-card.completed {
             background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-            box-shadow: 0 0 30px rgba(132, 250, 176, 0.5);
+            box-shadow: 0 0 35px rgba(132, 250, 176, 0.7);
+            animation: missionComplete 0.6s ease-out;
+        }
+
+        @keyframes missionComplete {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .mission-number {
@@ -517,11 +783,23 @@
             font-size: 1.2em;
             border: 3px solid #fff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .mission-card:hover .mission-number {
+            transform: rotate(360deg);
         }
 
         .mission-card.completed .mission-number {
             background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
-            box-shadow: 0 0 20px rgba(81, 207, 102, 0.6);
+            box-shadow: 0 0 25px rgba(81, 207, 102, 0.8);
+            animation: numberCelebrate 0.6s ease-out;
+        }
+
+        @keyframes numberCelebrate {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.2) rotate(10deg); }
+            75% { transform: scale(1.2) rotate(-10deg); }
         }
 
         .mission-card.completed .mission-number::after {
@@ -536,7 +814,7 @@
             line-height: 1.4;
         }
 
-        /* Buttons */
+        /* Botones mejorados */
         .btn-game {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: #fff;
@@ -551,23 +829,49 @@
             width: 100%;
             margin: 10px 0;
             font-size: 1.1em;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             touch-action: manipulation;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-game::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-game:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn-game:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .btn-game:active {
+            transform: translateY(0) scale(0.98);
         }
 
         .btn-success {
             background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
         }
+        
         .btn-danger {
             background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
         }
 
+        /* Toast mejorado */
         .status-toast {
             position: fixed;
             top: 100px;
@@ -579,20 +883,20 @@
             border: 4px solid #fff;
             z-index: 1000;
             transform: translateX(500px);
-            transition: transform 0.5s;
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             max-width: 450px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         .status-toast.show {
             transform: translateX(0);
-            animation: toastBounce 0.5s ease;
+            animation: toastBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         @keyframes toastBounce {
             0% { transform: translateX(500px); }
-            60% { transform: translateX(10px); }
-            80% { transform: translateX(-5px); }
+            50% { transform: translateX(-10px); }
+            70% { transform: translateX(5px); }
             100% { transform: translateX(0); }
         }
 
@@ -600,14 +904,17 @@
             background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
             color: #fff;
         }
+        
         .status-toast.error {
             background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             color: #fff;
         }
+        
         .status-toast.info {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: #fff;
         }
+        
         .status-toast.warning {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             color: #333;
@@ -620,6 +927,12 @@
             padding: 20px;
             margin: 20px 0;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         .info-title {
@@ -629,6 +942,7 @@
             font-size: 1.3em;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
+        
         .info-text {
             color: #555;
             font-weight: 600;
@@ -643,6 +957,12 @@
             padding: 20px;
             margin: 20px 0;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: warningPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes warningPulse {
+            0%, 100% { box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+            50% { box-shadow: 0 8px 25px rgba(255, 154, 158, 0.4); }
         }
 
         .circuit-guide {
@@ -658,18 +978,24 @@
             padding: 15px;
             text-align: center;
             border: 3px solid #ddd;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         .circuit-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transform: translateY(-8px) rotate(2deg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             border-color: #667eea;
         }
 
         .circuit-symbol {
             font-size: 3em;
             margin: 10px 0;
+            animation: symbolFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes symbolFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
         .circuit-name {
@@ -684,18 +1010,19 @@
             margin-top: 5px;
         }
 
+        /* Overlay de celebración mejorado */
         .celebration-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 9999;
             display: none;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
         }
 
         .celebration-overlay.active {
@@ -713,19 +1040,47 @@
             padding: 60px;
             border-radius: 30px;
             text-align: center;
-            border: 6px solid #fff;
+            border: 8px solid #fff;
             max-width: 600px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: celebrationPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes celebrationPop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .celebration-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: celebrationShine 2s infinite;
+        }
+
+        @keyframes celebrationShine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .celebration-emoji {
             font-size: 6em;
-            animation: bounce 1s ease-in-out infinite;
+            animation: celebrationBounce 1s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        @keyframes celebrationBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            25% { transform: translateY(-20px) scale(1.1); }
+            75% { transform: translateY(-10px) scale(1.05); }
         }
 
         .celebration-title {
@@ -733,7 +1088,15 @@
             font-size: 2.5em;
             color: #fff;
             margin: 25px 0;
-            text-shadow: 5px 5px 0 #000;
+            text-shadow: 5px 5px 0 #000, 0 0 30px #f5576c;
+            position: relative;
+            z-index: 1;
+            animation: celebrationTitlePulse 1s ease-in-out infinite;
+        }
+
+        @keyframes celebrationTitlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .celebration-text {
@@ -742,9 +1105,45 @@
             margin-bottom: 25px;
             font-weight: 600;
             line-height: 1.6;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Ajustes para responsividad */
+        /* Sistema de partículas de confeti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            position: absolute;
+            animation: confettiFall 3s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Indicador de progreso */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #84fab0 0%, #8fd3f4 100%);
+            border-radius: 10px;
+            transition: width 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 0 10px rgba(132, 250, 176, 0.8);
+        }
+
+        /* Ajustes responsivos */
         @media (max-width: 1100px) {
             .game-grid {
                 grid-template-columns: 1fr;
@@ -782,53 +1181,18 @@
                 width: 60px;
                 height: 60px;
             }
-            .battery-pin-positive,
-            .battery-pin-negative {
-                height: 40px;
-            }
-            .led-pin-long {
-                height: 45px;
-            }
-            .led-pin-short {
-                height: 32px;
-            }
             .circuit-guide {
                 grid-template-columns: 1fr;
             }
-            /* Aumentar tamaño de elementos táctiles en móviles */
             .connection-point {
                 width: 40px !important;
                 height: 40px !important;
             }
-            .score-value {
-                font-size: 2.2em;
+            .celebration-content {
+                padding: 40px;
             }
-            .panel-title {
-                font-size: 1.2em;
-            }
-            .mission-card {
-                padding: 15px 12px;
-            }
-            .mission-number {
-                width: 35px;
-                height: 35px;
-                font-size: 1em;
-            }
-            .mission-text {
-                font-size: 0.9em;
-            }
-            .btn-game {
-                padding: 15px 25px;
-                font-size: 0.9em;
-            }
-            .info-box, .warning-box {
-                padding: 15px;
-            }
-            .info-title {
-                font-size: 1.1em;
-            }
-            .info-text {
-                font-size: 0.95em;
+            .celebration-title {
+                font-size: 2em;
             }
         }
 
@@ -838,74 +1202,318 @@
                 min-height: 550px;
                 gap: 80px;
             }
-            .battery-body {
-                width: 60px;
-                height: 100px;
-            }
-            .led-body {
-                width: 50px;
-                height: 50px;
-            }
-            .battery-pin-positive,
-            .battery-pin-negative {
-                height: 35px;
-            }
-            .led-pin-long {
-                height: 40px;
-            }
-            .led-pin-short {
-                height: 28px;
-            }
             .game-title {
                 font-size: 1.3em;
             }
-            .game-subtitle {
-                font-size: 1em;
-            }
-            .score-value {
-                font-size: 2em;
-            }
-            .panel-title {
-                font-size: 1.1em;
-            }
-            .mission-card {
-                padding: 12px 10px;
-            }
-            .mission-number {
-                width: 30px;
-                height: 30px;
-                font-size: 0.9em;
-            }
-            .btn-game {
-                padding: 12px 20px;
-                font-size: 0.8em;
-            }
-            .info-title {
-                font-size: 1em;
-            }
-            .info-text {
-                font-size: 0.9em;
-            }
-            /* Aumentar aún más el tamaño de los puntos de conexión para móviles pequeños */
             .connection-point {
                 width: 45px !important;
                 height: 45px !important;
             }
+            .celebration-content {
+                padding: 30px;
+            }
+            .celebration-title {
+                font-size: 1.5em;
+            }
+            .celebration-emoji {
+                font-size: 4em;
+            }
         }
 
-        /* Para el arrastre de componentes */
         .component.dragging {
             opacity: 0.8;
             z-index: 100;
-            transform: scale(1.05);
+            transform: scale(1.1);
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
+        }
+
+        /* Efecto de electricidad en los cables */
+        .wire-electric {
+            stroke-dasharray: 5;
+            animation: electricFlow 1s linear infinite;
+        }
+
+        @keyframes electricFlow {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: 100; }
+        }
+
+        /* Mejoras para guía de componentes clickeable */
+        .circuit-item::before {
+            content: '👆 Click';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #667eea;
+            color: white;
+            font-size: 0.7em;
+            padding: 3px 8px;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-weight: 600;
+        }
+
+        .circuit-item:hover::before {
+            opacity: 1;
+        }
+
+        /* Modal educativo */
+        .info-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .info-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 6px solid #667eea;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.6);
+            animation: modalPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        @keyframes modalPop {
+            0% { transform: scale(0.3) rotate(-5deg); opacity: 0; }
+            50% { transform: scale(1.05) rotate(2deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.8em;
+            cursor: pointer;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg) scale(1.15);
+            background: linear-gradient(135deg, #c0392b, #a93226);
+        }
+
+        .modal-title {
+            font-size: 2.2em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .modal-symbol {
+            font-size: 5.5em;
+            text-align: center;
+            margin: 25px 0;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
+            animation: symbolRotate 3s ease-in-out infinite;
+        }
+
+        @keyframes symbolRotate {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.05); }
+        }
+
+        .modal-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            border-left: 6px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .modal-section:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .modal-section h3 {
+            color: #667eea;
+            font-weight: 900;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-section h3::before {
+            content: '▸';
+            color: #764ba2;
+        }
+
+        .modal-section p {
+            color: #555;
+            line-height: 1.8;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        .modal-section ul {
+            margin: 15px 0 15px 25px;
+            color: #555;
+        }
+
+        .modal-section li {
+            margin: 10px 0;
+            font-weight: 600;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        .modal-section li::marker {
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        /* Tabla de código de colores */
+        .color-code-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .color-code-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            font-weight: 900;
+            text-align: left;
+            font-size: 1.1em;
+        }
+
+        .color-code-table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #f0f0f0;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        .color-code-table tr:hover {
+            background: #f8f9fa;
+            transform: scale(1.01);
+        }
+
+        .color-code-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .color-sample {
+            display: inline-block;
+            width: 35px;
+            height: 25px;
+            border-radius: 6px;
+            margin-right: 12px;
+            border: 3px solid #333;
+            vertical-align: middle;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .circuit-symbol-svg {
+            width: 100%;
+            max-width: 320px;
+            margin: 25px auto;
+            display: block;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 30px 20px;
+                max-height: 90vh;
+            }
+
+            .modal-title {
+                font-size: 1.8em;
+            }
+
+            .modal-symbol {
+                font-size: 4em;
+            }
+
+            .modal-section {
+                padding: 15px;
+            }
+
+            .color-code-table th,
+            .color-code-table td {
+                padding: 10px;
+                font-size: 0.95em;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Partículas de fondo -->
+    <div class="background-particles" id="bg-particles"></div>
+
     <div class="container">
         <div class="game-header">
             <div class="game-title">⚡ CIRCUITO CON INTERRUPTOR ⚡</div>
             <div class="game-subtitle">🎯 Controla cuando encender y apagar el LED</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+            </div>
         </div>
 
         <div class="score-panel">
@@ -948,24 +1556,24 @@
                 </div>
 
                 <div class="info-box">
-                    <div class="info-title">📚 Guía de Componentes</div>
+                    <div class="info-title">📚 Guía de Componentes Interactiva</div>
                     <div class="circuit-guide">
-                        <div class="circuit-item">
+                        <div class="circuit-item" onclick="showComponentInfo('battery')" style="cursor: pointer; position: relative;">
                             <div class="circuit-symbol" style="color: #43e97b;">🔋</div>
                             <div class="circuit-name">Batería</div>
                             <div class="circuit-detail">Fuente de energía</div>
                         </div>
-                        <div class="circuit-item">
-                            <div class="circuit-symbol" style="color: #e74c3c;">🔘</div>
+                        <div class="circuit-item" onclick="showComponentInfo('switch')" style="cursor: pointer; position: relative;">
+                            <div class="circuit-symbol" style="color: #e74c3c;">⚡</div>
                             <div class="circuit-name">Interruptor</div>
                             <div class="circuit-detail">Controla el flujo</div>
                         </div>
-                        <div class="circuit-item">
-                            <div class="circuit-symbol" style="color: #ff9800;">🟫</div>
+                        <div class="circuit-item" onclick="showComponentInfo('resistor')" style="cursor: pointer; position: relative;">
+                            <div class="circuit-symbol" style="color: #ff9800;">━━┯━━</div>
                             <div class="circuit-name">Resistencia</div>
                             <div class="circuit-detail">Protege el LED</div>
                         </div>
-                        <div class="circuit-item">
+                        <div class="circuit-item" onclick="showComponentInfo('led')" style="cursor: pointer; position: relative;">
                             <div class="circuit-symbol" style="color: #ff6b6b;">💡</div>
                             <div class="circuit-name">LED</div>
                             <div class="circuit-detail">Emite luz</div>
@@ -992,7 +1600,6 @@
                 <div id="protoboard-container">
                     <svg id="wire-canvas"></svg>
                     
-                    <!-- Batería con pines corregidos -->
                     <div class="component battery">
                         <div class="battery-pin battery-pin-positive"></div>
                         <div class="connection-point" 
@@ -1015,7 +1622,6 @@
                         <div class="battery-pin battery-pin-negative"></div>
                     </div>
 
-                    <!-- Interruptor -->
                     <div class="component switch">
                         <div class="connection-point" 
                              data-component="switch" 
@@ -1035,7 +1641,6 @@
                              style="top: 50%; right: -22px; transform: translateY(-50%);"></div>
                     </div>
 
-                    <!-- Resistencia -->
                     <div class="component resistor">
                         <div class="connection-point" 
                              data-component="resistor" 
@@ -1053,9 +1658,7 @@
                              style="top: 50%; right: -22px; transform: translateY(-50%);"></div>
                     </div>
 
-                    <!-- LED con patas corregidas -->
                     <div class="component led">
-                        <!-- Pata larga (positivo) - IZQUIERDA -->
                         <div class="led-pin led-pin-long"></div>
                         <div class="led-sign led-sign-positive">+</div>
                         <div class="connection-point" 
@@ -1066,7 +1669,6 @@
                         
                         <div class="led-body"></div>
                         
-                        <!-- Pata corta (negativo) - DERECHA -->
                         <div class="connection-point" 
                              data-component="led" 
                              data-terminal="negative"
@@ -1107,6 +1709,14 @@
         </div>
     </div>
 
+    <!-- Modal de información educativa de componentes -->
+    <div class="info-modal" id="info-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
     <script>
         let wires = [];
         let selectedPoint = null;
@@ -1120,7 +1730,312 @@
         let isDragging = false;
         let touchIdentifier = null;
 
+        // Información educativa completa de componentes
+        const componentInfo = {
+            battery: {
+                title: '🔋 Batería - Fuente de Energía Eléctrica',
+                symbol: '🔋',
+                sections: [
+                    {
+                        title: '¿Qué es una Batería?',
+                        content: 'Una batería es un dispositivo que almacena <strong>energía química</strong> y la convierte en <strong>energía eléctrica</strong>. Es como el corazón del circuito que bombea electricidad a través de los componentes.'
+                    },
+                    {
+                        title: '¿Cómo Funciona?',
+                        content: 'Una batería tiene dos terminales:',
+                        list: [
+                            '<strong>Terminal Positivo (+):</strong> Generalmente marcado en rojo. Es de donde "sale" la corriente eléctrica hacia el circuito.',
+                            '<strong>Terminal Negativo (−):</strong> Generalmente marcado en negro. Es a donde "regresa" la corriente después de pasar por el circuito.',
+                            '<strong>Voltaje (9V):</strong> Mide la "fuerza" con la que la batería empuja los electrones. Mientras más voltios, más fuerte es el empuje.',
+                            'Los electrones fluyen desde el polo negativo hacia el positivo, creando la corriente eléctrica.'
+                        ]
+                    },
+                    {
+                        title: 'Símbolo en Circuitos Eléctricos',
+                        content: 'En los diagramas de circuitos, la batería se representa con dos líneas paralelas: una línea larga representa el terminal positivo (+) y una corta representa el negativo (−).',
+                        svg: '<svg class="circuit-symbol-svg" viewBox="0 0 100 60"><line x1="10" y1="30" x2="35" y2="30" stroke="#333" stroke-width="3"/><line x1="35" y1="15" x2="35" y2="45" stroke="#c0392b" stroke-width="5"/><line x1="45" y1="20" x2="45" y2="40" stroke="#333" stroke-width="3"/><line x1="55" y1="15" x2="55" y2="45" stroke="#c0392b" stroke-width="5"/><line x1="65" y1="20" x2="65" y2="40" stroke="#333" stroke-width="3"/><line x1="65" y1="30" x2="90" y2="30" stroke="#333" stroke-width="3"/><text x="35" y="12" font-size="14" font-weight="bold" fill="#c0392b" text-anchor="middle">+</text><text x="65" y="58" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">−</text></svg>'
+                    },
+                    {
+                        title: 'Tipos de Baterías',
+                        content: 'Existen muchos tipos de baterías:',
+                        list: [
+                            '<strong>Alcalinas (AA, AAA, 9V):</strong> Las más comunes para juguetes y dispositivos.',
+                            '<strong>Recargables (NiMH, Li-ion):</strong> Se pueden recargar miles de veces.',
+                            '<strong>De Litio:</strong> Muy potentes, usadas en celulares y laptops.',
+                            '<strong>De Coche:</strong> Grandes y potentes, para arrancar motores.'
+                        ]
+                    },
+                    {
+                        title: '⚠️ Reglas de Seguridad',
+                        content: '<strong>¡MUY IMPORTANTE!</strong> Nunca conectes directamente los dos polos de una batería sin componentes en medio. Esto crea un "cortocircuito" y la batería se puede calentar muchísimo, dañarse o incluso explotar.'
+                    }
+                ]
+            },
+            switch: {
+                title: '⚡ Interruptor - La Puerta de la Electricidad',
+                symbol: '⚡',
+                sections: [
+                    {
+                        title: '¿Qué es un Interruptor?',
+                        content: 'Un interruptor es como una <strong>puerta</strong> para la electricidad. Puede estar abierto (OFF) permitiendo que NO pase corriente, o cerrado (ON) permitiendo que SÍ pase la corriente.'
+                    },
+                    {
+                        title: '¿Cómo Funciona?',
+                        content: 'Un interruptor tiene dos estados principales:',
+                        list: [
+                            '<strong>OFF - Abierto:</strong> El circuito está interrumpido, la corriente NO puede pasar. Es como tener la puerta cerrada.',
+                            '<strong>ON - Cerrado:</strong> El circuito está completo, la corriente SÍ puede pasar libremente. Es como tener la puerta abierta.',
+                            'Es exactamente igual al interruptor de la luz que tienes en tu casa: cuando lo presionas, permites o bloqueas el paso de electricidad.',
+                            'Tiene dos terminales: una entrada y una salida de corriente.'
+                        ]
+                    },
+                    {
+                        title: 'Tipos Comunes de Interruptores',
+                        content: 'Hay muchos tipos de interruptores según su función:',
+                        list: [
+                            '<strong>Pulsador:</strong> Solo funciona mientras lo mantienes presionado (como el timbre de una casa).',
+                            '<strong>De Palanca:</strong> Se queda en la posición hasta que lo cambies (como este del circuito).',
+                            '<strong>Deslizante:</strong> Se desliza de un lado a otro para encender/apagar.',
+                            '<strong>Rotatorio:</strong> Se gira para cambiar de posición.',
+                            '<strong>Táctil:</strong> Se activa solo tocándolo (como las pantallas de los celulares).'
+                        ]
+                    },
+                    {
+                        title: 'Símbolo en Circuitos',
+                        content: 'Se representa con una línea que se puede "abrir" o "cerrar":',
+                        svg: '<svg class="circuit-symbol-svg" viewBox="0 0 110 70"><line x1="10" y1="35" x2="35" y2="35" stroke="#333" stroke-width="4"/><circle cx="35" cy="35" r="5" fill="#333"/><line x1="35" y1="35" x2="70" y2="20" stroke="#e74c3c" stroke-width="4"/><circle cx="75" cy="35" r="5" fill="#333"/><line x1="75" y1="35" x2="100" y2="35" stroke="#333" stroke-width="4"/><text x="55" y="60" font-size="11" font-weight="bold" fill="#666" text-anchor="middle">Interruptor Abierto (OFF)</text></svg>'
+                    },
+                    {
+                        title: '🎓 Dato Curioso',
+                        content: 'Los interruptores modernos pueden encender y apagar la corriente miles de veces sin desgastarse. ¡Algunos pueden durar más de 100,000 accionamientos!'
+                    }
+                ]
+            },
+            resistor: {
+                title: '━━┯━━ Resistencia - El Protector del Circuito',
+                symbol: '━━┯━━',
+                sections: [
+                    {
+                        title: '¿Qué es una Resistencia?',
+                        content: 'Una resistencia es un componente electrónico que <strong>dificulta el paso de la corriente eléctrica</strong>. Imagina que la electricidad es agua fluyendo por una tubería: la resistencia sería como hacer la tubería más estrecha para reducir el flujo.'
+                    },
+                    {
+                        title: '¿Para qué Sirve en Este Circuito?',
+                        content: 'En nuestro circuito, la resistencia tiene una función crucial:',
+                        list: [
+                            'Protege al LED de recibir demasiada corriente y <strong>quemarse</strong>.',
+                            'Sin la resistencia, el LED recibiría 9V directos y se dañaría en segundos.',
+                            'Reduce la cantidad de corriente que fluye hacia el LED a un nivel seguro.',
+                            'La resistencia "sacrifica" parte de la energía convirtiéndola en calor (por eso se calientan un poco).'
+                        ]
+                    },
+                    {
+                        title: 'Medición: Ohmios (Ω)',
+                        content: 'Las resistencias se miden en <strong>Ohmios (Ω)</strong>:',
+                        list: [
+                            'Esta resistencia es de <strong>330Ω</strong> (330 ohmios).',
+                            'Mientras más ohmios, más dificulta el paso de corriente.',
+                            'Las resistencias vienen en valores estándar: 100Ω, 220Ω, 330Ω, 1KΩ (1000Ω), etc.'
+                        ]
+                    },
+                    {
+                        title: '🎨 Código de Colores de Resistencias',
+                        content: 'Las resistencias usan <strong>bandas de colores</strong> para indicar su valor. Aquí está la tabla completa:',
+                        table: `
+                            <table class="color-code-table">
+                                <thead>
+                                    <tr>
+                                        <th>Color</th>
+                                        <th>Dígito</th>
+                                        <th>Multiplicador</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><span class="color-sample" style="background: #000;"></span>Negro</td><td>0</td><td>×1</td></tr>
+                                    <tr><td><span class="color-sample" style="background: #8B4513;"></span>Café/Marrón</td><td>1</td><td>×10</td></tr>
+                                    <tr><td><span class="color-sample" style="background: #FF0000;"></span>Rojo</td><td>2</td><td>×100</td></tr>
+                                    <tr><td><span class="color-sample" style="background: #FFA500;"></span>Naranja</td><td>3</td><td>×1,000 (1K)</td></tr>
+                                    <tr><td><span class="color-sample" style="background: #FFFF00;"></span>Amarillo</td><td>4</td><td>×10,000 (10K)</td></tr>
+                                    <tr><td><span class="color-sample" style="background: #00FF00;"></span>Verde</td><td>5</td><td>×100,000 (100K)</td></tr>
+                                    <tr><td><span class="color-sample" style="background: #0000FF;"></span>Azul</td><td>6</td><td>×1,000,000 (1M)</td></tr>
+                                    <tr><td><span class="color-sample" style="background: #9400D3;"></span>Violeta</td><td>7</td><td>-</td></tr>
+                                    <tr><td><span class="color-sample" style="background: #808080;"></span>Gris</td><td>8</td><td>-</td></tr>
+                                    <tr><td><span class="color-sample" style="background: #FFF; border-color: #000;"></span>Blanco</td><td>9</td><td>-</td></tr>
+                                </tbody>
+                            </table>
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                                <p style="margin: 10px 0; font-size: 1.1em;"><strong>📌 Ejemplo de lectura:</strong></p>
+                                <p style="margin: 5px 0;">Nuestra resistencia de 330Ω tiene:</p>
+                                <p style="margin: 5px 0;">• <strong>Banda 1 (Naranja):</strong> 3</p>
+                                <p style="margin: 5px 0;">• <strong>Banda 2 (Naranja):</strong> 3</p>
+                                <p style="margin: 5px 0;">• <strong>Banda 3 (Café):</strong> ×10</p>
+                                <p style="margin: 10px 0;"><strong>Resultado:</strong> 33 × 10 = <strong>330Ω</strong></p>
+                            </div>
+                        `
+                    },
+                    {
+                        title: 'Símbolo en Circuitos',
+                        content: 'Se representa con un zigzag o un rectángulo:',
+                        svg: '<svg class="circuit-symbol-svg" viewBox="0 0 140 70"><line x1="10" y1="35" x2="30" y2="35" stroke="#333" stroke-width="4"/><rect x="30" y="22" width="80" height="26" fill="none" stroke="#ff9800" stroke-width="4" rx="4"/><line x1="110" y1="35" x2="130" y2="35" stroke="#333" stroke-width="4"/><text x="70" y="60" font-size="11" font-weight="bold" fill="#666" text-anchor="middle">Resistencia 330Ω</text></svg>'
+                    },
+                    {
+                        title: '🎓 ¿Sabías que...?',
+                        content: 'Las resistencias son uno de los componentes más simples pero más importantes de la electrónica. Prácticamente TODOS los circuitos electrónicos tienen resistencias. ¡Tu celular tiene cientos de ellas!'
+                    }
+                ]
+            },
+            led: {
+                title: '💡 LED - Luz del Futuro',
+                symbol: '💡',
+                sections: [
+                    {
+                        title: '¿Qué Significa LED?',
+                        content: '<strong>LED</strong> significa <em>"Light Emitting Diode"</em> en inglés, que se traduce como <strong>"Diodo Emisor de Luz"</strong>. Es un componente electrónico que convierte electricidad en luz de manera muy eficiente, consumiendo mucha menos energía que las bombillas tradicionales.'
+                    },
+                    {
+                        title: '¿Cómo Funciona un LED?',
+                        content: 'El LED tiene características especiales:',
+                        list: [
+                            '<strong>Polaridad:</strong> El LED solo funciona si se conecta en la dirección correcta (tiene polaridad).',
+                            '<strong>Pata Larga (+) - ÁNODO:</strong> Esta es la pata positiva, se conecta hacia el lado positivo del circuito.',
+                            '<strong>Pata Corta (−) - CÁTODO:</strong> Esta es la pata negativa, se conecta hacia el lado negativo del circuito.',
+                            'Si lo conectas al revés, simplemente NO funcionará (pero no se daña).',
+                            'Cuando la corriente pasa en la dirección correcta, el LED emite luz.',
+                            'Consume MUY poca energía comparado con bombillas incandescentes.'
+                        ]
+                    },
+                    {
+                        title: '🌈 Colores y Tipos de LED',
+                        content: 'Los LEDs vienen en muchos colores y cada uno tiene características diferentes:',
+                        list: [
+                            '<strong>LED Rojo:</strong> El más común y económico. Voltaje de funcionamiento ≈ 1.8-2.2V',
+                            '<strong>LED Verde/Amarillo:</strong> Colores estándar. Voltaje ≈ 2.0-2.5V',
+                            '<strong>LED Azul/Blanco:</strong> Más modernos. Voltaje más alto ≈ 3.0-3.5V',
+                            '<strong>LED RGB:</strong> Puede cambiar de color porque tiene 3 LEDs internos (Rojo, Verde, Azul)',
+                            '<strong>LED Infrarrojo:</strong> Emite luz invisible, usado en controles remotos de TV',
+                            '<strong>LED Ultravioleta (UV):</strong> También invisible, usado para detectar billetes falsos'
+                        ]
+                    },
+                    {
+                        title: '⚠️ ¡MUY IMPORTANTE!',
+                        content: 'Un LED <strong>SIEMPRE necesita una resistencia</strong> para protegerse. Sin resistencia:',
+                        list: [
+                            'El LED recibiría demasiada corriente de la batería.',
+                            'Se calentaría muchísimo en segundos.',
+                            'Se quemaría y dejaría de funcionar permanentemente.',
+                            'La resistencia limita la corriente a un nivel seguro (generalmente 10-20mA).'
+                        ]
+                    },
+                    {
+                        title: 'Símbolo en Circuitos',
+                        content: 'Se representa como un triángulo con una línea y flechas que simbolizan luz:',
+                        svg: '<svg class="circuit-symbol-svg" viewBox="0 0 130 90"><line x1="10" y1="45" x2="40" y2="45" stroke="#333" stroke-width="4"/><polygon points="40,28 40,62 75,45" fill="none" stroke="#ff6b6b" stroke-width="4"/><line x1="75" y1="28" x2="75" y2="62" stroke="#ff6b6b" stroke-width="4"/><line x1="75" y1="45" x2="105" y2="45" stroke="#333" stroke-width="4"/><polyline points="65,18 72,10 70,10 72,5" fill="none" stroke="#ffed4e" stroke-width="3" stroke-linecap="round"/><polyline points="75,18 82,10 80,10 82,5" fill="none" stroke="#ffed4e" stroke-width="3" stroke-linecap="round"/><text x="40" y="82" font-size="12" font-weight="bold" fill="#c0392b" text-anchor="middle">+ ÁNODO</text><text x="75" y="82" font-size="12" font-weight="bold" fill="#333" text-anchor="middle">− CÁTODO</text></svg>'
+                    },
+                    {
+                        title: 'Ventajas de los LEDs',
+                        content: 'Los LEDs han revolucionado la iluminación por estas razones:',
+                        list: [
+                            '<strong>Eficiencia:</strong> Convierten casi toda la energía en luz, no en calor.',
+                            '<strong>Duración:</strong> Pueden durar más de 50,000 horas (¡más de 5 años encendidos continuamente!)',
+                            '<strong>Tamaño:</strong> Son muy pequeños y compactos.',
+                            '<strong>Ecológicos:</strong> No contienen mercurio ni materiales tóxicos.',
+                            '<strong>Resistentes:</strong> No tienen filamentos que se puedan romper.',
+                            '<strong>Económicos:</strong> Aunque cuestan más, ahorran mucha electricidad a largo plazo.'
+                        ]
+                    },
+                    {
+                        title: '🎓 Historia y Datos Curiosos',
+                        content: 'El primer LED fue inventado en 1962 por Nick Holonyak Jr. Originalmente solo había LEDs rojos. Los LEDs azules (inventados en 1990) fueron tan importantes que sus creadores ganaron el Premio Nobel de Física en 2014. ¡Hoy en día los LEDs están en todas partes: pantallas, semáforos, lámparas, celulares y hasta en los autos!'
+                    }
+                ]
+            }
+        };
+
+        // Sistema de partículas de fondo
+        function createBackgroundParticles() {
+            const container = document.getElementById('bg-particles');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Crear confeti cuando se complete el circuito
+        function createConfetti() {
+            const colors = ['#ff0080', '#ff8c00', '#40e0d0', '#f0f', '#0ff', '#ff0'];
+            const confettiCount = 50;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // Funciones para mostrar información educativa de componentes
+        function showComponentInfo(component) {
+            const modal = document.getElementById('info-modal');
+            const modalBody = document.getElementById('modal-body');
+            const info = componentInfo[component];
+            
+            let html = `
+                <div class="modal-title">${info.title}</div>
+                <div class="modal-symbol">${info.symbol}</div>
+            `;
+            
+            info.sections.forEach(section => {
+                html += `<div class="modal-section">`;
+                html += `<h3>${section.title}</h3>`;
+                html += `<p>${section.content}</p>`;
+                if (section.list) {
+                    html += '<ul>';
+                    section.list.forEach(item => {
+                        html += `<li>${item}</li>`;
+                    });
+                    html += '</ul>';
+                }
+                if (section.svg) {
+                    html += section.svg;
+                }
+                if (section.table) {
+                    html += section.table;
+                }
+                html += `</div>`;
+            });
+            
+            modalBody.innerHTML = html;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('info-modal').classList.remove('active');
+        }
+
+        // Cerrar modal al hacer clic fuera del contenido
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('info-modal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
+            createBackgroundParticles();
             setupConnectionPoints();
             setupDragAndDrop();
             resizeCanvas();
@@ -1191,7 +2106,6 @@
             e.preventDefault();
             e.stopPropagation();
             
-            // Verificar si el clic/touch es en el interruptor
             if (e.target && e.target.classList.contains('switch-toggle')) {
                 return;
             }
@@ -1233,11 +2147,9 @@
             const container = document.getElementById('protoboard-container');
             const containerRect = container.getBoundingClientRect();
             
-            // Calcular nueva posición
             let x = clientX - containerRect.left - offsetX;
             let y = clientY - containerRect.top - offsetY;
             
-            // Restringir el movimiento dentro del contenedor
             const maxLeft = 0;
             const maxRight = containerRect.width - draggedElement.offsetWidth;
             const maxTop = 0;
@@ -1249,7 +2161,6 @@
             draggedElement.style.left = x + 'px';
             draggedElement.style.top = y + 'px';
             
-            // Actualizar las conexiones en tiempo real
             redrawWires();
         }
 
@@ -1306,6 +2217,7 @@
                 selectedPoint = null;
                 
                 updateUI();
+                updateProgress();
                 checkMissions();
             }
         }
@@ -1349,7 +2261,6 @@
             const rect1 = point1.getBoundingClientRect();
             const rect2 = point2.getBoundingClientRect();
             
-            // Determinar color según la conexión
             let wireColor;
             const terminal1 = point1.dataset.terminal;
             const terminal2 = point2.dataset.terminal;
@@ -1357,11 +2268,11 @@
             if ((terminal1 === 'positive' && terminal2 === 'positive') || 
                 (terminal1 === 'in' && terminal2 === 'positive') ||
                 (terminal1 === 'positive' && terminal2 === 'in')) {
-                wireColor = '#ff4757'; // Rojo para positivo
+                wireColor = '#ff4757';
             } else if ((terminal1 === 'negative' && terminal2 === 'negative') ||
                       (terminal1 === 'negative' && terminal2 === 'out') ||
                       (terminal1 === 'out' && terminal2 === 'negative')) {
-                wireColor = '#2f3542'; // Negro para negativo
+                wireColor = '#2f3542';
             } else {
                 wireColor = wireColors[currentColorIndex++ % wireColors.length];
             }
@@ -1403,6 +2314,11 @@
             path.setAttribute('stroke-linecap', 'round');
             path.setAttribute('opacity', '0.9');
             
+            // Efecto eléctrico si el circuito está completo y switch encendido
+            if (circuitComplete && switchState) {
+                path.classList.add('wire-electric');
+            }
+            
             canvas.appendChild(path);
         }
 
@@ -1427,10 +2343,18 @@
         }
 
         function updateUI() {
-            document.getElementById('wire-count').textContent = wires.length + ' / ' + MAX_WIRES;
+            const wireCountEl = document.getElementById('wire-count');
+            wireCountEl.textContent = wires.length + ' / ' + MAX_WIRES;
+            wireCountEl.parentElement.classList.add('score-value');
+            
             document.getElementById('switch-status').textContent = switchState ? '✅ ON' : '❌ OFF';
             const ledActive = document.querySelector('.led').classList.contains('active');
             document.getElementById('led-status').textContent = ledActive ? '✅ ON' : '❌ OFF';
+        }
+
+        function updateProgress() {
+            const progress = (wires.length / MAX_WIRES) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
         }
 
         function clearWires() {
@@ -1454,6 +2378,7 @@
             });
             
             updateUI();
+            updateProgress();
             showStatus('🔄 Circuito reiniciado - ¡Intenta de nuevo!', 'info');
         }
 
@@ -1509,6 +2434,7 @@
             if (m1 && m2 && m3 && m4) {
                 circuitComplete = true;
                 document.getElementById('celebration').classList.add('active');
+                createConfetti();
                 showStatus('✅ ¡CIRCUITO CORRECTO! Ahora haz clic en el interruptor para encender el LED', 'success');
             } else {
                 circuitComplete = false;
