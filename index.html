@@ -98,7 +98,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 45%;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, #ff9800, #ff5733);
             border-radius: 2px;
         }
@@ -136,7 +136,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, #ff9800, #ff5733);
             transform: scaleX(0);
             transform-origin: left;
@@ -375,7 +375,7 @@
 
         @keyframes titleUnderline {
             0%, 100% { width: 55px; }
-            50% { width: 100px; }
+            50% { width: 90px; }
         }
 
         #protoboard-container {
@@ -1689,6 +1689,40 @@
     <!-- Partículas de fondo -->
     <div class="background-particles" id="bg-particles"></div>
     
+    <!-- NUEVA SECCIÓN: Guía de Componentes al Inicio -->
+    <div class="component-guide">
+        <h2 class="guide-title">Guía de Componentes Interactiva</h2>
+        <div class="components-grid">
+            <div class="component-card" onclick="showComponentInfo('battery')">
+                <div class="component-icon" style="color: #43e97b;">🔋</div>
+                <h3 class="component-name">Batería</h3>
+                <p class="component-description">Fuente de energía eléctrica</p>
+                <span class="component-tag">9V</span>
+            </div>
+            
+            <div class="component-card" onclick="showComponentInfo('switch')">
+                <div class="component-icon" style="color: #e74c3c;">⚡</div>
+                <h3 class="component-name">Interruptor</h3>
+                <p class="component-description">Controla el flujo de corriente</p>
+                <span class="component-tag">ON/OFF</span>
+            </div>
+            
+            <div class="component-card" onclick="showComponentInfo('resistor')">
+                <div class="component-icon" style="color: #ff9800;">.png</div>
+                <h3 class="component-name">Resistencia</h3>
+                <p class="component-description">Protege el LED de sobrecarga</p>
+                <span class="component-tag">330Ω</span>
+            </div>
+            
+            <div class="component-card" onclick="showComponentInfo('led')">
+                <div class="component-icon" style="color: #ff6b6b;">💡</div>
+                <h3 class="component-name">LED</h3>
+                <p class="component-description">Emite luz con corriente eléctrica</p>
+                <span class="component-tag">Rojo</span>
+            </div>
+        </div>
+    </div>
+    
     <div class="container">
         <div class="game-header">
             <div class="game-title">⚡ CIRCUITO CON INTERRUPTOR ⚡</div>
@@ -1710,40 +1744,6 @@
             <div class="score-card">
                 <div class="score-label">💡 LED</div>
                 <div class="score-value" id="led-status">OFF</div>
-            </div>
-        </div>
-        
-        <!-- NUEVA UBICACIÓN: Guía de Componentes debajo de los contadores -->
-        <div class="component-guide">
-            <h2 class="guide-title">Guía de Componentes Interactiva</h2>
-            <div class="components-grid">
-                <div class="component-card" onclick="showComponentInfo('battery')">
-                    <div class="component-icon" style="color: #43e97b;">🔋</div>
-                    <h3 class="component-name">Batería</h3>
-                    <p class="component-description">Fuente de energía eléctrica</p>
-                    <span class="component-tag">9V</span>
-                </div>
-                
-                <div class="component-card" onclick="showComponentInfo('switch')">
-                    <div class="component-icon" style="color: #e74c3c;">⚡</div>
-                    <h3 class="component-name">Interruptor</h3>
-                    <p class="component-description">Controla el flujo de corriente</p>
-                    <span class="component-tag">ON/OFF</span>
-                </div>
-                
-                <div class="component-card" onclick="showComponentInfo('resistor')">
-                    <div class="component-icon" style="color: #ff9800;">━━┯━━</div>
-                    <h3 class="component-name">Resistencia</h3>
-                    <p class="component-description">Protege el LED de sobrecarga</p>
-                    <span class="component-tag">330Ω</span>
-                </div>
-                
-                <div class="component-card" onclick="showComponentInfo('led')">
-                    <div class="component-icon" style="color: #ff6b6b;">💡</div>
-                    <h3 class="component-name">LED</h3>
-                    <p class="component-description">Emite luz con corriente eléctrica</p>
-                    <span class="component-tag">Rojo</span>
-                </div>
             </div>
         </div>
         
@@ -1769,32 +1769,6 @@
                 <div class="mission-card" id="mission4">
                     <span class="mission-number">4</span>
                     <span class="mission-text">Conecta el <strong>− del LED</strong> (pata corta) con el <strong>− negro</strong> de la batería</span>
-                </div>
-                
-                <div class="info-box">
-                    <div class="info-title">📚 Guía de Componentes Interactiva</div>
-                    <div class="circuit-guide">
-                        <div class="circuit-item" onclick="showComponentInfo('battery')" style="cursor: pointer; position: relative;">
-                            <div class="circuit-symbol" style="color: #43e97b;">🔋</div>
-                            <div class="circuit-name">Batería</div>
-                            <div class="circuit-detail">Fuente de energía</div>
-                        </div>
-                        <div class="circuit-item" onclick="showComponentInfo('switch')" style="cursor: pointer; position: relative;">
-                            <div class="circuit-symbol" style="color: #e74c3c;">⚡</div>
-                            <div class="circuit-name">Interruptor</div>
-                            <div class="circuit-detail">Controla el flujo</div>
-                        </div>
-                        <div class="circuit-item" onclick="showComponentInfo('resistor')" style="cursor: pointer; position: relative;">
-                            <div class="circuit-symbol" style="color: #ff9800;">━━┯━━</div>
-                            <div class="circuit-name">Resistencia</div>
-                            <div class="circuit-detail">Protege el LED</div>
-                        </div>
-                        <div class="circuit-item" onclick="showComponentInfo('led')" style="cursor: pointer; position: relative;">
-                            <div class="circuit-symbol" style="color: #ff6b6b;">💡</div>
-                            <div class="circuit-name">LED</div>
-                            <div class="circuit-detail">Emite luz</div>
-                        </div>
-                    </div>
                 </div>
                 
                 <div class="warning-box">
@@ -2034,7 +2008,7 @@
                 ]
             },
             resistor: {
-                title: '━━┯━━ Resistencia - El Protector del Circuito',
+                title: '━━┯━━ Resistencia - El Protector del Circuit',
                 symbol: '━━┯━━',
                 sections: [
                     {
@@ -2042,7 +2016,7 @@
                         content: 'Una resistencia es un componente electrónico que <strong>dificulta el paso de la corriente eléctrica</strong>. Imagina que la electricidad es agua fluyendo por una tubería: la resistencia sería como hacer la tubería más estrecha para reducir el flujo.'
                     },
                     {
-                        title: '¿Para qué Sirve en Este Circuito?',
+                        title: '¿Para qué Sirve en Este Circuit?',
                         content: 'En nuestro circuito, la resistencia tiene una función crucial:',
                         list: [
                             'Protege al LED de recibir demasiada corriente y <strong>quemarse</strong>.',
