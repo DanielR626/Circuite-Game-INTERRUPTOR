@@ -50,16 +50,22 @@
             z-index: 1;
         }
 
-        /* NUEVA SECCIÓN: Guía de Componentes al Inicio */
+        /* NUEVA SECCIÓN: Guía de Componentes al Inicio - CORREGIDA Y CENTRADA */
         .component-guide {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 4px solid #fff;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 5px solid #fff;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
             overflow: hidden;
             position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .component-guide::before {
@@ -69,65 +75,66 @@
             left: -5px;
             right: -5px;
             bottom: -5px;
-            border: 2px solid #ff9800;
-            border-radius: 22px;
+            border: 3px solid #ff9800;
+            border-radius: 27px;
             pointer-events: none;
             z-index: -1;
-            animation: guideBorder 4s linear infinite;
+            animation: guideBorder 3s linear infinite;
         }
 
         @keyframes guideBorder {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% { transform: rotate(0deg); box-shadow: 0 0 15px rgba(255, 152, 0, 0.5); }
+            100% { transform: rotate(360deg); box-shadow: 0 0 25px rgba(255, 152, 0, 0.8); }
         }
 
         .guide-title {
             font-family: 'Press Start 2P', cursive;
-            font-size: 1.8em;
+            font-size: 2em;
             color: #667eea;
-            text-shadow: 3px 3px 0 #fff, 0 0 15px #ff9800;
-            margin-bottom: 15px;
+            text-shadow: 3px 3px 0 #fff, 0 0 20px #ff9800;
+            margin-bottom: 20px;
             text-align: center;
             position: relative;
+            letter-spacing: 1px;
         }
 
         .guide-title::after {
             content: '';
             position: absolute;
-            bottom: -12px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 45%;
-            height: 3px;
-            background: linear-gradient(90deg, #ff9800, #ff5733);
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff9800, #ff5733, #ff9800);
             border-radius: 2px;
+            box-shadow: 0 2px 10px rgba(255, 152, 0, 0.6);
         }
 
         .components-grid {
             display: flex;
-            gap: 15px;
-            overflow-x: auto;
-            padding: 8px 5px;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .components-grid::-webkit-scrollbar {
-            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .component-card {
-            flex: 0 0 260px;
             background: white;
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 25px 20px;
             text-align: center;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
-            border: 3px solid #eaeaea;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 4px solid #eaeaea;
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            width: calc(25% - 20px);
+            min-width: 220px;
+            max-width: 280px;
         }
 
         .component-card::before {
@@ -136,64 +143,85 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #ff9800, #ff5733);
+            height: 6px;
+            background: linear-gradient(90deg, #ff9800, #ff5733, #ff9800);
             transform: scaleX(0);
             transform-origin: left;
-            transition: transform 0.4s ease;
+            transition: transform 0.5s ease;
         }
 
         .component-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.35), 0 0 30px rgba(255, 152, 0, 0.3);
             border-color: #ff9800;
+            z-index: 10;
         }
 
         .component-card:hover::before {
             transform: scaleX(1);
         }
 
+        .component-card:active {
+            transform: translateY(-5px) scale(0.98);
+        }
+
         .component-icon {
-            font-size: 3em;
-            margin: 12px 0;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-size: 4em;
+            margin: 15px 0;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .component-card:hover .component-icon {
+            transform: scale(1.2) rotate(5deg);
         }
 
         .component-name {
-            font-size: 1.4em;
+            font-size: 1.6em;
             font-weight: 900;
-            color: #333;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            color: #2c3e50;
+            margin-bottom: 12px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            letter-spacing: 0.5px;
         }
 
         .component-description {
-            font-size: 0.95em;
+            font-size: 1.05em;
             color: #555;
             font-weight: 600;
             line-height: 1.5;
+            margin-bottom: 15px;
+            min-height: 50px;
         }
 
         .component-tag {
             display: inline-block;
             background: linear-gradient(135deg, #ff9800 0%, #ff5733 100%);
             color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 700;
-            margin-top: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 1em;
+            font-weight: 800;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(255, 120, 0, 0.4);
+            letter-spacing: 1px;
+            border: 2px solid white;
+        }
+
+        .component-card:hover .component-tag {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 120, 0, 0.6);
         }
 
         .game-header {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 18px;
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 22px;
             text-align: center;
-            border: 4px solid #fff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 5px solid #fff;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.35);
             animation: headerPulse 3s ease-in-out infinite;
             position: relative;
             overflow: hidden;
@@ -206,13 +234,13 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
             animation: shine 3s infinite;
         }
 
         @keyframes headerPulse {
-            0%, 100% { box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-            50% { box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6); }
+            0%, 100% { box-shadow: 0 12px 35px rgba(0,0,0,0.35); }
+            50% { box-shadow: 0 18px 45px rgba(245, 87, 108, 0.7); }
         }
 
         @keyframes shine {
@@ -222,47 +250,50 @@
 
         .game-title {
             font-family: 'Press Start 2P', cursive;
-            font-size: 1.8em;
+            font-size: 2.2em;
             color: #fff;
-            text-shadow: 4px 4px 0 #000, 0 0 20px #f5576c;
-            margin-bottom: 8px;
+            text-shadow: 5px 5px 0 #000, 0 0 25px #f5576c;
+            margin-bottom: 12px;
             animation: titleBounce 2s ease-in-out infinite;
             position: relative;
             z-index: 1;
+            letter-spacing: 2px;
         }
 
         @keyframes titleBounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            50% { transform: translateY(-7px); }
         }
 
         .game-subtitle {
             color: #fff;
-            font-size: 1.1em;
-            font-weight: 600;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 1.3em;
+            font-weight: 700;
+            text-shadow: 3px 3px 5px rgba(0,0,0,0.4);
             position: relative;
             z-index: 1;
+            margin-top: 8px;
         }
 
         .score-panel {
             display: flex;
-            gap: 12px;
-            margin-bottom: 18px;
+            gap: 15px;
+            margin-bottom: 22px;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .score-card {
             flex: 1;
-            min-width: 180px;
+            min-width: 200px;
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            border-radius: 15px;
-            padding: 18px;
+            border-radius: 20px;
+            padding: 22px;
             color: #fff;
             text-align: center;
-            border: 3px solid #fff;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
+            border: 4px solid #fff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
@@ -275,11 +306,11 @@
             right: -2px;
             bottom: -2px;
             background: linear-gradient(45deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
-            border-radius: 15px;
+            border-radius: 20px;
             opacity: 0;
             z-index: -1;
             animation: rotateBorder 3s linear infinite;
-            transition: opacity 0.3s;
+            transition: opacity 0.4s;
         }
 
         .score-card:hover::before {
@@ -292,56 +323,59 @@
         }
 
         .score-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.45);
         }
 
         .score-label {
-            font-size: 0.85em;
-            font-weight: 600;
+            font-size: 0.95em;
+            font-weight: 700;
             text-transform: uppercase;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            margin-bottom: 5px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
         }
 
         .score-value {
-            font-size: 2.2em;
+            font-size: 2.8em;
             font-weight: 900;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
-            animation: scoreUpdate 0.5s ease;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+            animation: scoreUpdate 0.6s ease;
+            font-family: 'Press Start 2P', cursive;
+            letter-spacing: 1px;
         }
 
         @keyframes scoreUpdate {
             0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.25); }
             100% { transform: scale(1); }
         }
 
         .game-grid {
             display: grid;
-            grid-template-columns: 380px 1fr;
-            gap: 18px;
+            grid-template-columns: 420px 1fr;
+            gap: 22px;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1150px) {
             .game-grid {
                 grid-template-columns: 1fr;
             }
         }
 
         .panel {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 22px;
-            border: 4px solid #fff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            animation: panelSlideIn 0.6s ease-out;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            padding: 28px;
+            border: 5px solid #fff;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+            animation: panelSlideIn 0.7s ease-out;
         }
 
         @keyframes panelSlideIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -350,14 +384,15 @@
         }
 
         .panel-title {
-            font-size: 1.3em;
+            font-size: 1.6em;
             font-weight: 900;
             color: #667eea;
-            margin-bottom: 18px;
+            margin-bottom: 22px;
             text-align: center;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
+            letter-spacing: 1px;
         }
 
         .panel-title::after {
@@ -366,32 +401,36 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 55px;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
             border-radius: 2px;
             animation: titleUnderline 2s ease-in-out infinite;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5);
         }
 
         @keyframes titleUnderline {
-            0%, 100% { width: 55px; }
-            50% { width: 90px; }
+            0%, 100% { width: 70px; box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5); }
+            50% { width: 110px; box-shadow: 0 2px 12px rgba(102, 126, 234, 0.8); }
         }
 
         #protoboard-container {
             position: relative;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            border-radius: 20px;
-            padding: 50px 35px;
-            min-height: 600px;
-            border: 5px solid #fff;
+            border-radius: 25px;
+            padding: 65px 50px;
+            min-height: 680px;
+            border: 6px solid #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 130px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4), inset 0 0 50px rgba(255,255,255,0.05);
+            gap: 150px;
+            box-shadow: 0 18px 50px rgba(0,0,0,0.5), inset 0 0 60px rgba(255,255,255,0.08);
             overflow: hidden;
             touch-action: none;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 20%);
         }
 
         /* Efecto de cuadrícula de circuito */
@@ -403,9 +442,10 @@
             right: 0;
             bottom: 0;
             background-image:
-                repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 20px),
-                repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 20px);
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 30px),
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 30px);
             pointer-events: none;
+            z-index: 0;
         }
 
         #wire-canvas {
@@ -421,14 +461,15 @@
         .component {
             position: absolute;
             z-index: 10;
-            filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.4));
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
             cursor: grab;
             user-select: none;
             transition: filter 0.3s ease;
         }
 
         .component:hover {
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
+            filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.7));
+            z-index: 15;
         }
 
         .component:active {
@@ -437,158 +478,164 @@
 
         /* Battery - Mejorada con animación */
         .battery {
-            width: 90px;
+            width: 100px;
             text-align: center;
             position: relative;
         }
 
         .battery-body {
-            width: 80px;
-            height: 140px;
-            background: linear-gradient(180deg, #43e97b 0%, #38f9d7 50%, #2ecc71 100%);
-            border: 4px solid #2c3e50;
-            border-radius: 10px;
+            width: 90px;
+            height: 155px;
+            background: linear-gradient(180deg, #43e97b 0%, #38f9d7 40%, #2ecc71 100%);
+            border: 5px solid #2c3e50;
+            border-radius: 12px;
             position: relative;
             margin: 0 auto;
-            box-shadow: inset 0 -20px 40px rgba(0,0,0,0.2);
+            box-shadow: inset 0 -25px 50px rgba(0,0,0,0.25), 0 10px 25px rgba(67, 233, 123, 0.4);
             animation: batteryGlow 3s ease-in-out infinite;
         }
 
         @keyframes batteryGlow {
-            0%, 100% { box-shadow: inset 0 -20px 40px rgba(0,0,0,0.2), 0 0 10px rgba(67, 233, 123, 0.3); }
-            50% { box-shadow: inset 0 -20px 40px rgba(0,0,0,0.2), 0 0 25px rgba(67, 233, 123, 0.6); }
+            0%, 100% { box-shadow: inset 0 -25px 50px rgba(0,0,0,0.25), 0 10px 25px rgba(67, 233, 123, 0.4); }
+            50% { box-shadow: inset 0 -25px 50px rgba(0,0,0,0.25), 0 10px 35px rgba(67, 233, 123, 0.7), 0 0 30px rgba(67, 233, 123, 0.5); }
         }
 
         .battery-body::before {
             content: '';
             position: absolute;
-            top: -14px;
+            top: -18px;
             left: 50%;
             transform: translateX(-50%);
-            width: 24px;
-            height: 14px;
+            width: 30px;
+            height: 18px;
             background: #2c3e50;
-            border-radius: 4px 4px 0 0;
+            border-radius: 6px 6px 0 0;
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.3);
         }
 
         .battery-label {
             text-align: center;
             color: #fff;
             font-weight: 900;
-            font-size: 1.8em;
+            font-size: 2em;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
             animation: batteryPulse 2s ease-in-out infinite;
+            font-family: 'Press Start 2P', cursive;
+            letter-spacing: 1px;
         }
 
         @keyframes batteryPulse {
             0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.05); }
+            50% { transform: translate(-50%, -50%) scale(1.07); }
         }
 
         .battery-pin {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 5px;
-            background: linear-gradient(180deg, #d4d4d4 0%, #888 100%);
-            border-radius: 2px;
-            box-shadow: 2px 0 4px rgba(0,0,0,0.3);
+            width: 7px;
+            background: linear-gradient(180deg, #e0e0e0 0%, #a0a0a0 50%, #606060 100%);
+            border-radius: 3px;
+            box-shadow: 3px 0 8px rgba(0,0,0,0.4), inset -2px 0 5px rgba(255,255,255,0.4);
+            border: 2px solid #333;
         }
 
         .battery-pin-positive {
-            top: -14px;
-            height: 24px;
+            top: -18px;
+            height: 30px;
+            background: linear-gradient(180deg, #ff6b6b 0%, #ff4757 50%, #c0392b 100%);
+            box-shadow: 3px 0 8px rgba(255,71,87,0.6), inset -2px 0 5px rgba(255,255,255,0.4);
         }
 
         .battery-pin-negative {
             bottom: 0;
-            height: 24px;
+            height: 30px;
+            background: linear-gradient(180deg, #6c757d 0%, #495057 50%, #343a40 100%);
         }
 
         .battery-sign {
             position: absolute;
-            font-size: 1.1em;
+            font-size: 1.3em;
             font-weight: 900;
-            background: rgba(255,255,255,0.95);
-            width: 22px;
-            height: 22px;
+            background: rgba(255,255,255,0.98);
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            border: 3px solid;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.4), 0 0 12px rgba(0,0,0,0.2);
             z-index: 5;
-            animation: signBounce 2s ease-in-out infinite;
-        }
-
-        @keyframes signBounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            font-family: 'Press Start 2P', cursive;
         }
 
         .battery-sign-positive {
-            top: 5px;
-            right: 5px;
+            top: 8px;
+            right: 8px;
             color: #c0392b;
             border-color: #c0392b;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.4), 0 0 15px rgba(192, 57, 43, 0.6);
         }
 
         .battery-sign-negative {
-            bottom: 5px;
-            right: 5px;
+            bottom: 8px;
+            right: 8px;
             color: #2c3e50;
             border-color: #2c3e50;
         }
 
         /* Switch - Mejorado con animaciones avanzadas */
         .switch {
-            width: 120px;
+            width: 135px;
             text-align: center;
             position: relative;
         }
 
         .switch-body {
-            width: 100px;
-            height: 70px;
+            width: 115px;
+            height: 80px;
             background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
-            border: 4px solid #fff;
-            border-radius: 12px;
+            border: 5px solid #fff;
+            border-radius: 15px;
             position: relative;
             margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.2);
+            box-shadow: inset 0 -12px 25px rgba(0,0,0,0.3), 0 10px 25px rgba(0,0,0,0.3);
         }
 
         .switch-toggle {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-            border: 4px solid #fff;
+            border: 5px solid #fff;
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2em;
+            font-size: 1.4em;
             font-weight: 900;
             color: #fff;
             user-select: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.5);
             position: relative;
             z-index: 15;
             touch-action: manipulation;
+            font-family: 'Press Start 2P', cursive;
+            letter-spacing: 2px;
         }
 
         .switch-toggle:hover {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.12) rotate(5deg);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.5), 0 0 25px rgba(231, 76, 60, 0.7);
         }
 
         .switch-toggle:active {
@@ -597,199 +644,232 @@
 
         .switch.on .switch-toggle {
             background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 30px #2ecc71, 0 0 50px #2ecc71;
+            box-shadow: 0 7px 20px rgba(0,0,0,0.5), 0 0 35px #2ecc71, 0 0 55px #2ecc71;
             animation: switchGlow 1s ease-in-out infinite, switchRotate 0.6s ease-out;
         }
 
         @keyframes switchGlow {
-            0%, 100% { box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 30px #2ecc71; }
-            50% { box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 60px #2ecc71, 0 0 80px #2ecc71; }
+            0%, 100% { box-shadow: 0 7px 20px rgba(0,0,0,0.5), 0 0 35px #2ecc71; }
+            50% { box-shadow: 0 7px 20px rgba(0,0,0,0.5), 0 0 55px #2ecc71, 0 0 75px #2ecc71; }
         }
 
         @keyframes switchRotate {
             0% { transform: rotate(0deg); }
-            25% { transform: rotate(15deg); }
-            75% { transform: rotate(-15deg); }
+            25% { transform: rotate(18deg); }
+            75% { transform: rotate(-18deg); }
             100% { transform: rotate(0deg); }
         }
 
         .switch-label {
             position: absolute;
-            bottom: -25px;
+            bottom: -30px;
             left: 50%;
             transform: translateX(-50%);
             background: #e74c3c;
             color: #fff;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.85em;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 1.1em;
             font-weight: 900;
-            border: 3px solid #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 4px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             transition: all 0.4s ease;
+            font-family: 'Press Start 2P', cursive;
+            letter-spacing: 1px;
         }
 
         .switch.on .switch-label {
             background: #2ecc71;
             animation: labelPulse 1.5s ease-in-out infinite;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3), 0 0 20px rgba(46, 204, 113, 0.6);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 25px rgba(46, 204, 113, 0.7);
         }
 
         @keyframes labelPulse {
-            0%, 100% { transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.08); }
+            0%, 100% { transform: translateX(-50%) scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 25px rgba(46, 204, 113, 0.7); }
+            50% { transform: translateX(-50%) scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 35px rgba(46, 204, 113, 0.9); }
         }
 
         /* Resistencia - Mejorada */
         .resistor {
-            width: 130px;
+            width: 145px;
             text-align: center;
             position: relative;
         }
 
         .resistor-body {
-            width: 110px;
-            height: 40px;
+            width: 125px;
+            height: 45px;
             background: linear-gradient(90deg,
-                #FFD89B 0%, #FFF 15%, #FFD89B 25%, #8B4513 30%,
-                #FFD89B 35%, #FFEB3B 40%, #FFD89B 45%, #FF9800 50%,
-                #FFD89B 55%, #FFF 70%, #FFD89B 100%
+                #FFD89B 0%, #FFF 12%, #FFD89B 22%, #8B4513 28%,
+                #FFD89B 33%, #FFEB3B 38%, #FFD89B 43%, #FF9800 50%,
+                #FFD89B 57%, #FFF 62%, #FFD89B 67%, #8B4513 72%,
+                #FFD89B 78%, #FFF 88%, #FFD89B 100%
             );
-            border-radius: 10px;
-            border: 3px solid #8B4513;
+            border-radius: 12px;
+            border: 4px solid #8B4513;
             position: relative;
             margin: 0 auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.35);
             transition: transform 0.3s ease;
         }
 
         .resistor-body:hover {
-            transform: scale(1.05);
+            transform: scale(1.07);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.45);
         }
 
         .resistor-label {
             position: absolute;
-            top: -30px;
+            top: -35px;
             left: 50%;
             transform: translateX(-50%);
             background: #ff9800;
             color: #fff;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.85em;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 1.1em;
             font-weight: 900;
-            border: 3px solid #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 4px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             animation: resistorLabelFloat 3s ease-in-out infinite;
+            font-family: 'Press Start 2P', cursive;
+            letter-spacing: 1px;
         }
 
         @keyframes resistorLabelFloat {
             0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-3px); }
+            50% { transform: translateX(-50%) translateY(-5px); }
         }
 
         /* LED - Mejorado con efectos avanzados */
         .led {
-            width: 90px;
+            width: 100px;
             text-align: center;
             position: relative;
         }
 
         .led-body {
-            width: 70px;
-            height: 70px;
-            background: radial-gradient(circle at 30% 30%, #ff9999 0%, #ff6b6b 30%, #ee5a6f 60%, #c92a2a 100%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 35% 35%, 
+                #ffcccc 0%, 
+                #ff9999 20%, 
+                #ff6b6b 40%, 
+                #ee5a6f 60%, 
+                #c92a2a 80%, 
+                #8b0000 100%
+            );
             border-radius: 50% 50% 48% 48%;
             position: relative;
             margin: 0 auto;
-            border: 3px solid rgba(255,255,255,0.3);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4), inset 0 -5px 10px rgba(0,0,0,0.2);
+            border: 4px solid rgba(255,255,255,0.4);
+            box-shadow: 
+                0 8px 20px rgba(0,0,0,0.5),
+                inset 0 -8px 15px rgba(0,0,0,0.3),
+                inset 0 5px 15px rgba(255,255,255,0.4);
             transition: all 0.3s ease;
-        }
-
-        .led-body:hover {
-            transform: scale(1.05);
         }
 
         .led-body::before {
             content: '';
             position: absolute;
-            top: 10px;
-            left: 12px;
-            width: 30px;
-            height: 30px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
+            top: 12px;
+            left: 15px;
+            width: 35px;
+            height: 35px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.3) 70%, transparent 100%);
+            border-radius: 50%;
+        }
+
+        .led-body::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            width: 18px;
+            height: 18px;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 50%;
         }
 
         .led.active .led-body {
-            background: radial-gradient(circle at 30% 30%, #ff3333 0%, #ff0000 30%, #ff0000 60%, #cc0000 100%);
-            box-shadow:
-                0 5px 15px rgba(0,0,0,0.4),
-                0 0 40px #ff0000,
-                0 0 60px #ff0000,
-                0 0 80px rgba(255, 0, 0, 0.5),
-                inset 0 -5px 10px rgba(0,0,0,0.2);
-            animation: ledGlow 0.8s ease-in-out infinite, ledExpand 0.6s ease-out;
+            background: radial-gradient(circle at 35% 35%, 
+                #ff6666 0%, 
+                #ff3333 20%, 
+                #ff0000 40%, 
+                #ff0000 60%, 
+                #cc0000 80%, 
+                #800000 100%
+            );
+            box-shadow: 
+                0 8px 20px rgba(0,0,0,0.5),
+                0 0 50px #ff0000,
+                0 0 80px #ff0000,
+                0 0 120px rgba(255, 0, 0, 0.7),
+                inset 0 -8px 15px rgba(0,0,0,0.3),
+                inset 0 5px 15px rgba(255,255,255,0.6);
+            animation: ledGlow 0.7s ease-in-out infinite, ledExpand 0.6s ease-out;
         }
 
         @keyframes ledGlow {
-            0%, 100% { filter: brightness(1.5); }
-            50% { filter: brightness(2.5); }
+            0%, 100% { filter: brightness(1.6) saturate(1.3); box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 50px #ff0000, 0 0 80px #ff0000, 0 0 120px rgba(255, 0, 0, 0.7), inset 0 -8px 15px rgba(0,0,0,0.3), inset 0 5px 15px rgba(255,255,255,0.6); }
+            50% { filter: brightness(2.3) saturate(1.6); box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 70px #ff0000, 0 0 100px #ff0000, 0 0 150px rgba(255, 0, 0, 0.9), inset 0 -8px 15px rgba(0,0,0,0.3), inset 0 5px 15px rgba(255,255,255,0.8); }
         }
 
         @keyframes ledExpand {
             0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
+            50% { transform: scale(1.18); }
             100% { transform: scale(1); }
         }
 
         .led-pin {
             position: absolute;
-            width: 4px;
-            background: linear-gradient(180deg, #d4d4d4 0%, #888 100%);
-            border-radius: 2px;
-            box-shadow: 2px 0 4px rgba(0,0,0,0.3);
+            width: 6px;
+            background: linear-gradient(180deg, #e0e0e0 0%, #a0a0a0 50%, #606060 100%);
+            border-radius: 3px;
+            box-shadow: 3px 0 8px rgba(0,0,0,0.4), inset -2px 0 5px rgba(255,255,255,0.4);
+            border: 2px solid #333;
         }
 
         .led-pin-long {
             top: 0;
-            left: 18px;
-            height: 26px;
+            left: 22px;
+            height: 32px;
         }
 
         .led-pin-short {
             bottom: 0;
-            right: 18px;
-            height: 16px;
+            right: 22px;
+            height: 22px;
         }
 
         .led-sign {
             position: absolute;
-            font-size: 1em;
+            font-size: 1.2em;
             font-weight: 900;
-            background: rgba(255,255,255,0.95);
-            width: 22px;
-            height: 22px;
+            background: rgba(255,255,255,0.98);
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            border: 3px solid;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.4);
             z-index: 5;
+            font-family: 'Press Start 2P', cursive;
         }
 
         .led-sign-positive {
-            top: -8px;
-            left: 14px;
+            top: -10px;
+            left: 18px;
             color: #c0392b;
             border-color: #c0392b;
         }
 
         .led-sign-negative {
-            bottom: -8px;
-            right: 14px;
+            bottom: -10px;
+            right: 18px;
             color: #2c3e50;
             border-color: #2c3e50;
         }
@@ -797,88 +877,96 @@
         /* Puntos de conexión mejorados */
         .connection-point {
             position: absolute;
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            border: 4px solid #fff;
+            border: 5px solid #fff;
             border-radius: 50%;
             cursor: pointer;
             z-index: 15;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             touch-action: manipulation;
         }
 
         .connection-point:hover {
             background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
-            transform: scale(1.5);
-            box-shadow: 0 0 25px rgba(255,215,0,1), 0 6px 15px rgba(0,0,0,0.5);
-            animation: pointHover 0.6s ease-in-out infinite;
+            transform: scale(1.6);
+            box-shadow: 0 0 30px rgba(255,215,0,1), 0 8px 20px rgba(0,0,0,0.6);
+            animation: pointHover 0.7s ease-in-out infinite;
         }
 
         @keyframes pointHover {
-            0%, 100% { transform: scale(1.5); }
-            50% { transform: scale(1.6); }
+            0%, 100% { transform: scale(1.6); }
+            50% { transform: scale(1.75); }
         }
 
         .connection-point.connected {
             background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
             animation: connectedPulse 1.5s ease-in-out infinite;
-            box-shadow: 0 0 20px rgba(81, 207, 102, 0.8), 0 4px 10px rgba(0,0,0,0.4);
+            box-shadow: 0 0 25px rgba(81, 207, 102, 0.9), 0 5px 15px rgba(0,0,0,0.5);
         }
 
         @keyframes connectedPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(81, 207, 102, 0.8); }
-            50% { transform: scale(1.25); box-shadow: 0 0 30px rgba(81, 207, 102, 1); }
+            0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(81, 207, 102, 0.9), 0 5px 15px rgba(0,0,0,0.5); }
+            50% { transform: scale(1.3); box-shadow: 0 0 40px rgba(81, 207, 102, 1.2), 0 8px 20px rgba(0,0,0,0.6); }
         }
 
         .connection-point.selected {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            animation: selectedJump 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-            box-shadow: 0 0 30px rgba(79, 172, 254, 1), 0 6px 15px rgba(0,0,0,0.5);
+            animation: selectedJump 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            box-shadow: 0 0 35px rgba(79, 172, 254, 1.1), 0 8px 20px rgba(0,0,0,0.6);
         }
 
         @keyframes selectedJump {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.4) translateY(-5px); }
+            50% { transform: scale(1.5) translateY(-8px); }
         }
 
         .connection-point::after {
             content: attr(data-tooltip);
             position: absolute;
-            bottom: 100%;
+            bottom: 110%;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0,0,0,0.9);
+            background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
             color: white;
-            padding: 6px 10px;
-            border-radius: 8px;
-            font-size: 12px;
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-size: 14px;
             white-space: nowrap;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s;
-            margin-bottom: 8px;
-            font-weight: 600;
-            border: 2px solid #ffd700;
+            transition: opacity 0.4s;
+            margin-bottom: 10px;
+            font-weight: 700;
+            border: 3px solid #ffd700;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            font-family: 'Poppins', sans-serif;
         }
 
         .connection-point:hover::after {
             opacity: 1;
+            animation: tooltipPop 0.4s ease;
+        }
+
+        @keyframes tooltipPop {
+            0% { transform: translateX(-50%) scale(0.8); opacity: 0; }
+            100% { transform: translateX(-50%) scale(1); opacity: 1; }
         }
 
         /* Mission cards mejoradas */
         .mission-card {
             background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            border-radius: 12px;
-            padding: 15px;
-            margin: 12px 0;
-            border: 3px solid #fff;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 4px solid #fff;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
             position: relative;
             overflow: hidden;
-            font-size: 0.9em;
+            font-size: 1em;
         }
 
         .mission-card::before {
@@ -888,8 +976,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            transition: left 0.7s;
         }
 
         .mission-card:hover::before {
@@ -897,65 +985,69 @@
         }
 
         .mission-card:hover {
-            transform: translateX(6px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transform: translateX(8px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+            border-color: #667eea;
         }
 
         .mission-card.completed {
             background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-            box-shadow: 0 0 30px rgba(132, 250, 176, 0.7);
-            animation: missionComplete 0.6s ease-out;
+            box-shadow: 0 0 40px rgba(132, 250, 176, 0.8);
+            animation: missionComplete 0.7s ease-out;
+            border-color: #51cf66;
         }
 
         @keyframes missionComplete {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.07); }
             100% { transform: scale(1); }
         }
 
         .mission-number {
             display: inline-flex;
-            width: 35px;
-            height: 35px;
+            width: 45px;
+            height: 45px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
             border-radius: 50%;
             align-items: center;
             justify-content: center;
-            margin-right: 10px;
+            margin-right: 15px;
             font-weight: 900;
-            font-size: 1.1em;
-            border: 3px solid #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
+            font-size: 1.4em;
+            border: 4px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            transition: all 0.4s ease;
+            font-family: 'Press Start 2P', cursive;
+            letter-spacing: 1px;
         }
 
         .mission-card:hover .mission-number {
-            transform: rotate(360deg);
+            transform: rotate(360deg) scale(1.1);
         }
 
         .mission-card.completed .mission-number {
             background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
-            box-shadow: 0 0 20px rgba(81, 207, 102, 0.8);
-            animation: numberCelebrate 0.6s ease-out;
+            box-shadow: 0 0 25px rgba(81, 207, 102, 0.9);
+            animation: numberCelebrate 0.7s ease-out;
         }
 
         @keyframes numberCelebrate {
             0%, 100% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.2) rotate(10deg); }
-            75% { transform: scale(1.2) rotate(-10deg); }
+            25% { transform: scale(1.3) rotate(15deg); }
+            75% { transform: scale(1.3) rotate(-15deg); }
         }
 
         .mission-card.completed .mission-number::after {
             content: '✓';
-            font-size: 1.2em;
+            font-size: 1.5em;
         }
 
         .mission-text {
-            font-weight: 600;
-            color: #333;
-            font-size: 0.9em;
-            line-height: 1.4;
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.05em;
+            line-height: 1.5;
         }
 
         /* Botones mejorados */
@@ -963,21 +1055,22 @@
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: #fff;
             border: none;
-            padding: 14px 25px;
-            border-radius: 50px;
+            padding: 18px 30px;
+            border-radius: 60px;
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
             font-weight: 900;
             text-transform: uppercase;
-            border: 4px solid #fff;
+            border: 5px solid #fff;
             width: 100%;
-            margin: 8px 0;
-            font-size: 1em;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin: 12px 0;
+            font-size: 1.2em;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.35);
             touch-action: manipulation;
             position: relative;
             overflow: hidden;
+            letter-spacing: 1px;
         }
 
         .btn-game::before {
@@ -988,171 +1081,177 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.4);
             transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+            transition: width 0.8s, height 0.8s;
         }
 
         .btn-game:hover::before {
-            width: 250px;
-            height: 250px;
+            width: 300px;
+            height: 300px;
         }
 
         .btn-game:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.45), 0 0 30px rgba(245, 87, 108, 0.4);
         }
 
         .btn-game:active {
-            transform: translateY(0) scale(0.98);
+            transform: translateY(2px) scale(0.98);
         }
 
         .btn-success {
             background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            box-shadow: 0 7px 20px rgba(132, 250, 176, 0.4);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 10px 25px rgba(132, 250, 176, 0.6), 0 0 30px rgba(143, 211, 244, 0.5);
         }
 
         .btn-danger {
             background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            box-shadow: 0 7px 20px rgba(250, 112, 154, 0.4);
+        }
+
+        .btn-danger:hover {
+            box-shadow: 0 10px 25px rgba(250, 112, 154, 0.6), 0 0 30px rgba(254, 225, 64, 0.5);
         }
 
         /* Toast mejorado */
         .status-toast {
             position: fixed;
-            top: 80px;
-            right: 15px;
-            padding: 20px 25px;
-            border-radius: 15px;
-            font-weight: 700;
-            font-size: 1em;
-            border: 4px solid #fff;
+            top: 100px;
+            right: 25px;
+            padding: 25px 35px;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 1.2em;
+            border: 5px solid #fff;
             z-index: 1000;
-            transform: translateX(500px);
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            max-width: 400px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            font-size: 0.95em;
+            transform: translateX(600px);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 500px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.45);
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+            text-align: center;
         }
 
         .status-toast.show {
             transform: translateX(0);
-            animation: toastBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: toastBounce 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes toastBounce {
-            0% { transform: translateX(500px); }
-            50% { transform: translateX(-10px); }
-            70% { transform: translateX(5px); }
+            0% { transform: translateX(600px); }
+            50% { transform: translateX(-15px); }
+            70% { transform: translateX(8px); }
             100% { transform: translateX(0); }
         }
 
         .status-toast.success {
             background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
             color: #fff;
+            box-shadow: 0 12px 35px rgba(132, 250, 176, 0.6);
         }
 
         .status-toast.error {
             background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             color: #fff;
+            box-shadow: 0 12px 35px rgba(250, 112, 154, 0.6);
         }
 
         .status-toast.info {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: #fff;
+            box-shadow: 0 12px 35px rgba(79, 172, 254, 0.6);
         }
 
         .status-toast.warning {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             color: #333;
+            box-shadow: 0 12px 35px rgba(255, 236, 210, 0.6);
         }
 
         .info-box {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border: 3px solid #fff;
-            border-radius: 12px;
-            padding: 15px;
-            margin: 15px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
+            border: 4px solid #fff;
+            border-radius: 20px;
+            padding: 22px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            transition: all 0.4s ease;
         }
 
         .info-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
         }
 
         .info-title {
             font-weight: 900;
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .info-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff9800, #ff5733);
+            border-radius: 2px;
         }
 
         .info-text {
-            color: #555;
+            color: #444;
             font-weight: 600;
-            font-size: 0.95em;
-            line-height: 1.6;
+            font-size: 1.1em;
+            line-height: 1.7;
+            text-align: justify;
         }
 
         .warning-box {
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            border: 3px solid #fff;
-            border-radius: 12px;
-            padding: 15px;
-            margin: 15px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 4px solid #fff;
+            border-radius: 20px;
+            padding: 22px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
             animation: warningPulse 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: warningShine 3s infinite;
+        }
+
+        @keyframes warningShine {
+            0% { transform: rotate(0deg) translate(-50%, -50%); }
+            100% { transform: rotate(360deg) translate(-50%, -50%); }
         }
 
         @keyframes warningPulse {
-            0%, 100% { box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-            50% { box-shadow: 0 8px 25px rgba(255, 154, 158, 0.4); }
-        }
-
-        .circuit-guide {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin: 15px 0;
-        }
-
-        .circuit-item {
-            background: #fff;
-            border-radius: 10px;
-            padding: 12px;
-            text-align: center;
-            border: 3px solid #ddd;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .circuit-item:hover {
-            transform: translateY(-5px) rotate(2deg);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            border-color: #667eea;
-        }
-
-        .circuit-symbol {
-            font-size: 2.2em;
-            margin: 8px 0;
-            animation: symbolFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes symbolFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .circuit-name {
-            font-weight: 900;
-            color: #333;
-            font-size: 1em;
-        }
-
-        .circuit-detail {
-            font-size: 0.8em;
-            color: #666;
-            margin-top: 4px;
+            0%, 100% { box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
+            50% { box-shadow: 0 12px 35px rgba(255, 154, 158, 0.6); }
         }
 
         /* Overlay de celebración mejorado */
@@ -1162,7 +1261,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(102,126,234,0.95) 100%);
             z-index: 9999;
             display: none;
             align-items: center;
@@ -1172,7 +1271,7 @@
 
         .celebration-overlay.active {
             display: flex;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.6s ease;
         }
 
         @keyframes fadeIn {
@@ -1182,21 +1281,21 @@
 
         .celebration-content {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 45px;
-            border-radius: 25px;
+            padding: 60px;
+            border-radius: 40px;
             text-align: center;
-            border: 6px solid #fff;
-            max-width: 550px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            animation: celebrationPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 8px solid #fff;
+            max-width: 650px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.6), 0 0 50px rgba(240, 147, 251, 0.5);
+            animation: celebrationPop 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
         }
 
         @keyframes celebrationPop {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
+            0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+            50% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
 
         .celebration-content::before {
@@ -1206,7 +1305,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
             animation: celebrationShine 2s infinite;
         }
 
@@ -1216,168 +1315,243 @@
         }
 
         .celebration-emoji {
-            font-size: 4.5em;
+            font-size: 6em;
             animation: celebrationBounce 1s ease-in-out infinite;
             position: relative;
             z-index: 1;
+            text-shadow: 0 0 20px rgba(255,255,255,0.8);
         }
 
         @keyframes celebrationBounce {
             0%, 100% { transform: translateY(0) scale(1); }
-            25% { transform: translateY(-20px) scale(1.1); }
+            25% { transform: translateY(-25px) scale(1.15); }
             75% { transform: translateY(-10px) scale(1.05); }
         }
 
         .celebration-title {
             font-family: 'Press Start 2P', cursive;
-            font-size: 2em;
+            font-size: 2.8em;
             color: #fff;
-            margin: 20px 0;
-            text-shadow: 5px 5px 0 #000, 0 0 30px #f5576c;
+            margin: 30px 0;
+            text-shadow: 6px 6px 0 #000, 0 0 40px #f5576c;
             position: relative;
             z-index: 1;
-            animation: celebrationTitlePulse 1s ease-in-out infinite;
+            letter-spacing: 3px;
+            animation: celebrationTitlePulse 1.2s ease-in-out infinite;
         }
 
         @keyframes celebrationTitlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            0%, 100% { transform: scale(1); text-shadow: 6px 6px 0 #000, 0 0 40px #f5576c; }
+            50% { transform: scale(1.08); text-shadow: 6px 6px 0 #000, 0 0 60px #f5576c, 0 0 80px #f093fb; }
         }
 
         .celebration-text {
-            font-size: 1.1em;
+            font-size: 1.5em;
             color: #fff;
-            margin-bottom: 20px;
-            font-weight: 600;
-            line-height: 1.6;
+            margin-bottom: 30px;
+            font-weight: 700;
+            line-height: 1.7;
             position: relative;
             z-index: 1;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
         }
 
         /* Sistema de partículas de confeti */
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: #f0f;
             position: absolute;
-            animation: confettiFall 3s linear infinite;
+            animation: confettiFall 4s linear infinite;
+            border-radius: 2px;
+            opacity: 0.9;
         }
 
         @keyframes confettiFall {
-            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+            0% { transform: translateY(-100vh) rotate(0deg) scale(0.5); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg) scale(1.2); opacity: 0; }
         }
 
         /* Indicador de progreso */
         .progress-bar {
             width: 100%;
-            height: 6px;
-            background: rgba(255,255,255,0.2);
+            height: 8px;
+            background: rgba(255,255,255,0.3);
             border-radius: 10px;
-            margin: 10px 0;
+            margin: 15px 0;
             overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.5);
         }
 
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #84fab0 0%, #8fd3f4 100%);
             border-radius: 10px;
-            transition: width 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 0 10px rgba(132, 250, 176, 0.8);
+            transition: width 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 15px rgba(132, 250, 176, 0.9);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: progressShine 2s infinite;
+        }
+
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         /* Ajustes responsivos */
-        @media (max-width: 1100px) {
+        @media (max-width: 1200px) {
             .game-grid {
                 grid-template-columns: 1fr;
             }
             #protoboard-container {
                 flex-direction: column;
-                gap: 100px;
-                padding: 40px 25px;
+                gap: 130px;
+                padding: 55px 35px;
             }
             .game-title {
-                font-size: 1.4em;
+                font-size: 1.9em;
             }
             .game-subtitle {
-                font-size: 1em;
+                font-size: 1.15em;
+            }
+            .components-grid {
+                flex-direction: row;
+            }
+            .component-card {
+                width: calc(33.333% - 20px);
+                min-width: 200px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .components-grid {
+                flex-direction: row;
+            }
+            .component-card {
+                width: calc(50% - 20px);
+                min-width: 200px;
+            }
+            .game-title {
+                font-size: 1.7em;
+            }
+            .score-value {
+                font-size: 2.5em;
+            }
+            .panel-title {
+                font-size: 1.4em;
             }
         }
 
         @media (max-width: 768px) {
             .game-title {
-                font-size: 1.2em;
+                font-size: 1.5em;
+            }
+            .game-subtitle {
+                font-size: 1.05em;
             }
             .score-panel {
                 flex-direction: column;
             }
             #protoboard-container {
-                padding: 30px 20px;
-                min-height: 400px;
-                gap: 80px;
+                padding: 45px 25px;
+                min-height: 550px;
+                gap: 110px;
             }
             .battery-body {
-                width: 65px;
-                height: 110px;
+                width: 75px;
+                height: 125px;
             }
             .led-body {
-                width: 55px;
-                height: 55px;
+                width: 65px;
+                height: 65px;
             }
-            .circuit-guide {
-                grid-template-columns: 1fr;
+            .battery-pin-positive,
+            .battery-pin-negative {
+                height: 35px;
+            }
+            .led-pin-long {
+                height: 40px;
+            }
+            .led-pin-short {
+                height: 28px;
             }
             .connection-point {
-                width: 35px !important;
-                height: 35px !important;
+                width: 45px !important;
+                height: 45px !important;
             }
             .score-value {
-                font-size: 1.8em;
+                font-size: 2.2em;
             }
             .panel-title {
-                font-size: 1em;
+                font-size: 1.25em;
             }
             .mission-card {
-                padding: 12px 10px;
+                padding: 16px 14px;
             }
             .mission-number {
-                width: 30px;
-                height: 30px;
-                font-size: 1em;
+                width: 40px;
+                height: 40px;
+                font-size: 1.25em;
             }
             .mission-text {
-                font-size: 0.85em;
+                font-size: 0.95em;
             }
             .btn-game {
-                padding: 12px 20px;
-                font-size: 0.9em;
+                padding: 15px 25px;
+                font-size: 1.05em;
             }
             .info-box, .warning-box {
-                padding: 12px;
+                padding: 18px;
             }
             .info-title {
-                font-size: 1em;
+                font-size: 1.25em;
             }
             .info-text {
-                font-size: 0.9em;
+                font-size: 1em;
+            }
+            .component-card {
+                width: calc(50% - 20px);
+                min-width: 190px;
+                padding: 20px 15px;
+            }
+            .component-name {
+                font-size: 1.45em;
+            }
+            .component-description {
+                font-size: 0.95em;
+                min-height: 45px;
+            }
+            .component-icon {
+                font-size: 3.5em;
             }
         }
 
         @media (max-width: 480px) {
             #protoboard-container {
-                padding: 25px 15px;
-                min-height: 380px;
-                gap: 70px;
+                padding: 35px 18px;
+                min-height: 480px;
+                gap: 90px;
             }
             .battery-body {
-                width: 55px;
-                height: 95px;
+                width: 65px;
+                height: 105px;
             }
             .led-body {
-                width: 45px;
-                height: 45px;
+                width: 55px;
+                height: 55px;
             }
             .battery-pin-positive,
             .battery-pin-negative {
@@ -1387,50 +1561,90 @@
                 height: 35px;
             }
             .led-pin-short {
-                height: 25px;
+                height: 24px;
             }
             .game-title {
-                font-size: 1.1em;
+                font-size: 1.35em;
             }
             .game-subtitle {
-                font-size: 0.9em;
+                font-size: 0.95em;
             }
             .score-value {
-                font-size: 1.6em;
+                font-size: 2em;
             }
             .panel-title {
-                font-size: 0.9em;
+                font-size: 1.15em;
             }
             .mission-card {
-                padding: 10px 8px;
+                padding: 14px 12px;
             }
             .mission-number {
-                width: 25px;
-                height: 25px;
+                width: 35px;
+                height: 35px;
+                font-size: 1.15em;
+            }
+            .mission-text {
                 font-size: 0.9em;
             }
             .btn-game {
-                padding: 10px 15px;
-                font-size: 0.8em;
+                padding: 13px 22px;
+                font-size: 0.95em;
             }
             .info-title {
-                font-size: 0.9em;
+                font-size: 1.15em;
             }
             .info-text {
-                font-size: 0.85em;
+                font-size: 0.95em;
             }
-            /* Aumentar aún más el tamaño de los puntos de conexión para móviles pequeños */
-            .connection-point {
-                width: 40px !important;
-                height: 40px !important;
+            .component-card {
+                width: 100%;
+                min-width: auto;
+                max-width: none;
+            }
+            .component-name {
+                font-size: 1.4em;
+            }
+            .component-description {
+                font-size: 0.9em;
+                min-height: 40px;
+            }
+            .component-icon {
+                font-size: 3.2em;
+            }
+            .component-tag {
+                font-size: 0.95em;
+                padding: 7px 18px;
+            }
+            .status-toast {
+                font-size: 1.05em;
+                padding: 20px 25px;
+                right: 15px;
+            }
+            .celebration-title {
+                font-size: 2.3em;
+            }
+            .celebration-text {
+                font-size: 1.3em;
+            }
+            .celebration-emoji {
+                font-size: 5em;
+            }
+            .progress-bar {
+                height: 7px;
             }
         }
 
         .component.dragging {
-            opacity: 0.8;
+            opacity: 0.85;
             z-index: 100;
-            transform: scale(1.1);
-            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
+            transform: scale(1.15);
+            filter: drop-shadow(0 18px 35px rgba(0, 0, 0, 0.7));
+            animation: dragPulse 0.5s ease-in-out infinite;
+        }
+
+        @keyframes dragPulse {
+            0%, 100% { transform: scale(1.15); }
+            50% { transform: scale(1.2); }
         }
 
         /* Efecto de electricidad en los cables */
@@ -1452,235 +1666,297 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.92);
             z-index: 10000;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
         }
 
         .info-modal.active {
             display: flex;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.4s ease;
         }
 
         .modal-content {
-            background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
-            border-radius: 20px;
-            padding: 35px;
-            max-width: 700px;
-            width: 90%;
-            max-height: 85vh;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 30px;
+            padding: 45px;
+            max-width: 850px;
+            width: 95%;
+            max-height: 90vh;
             overflow-y: auto;
-            border: 5px solid #667eea;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-            animation: modalPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 6px solid #667eea;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.65), 0 0 40px rgba(102, 126, 234, 0.5);
+            animation: modalPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
         }
 
         @keyframes modalPop {
-            0% { transform: scale(0.3) rotate(-5deg); opacity: 0; }
-            50% { transform: scale(1.05) rotate(2deg); }
+            0% { transform: scale(0.4) rotate(-10deg); opacity: 0; }
+            50% { transform: scale(1.05) rotate(5deg); }
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
 
         .modal-close {
             position: absolute;
-            top: 12px;
-            right: 12px;
+            top: 18px;
+            right: 18px;
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            font-size: 1.6em;
+            font-size: 1.8em;
             cursor: pointer;
-            border: 3px solid white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-            transition: all 0.3s ease;
+            border: 4px solid white;
+            box-shadow: 0 7px 20px rgba(0,0,0,0.45);
+            transition: all 0.4s ease;
             font-weight: bold;
             line-height: 1;
+            z-index: 100;
         }
 
         .modal-close:hover {
-            transform: rotate(90deg) scale(1.1);
+            transform: rotate(180deg) scale(1.15);
             background: linear-gradient(135deg, #c0392b, #a93226);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.45), 0 0 30px rgba(192, 57, 43, 0.6);
         }
 
         .modal-title {
-            font-size: 1.8em;
+            font-size: 2.2em;
             font-weight: 900;
             background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-align: center;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
+            position: relative;
+            padding-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .modal-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+            border-radius: 2px;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.6);
         }
 
         .modal-symbol {
-            font-size: 4.5em;
+            font-size: 5.5em;
             text-align: center;
-            margin: 20px 0;
-            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
-            animation: symbolRotate 3s ease-in-out infinite;
+            margin: 25px 0;
+            filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
+            animation: symbolRotate 3.5s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
         }
 
         @keyframes symbolRotate {
             0%, 100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(5deg) scale(1.05); }
+            50% { transform: rotate(8deg) scale(1.08); }
         }
 
         .modal-section {
-            margin: 20px 0;
-            padding: 15px;
+            margin: 25px 0;
+            padding: 20px;
             background: white;
-            border-radius: 12px;
-            border-left: 5px solid #667eea;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
+            border-radius: 18px;
+            border-left: 7px solid #667eea;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(102,126,234,0.03), transparent, rgba(102,126,234,0.03));
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: -1;
         }
 
         .modal-section:hover {
-            transform: translateX(3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+            border-left-width: 10px;
+        }
+
+        .modal-section:hover::before {
+            opacity: 1;
         }
 
         .modal-section h3 {
             color: #667eea;
             font-weight: 900;
-            margin-bottom: 10px;
-            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-size: 1.5em;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            position: relative;
+            padding-bottom: 8px;
         }
 
         .modal-section h3::before {
             content: '▸';
             color: #764ba2;
+            font-size: 1.8em;
+            position: absolute;
+            left: -15px;
+            opacity: 0.8;
         }
 
         .modal-section p {
-            color: #555;
-            line-height: 1.7;
+            color: #444;
+            line-height: 1.8;
             font-weight: 600;
-            font-size: 1em;
+            font-size: 1.1em;
+            margin-bottom: 12px;
         }
 
         .modal-section ul {
-            margin: 12px 0 12px 20px;
-            color: #555;
+            margin: 15px 0 15px 25px;
+            color: #444;
+            padding-left: 10px;
         }
 
         .modal-section li {
-            margin: 8px 0;
+            margin: 12px 0;
             font-weight: 600;
-            line-height: 1.5;
+            line-height: 1.6;
             position: relative;
-            padding-left: 8px;
+            padding-left: 10px;
+            font-size: 1.05em;
         }
 
         .modal-section li::marker {
             color: #667eea;
-            font-size: 1.1em;
+            font-size: 1.3em;
+            font-weight: bold;
         }
 
         /* Tabla de código de colores */
         .color-code-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 15px;
             overflow: hidden;
+            background: white;
         }
 
         .color-code-table th {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 12px;
+            padding: 15px;
             font-weight: 900;
             text-align: left;
-            font-size: 1em;
+            font-size: 1.15em;
         }
 
         .color-code-table td {
-            padding: 10px 12px;
-            border-bottom: 2px solid #f0f0f0;
+            padding: 14px 16px;
+            border-bottom: 3px solid #f5f7fa;
             font-weight: 600;
-            font-size: 0.95em;
-        }
-
-        .color-code-table tr:hover {
-            background: #f8f9fa;
-            transform: scale(1.01);
+            font-size: 1.05em;
         }
 
         .color-code-table tr:last-child td {
             border-bottom: none;
         }
 
+        .color-code-table tr:hover {
+            background: #f8f9ff;
+            transform: scale(1.01);
+        }
+
         .color-sample {
             display: inline-block;
-            width: 30px;
-            height: 20px;
-            border-radius: 5px;
-            margin-right: 10px;
-            border: 2px solid #333;
+            width: 35px;
+            height: 25px;
+            border-radius: 8px;
+            margin-right: 12px;
+            border: 3px solid #333;
             vertical-align: middle;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.25);
         }
 
         .circuit-symbol-svg {
             width: 100%;
-            max-width: 300px;
-            margin: 20px auto;
+            max-width: 350px;
+            margin: 25px auto;
             display: block;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 7px 15px rgba(0,0,0,0.25));
             background: white;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 20px;
+            border-radius: 18px;
+            border: 3px solid #eaeaea;
         }
 
         .modal-content::-webkit-scrollbar {
-            width: 10px;
+            width: 12px;
         }
 
         .modal-content::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: #f1f3f5;
             border-radius: 10px;
+            border: 2px solid #e9ecef;
         }
 
         .modal-content::-webkit-scrollbar-thumb {
             background: linear-gradient(135deg, #667eea, #764ba2);
             border-radius: 10px;
+            border: 2px solid #f8f9fa;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5);
         }
 
         .modal-content::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #764ba2, #667eea);
+            box-shadow: 0 2px 12px rgba(102, 126, 234, 0.7);
         }
 
         @media (max-width: 768px) {
             .modal-content {
-                padding: 25px 15px;
-                max-height: 90vh;
+                padding: 30px 20px;
+                max-height: 92vh;
             }
             .modal-title {
-                font-size: 1.5em;
+                font-size: 1.8em;
             }
             .modal-symbol {
-                font-size: 3.5em;
+                font-size: 4.2em;
             }
             .modal-section {
-                padding: 12px;
+                padding: 16px;
             }
             .color-code-table th,
             .color-code-table td {
-                padding: 8px;
-                font-size: 0.85em;
+                padding: 10px 12px;
+                font-size: 0.95em;
+            }
+            .modal-section h3 {
+                font-size: 1.3em;
+            }
+            .modal-section p, 
+            .modal-section li {
+                font-size: 1em;
             }
         }
     </style>
@@ -1689,35 +1965,35 @@
     <!-- Partículas de fondo -->
     <div class="background-particles" id="bg-particles"></div>
     
-    <!-- NUEVA SECCIÓN: Guía de Componentes al Inicio -->
+    <!-- NUEVA SECCIÓN: Guía de Componentes al Inicio - CORREGIDA Y CENTRADA -->
     <div class="component-guide">
         <h2 class="guide-title">Guía de Componentes Interactiva</h2>
         <div class="components-grid">
             <div class="component-card" onclick="showComponentInfo('battery')">
                 <div class="component-icon" style="color: #43e97b;">🔋</div>
                 <h3 class="component-name">Batería</h3>
-                <p class="component-description">Fuente de energía eléctrica</p>
+                <p class="component-description">Fuente de energía eléctrica que impulsa el circuito</p>
                 <span class="component-tag">9V</span>
             </div>
             
             <div class="component-card" onclick="showComponentInfo('switch')">
                 <div class="component-icon" style="color: #e74c3c;">⚡</div>
                 <h3 class="component-name">Interruptor</h3>
-                <p class="component-description">Controla el flujo de corriente</p>
+                <p class="component-description">Controla el flujo de corriente eléctrica</p>
                 <span class="component-tag">ON/OFF</span>
             </div>
             
             <div class="component-card" onclick="showComponentInfo('resistor')">
-                <div class="component-icon" style="color: #ff9800;">.png</div>
+                <div class="component-icon" style="color: #ff9800; font-size: 3.5em; margin: 10px 0;">━━┯━━</div>
                 <h3 class="component-name">Resistencia</h3>
-                <p class="component-description">Protege el LED de sobrecarga</p>
+                <p class="component-description">Protege el LED limitando la corriente</p>
                 <span class="component-tag">330Ω</span>
             </div>
             
             <div class="component-card" onclick="showComponentInfo('led')">
                 <div class="component-icon" style="color: #ff6b6b;">💡</div>
                 <h3 class="component-name">LED</h3>
-                <p class="component-description">Emite luz con corriente eléctrica</p>
+                <p class="component-description">Emite luz cuando recibe corriente eléctrica</p>
                 <span class="component-tag">Rojo</span>
             </div>
         </div>
@@ -1734,15 +2010,15 @@
         
         <div class="score-panel">
             <div class="score-card">
-                <div class="score-label">🔌 Cables</div>
+                <div class="score-label">🔌 Cables Conectados</div>
                 <div class="score-value" id="wire-count">0 / 4</div>
             </div>
             <div class="score-card">
-                <div class="score-label">⚡ Interruptor</div>
+                <div class="score-label">⚡ Estado Interruptor</div>
                 <div class="score-value" id="switch-status">OFF</div>
             </div>
             <div class="score-card">
-                <div class="score-label">💡 LED</div>
+                <div class="score-label">💡 Estado LED</div>
                 <div class="score-value" id="led-status">OFF</div>
             </div>
         </div>
@@ -1772,16 +2048,16 @@
                 </div>
                 
                 <div class="warning-box">
-                    <div class="info-title">⚠️ IMPORTANTE</div>
+                    <div class="info-title">⚠️ INSTRUCCIONES IMPORTANTES</div>
                     <div class="info-text">
-                        <strong>Necesitas 4 cables para completar el circuito.</strong><br>
-                        🔍 Haz clic en el <strong>interruptor</strong> para encender/apagar.<br>
-                        ⚡ Cuando el interruptor esté <strong>ON</strong> y el circuito correcto, ¡el LED se encenderá!
+                        <strong>🎯 Necesitas conectar exactamente 4 cables</strong> para completar el circuito.<br><br>
+                        <strong>⚡ El interruptor debe estar en ON</strong> para que el LED se encienda después de verificar.<br><br>
+                        <strong>💡 Recuerda:</strong> El LED solo funciona si se conecta con la polaridad correcta (pata larga al positivo).
                     </div>
                 </div>
                 
                 <button class="btn-game btn-success" onclick="verifyCircuit()">✓ VERIFICAR CIRCUITO</button>
-                <button class="btn-game btn-danger" onclick="clearWires()">🔄 EMPEZAR DE NUEVO</button>
+                <button class="btn-game btn-danger" onclick="clearWires()">🔄 REINICIAR TODO</button>
             </div>
             
             <div class="panel">
@@ -1797,7 +2073,7 @@
                              data-component="battery" 
                              data-terminal="positive"
                              data-tooltip="+ Positivo Batería"
-                             style="top: -28px; left: 50%; transform: translateX(-50%);"></div>
+                             style="top: -32px; left: 50%; transform: translateX(-50%);"></div>
                         
                         <div class="battery-body">
                             <div class="battery-label">9V</div>
@@ -1809,7 +2085,7 @@
                              data-component="battery" 
                              data-terminal="negative"
                              data-tooltip="− Negativo Batería"
-                             style="bottom: -28px; left: 50%; transform: translateX(-50%);"></div>
+                             style="bottom: -32px; left: 50%; transform: translateX(-50%);"></div>
                         <div class="battery-pin battery-pin-negative"></div>
                     </div>
 
@@ -1819,7 +2095,7 @@
                              data-component="switch" 
                              data-terminal="in"
                              data-tooltip="Entrada Interruptor"
-                             style="top: 50%; left: -20px; transform: translateY(-50%);"></div>
+                             style="top: 50%; left: -25px; transform: translateY(-50%);"></div>
                         
                         <div class="switch-body">
                             <div class="switch-toggle" onclick="toggleSwitch(event)">OFF</div>
@@ -1830,7 +2106,7 @@
                              data-component="switch" 
                              data-terminal="out"
                              data-tooltip="Salida Interruptor"
-                             style="top: 50%; right: -20px; transform: translateY(-50%);"></div>
+                             style="top: 50%; right: -25px; transform: translateY(-50%);"></div>
                     </div>
 
                     <!-- Resistencia -->
@@ -1839,7 +2115,7 @@
                              data-component="resistor" 
                              data-terminal="left"
                              data-tooltip="Lado Izquierdo Resistencia"
-                             style="top: 50%; left: -20px; transform: translateY(-50%);"></div>
+                             style="top: 50%; left: -25px; transform: translateY(-50%);"></div>
                         
                         <div class="resistor-body"></div>
                         <div class="resistor-label">330Ω</div>
@@ -1848,7 +2124,7 @@
                              data-component="resistor" 
                              data-terminal="right"
                              data-tooltip="Lado Derecho Resistencia"
-                             style="top: 50%; right: -20px; transform: translateY(-50%);"></div>
+                             style="top: 50%; right: -25px; transform: translateY(-50%);"></div>
                     </div>
 
                     <!-- LED con patas corregidas -->
@@ -1860,7 +2136,7 @@
                              data-component="led" 
                              data-terminal="positive"
                              data-tooltip="+ Positivo LED (pata larga)"
-                             style="top: -30px; left: 18px;"></div>
+                             style="top: -35px; left: 22px;"></div>
                         
                         <div class="led-body"></div>
                         
@@ -1869,7 +2145,7 @@
                              data-component="led" 
                              data-terminal="negative"
                              data-tooltip="− Negativo LED (pata corta)"
-                             style="bottom: -20px; right: 18px;"></div>
+                             style="bottom: -25px; right: 22px;"></div>
                         <div class="led-sign led-sign-negative">−</div>
                         <div class="led-pin led-pin-short"></div>
                     </div>
@@ -1878,14 +2154,13 @@
         </div>
         
         <div class="info-box">
-            <div class="info-title">🔍 ¿Cómo funciona?</div>
+            <div class="info-title">🔍 ¿CÓMO FUNCIONA EL CIRCUITO?</div>
             <div class="info-text">
-                El interruptor es como una <strong>puerta</strong> para la electricidad.
-                Cuando está <strong>ENCENDIDO (ON)</strong>, la corriente fluye y el LED se ilumina.
-                Cuando está <strong>APAGADO (OFF)</strong>, la corriente se detiene y el LED se apaga.
-                ¡Igual que el interruptor de la luz en tu casa!<br><br>
-                🔴 La <strong>resistencia</strong> protege al LED para que no se queme.<br>
-                ⚡ El circuito debe estar <strong>completo y cerrado</strong> para que funcione.
+                El <strong>interruptor</strong> actúa como una puerta para la electricidad. Cuando está <strong>ENCENDIDO (ON)</strong>, permite que la corriente fluya desde la batería, a través de la resistencia y finalmente al LED, haciéndolo brillar. Cuando está <strong>APAGADO (OFF)</strong>, bloquea el flujo de corriente y el LED se apaga.<br><br>
+                
+                La <strong>resistencia</strong> es crucial porque limita la cantidad de corriente que llega al LED, protegiéndolo de quemarse. Sin ella, el LED recibiría demasiada energía y se dañaría instantáneamente.<br><br>
+                
+                El <strong>LED</strong> tiene polaridad, lo que significa que solo funciona si se conecta en la dirección correcta: la pata larga (+) debe ir hacia el lado positivo del circuito y la pata corta (-) hacia el negativo.
             </div>
         </div>
     </div>
@@ -1894,14 +2169,15 @@
     
     <div class="celebration-overlay" id="celebration">
         <div class="celebration-content">
-            <div class="celebration-emoji">🎉💡✨</div>
-            <div class="celebration-title">¡PERFECTO!</div>
+            <div class="celebration-emoji">🎉💡✨🎊</div>
+            <div class="celebration-title">¡MISIÓN CUMPLIDA!</div>
             <div class="celebration-text">
-                🌟 ¡Has completado el circuito correctamente! 🌟<br><br>
-                Ahora haz clic en el <strong>interruptor</strong> para encender el LED<br><br>
-                💡 <strong>¡Aprender electrónica es divertido!</strong> 💡
+                🌟 ¡Excelente trabajo, futuro ingeniero! 🌟<br><br>
+                Has completado correctamente el circuito eléctrico.<br><br>
+                Ahora haz clic en el <strong>interruptor</strong> para encender el LED y ver tu creación en acción.<br><br>
+                💡 <strong>¡La electrónica es increíble cuando la entiendes!</strong> 💡
             </div>
-            <button class="btn-game" onclick="closeCelebration()">🎯 CONTINUAR APRENDIENDO</button>
+            <button class="btn-game" onclick="closeCelebration()">🚀 CONTINUAR APRENDIENDO</button>
         </div>
     </div>
     
@@ -2008,7 +2284,7 @@
                 ]
             },
             resistor: {
-                title: '━━┯━━ Resistencia - El Protector del Circuit',
+                title: '━━┯━━ Resistencia - El Protector del Circuito',
                 symbol: '━━┯━━',
                 sections: [
                     {
@@ -2016,7 +2292,7 @@
                         content: 'Una resistencia es un componente electrónico que <strong>dificulta el paso de la corriente eléctrica</strong>. Imagina que la electricidad es agua fluyendo por una tubería: la resistencia sería como hacer la tubería más estrecha para reducir el flujo.'
                     },
                     {
-                        title: '¿Para qué Sirve en Este Circuit?',
+                        title: '¿Para qué Sirve en Este Circuito?',
                         content: 'En nuestro circuito, la resistencia tiene una función crucial:',
                         list: [
                             'Protege al LED de recibir demasiada corriente y <strong>quemarse</strong>.',
@@ -2059,13 +2335,13 @@
                                     <tr><td><span class="color-sample" style="background: #FFF; border-color: #000;"></span>Blanco</td><td>9</td><td>-</td></tr>
                                 </tbody>
                             </table>
-                            <div style="background: #f8f9fa; padding: 12px; border-radius: 10px; margin-top: 12px;">
-                                <p style="margin: 8px 0; font-size: 1em;"><strong>📌 Ejemplo de lectura:</strong></p>
-                                <p style="margin: 4px 0;">Nuestra resistencia de 330Ω tiene:</p>
-                                <p style="margin: 4px 0;">• <strong>Banda 1 (Naranja):</strong> 3</p>
-                                <p style="margin: 4px 0;">• <strong>Banda 2 (Naranja):</strong> 3</p>
-                                <p style="margin: 4px 0;">• <strong>Banda 3 (Café):</strong> ×10</p>
-                                <p style="margin: 8px 0;"><strong>Resultado:</strong> 33 × 10 = <strong>330Ω</strong></p>
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 15px; margin-top: 15px; border: 2px solid #e9ecef;">
+                                <p style="margin: 10px 0; font-size: 1.1em; font-weight: 700;"><strong>📌 Ejemplo de lectura:</strong></p>
+                                <p style="margin: 8px 0; font-size: 1.05em;">Nuestra resistencia de 330Ω tiene:</p>
+                                <p style="margin: 8px 0; font-size: 1.05em;">• <strong>Banda 1 (Naranja):</strong> 3</p>
+                                <p style="margin: 8px 0; font-size: 1.05em;">• <strong>Banda 2 (Naranja):</strong> 3</p>
+                                <p style="margin: 8px 0; font-size: 1.05em;">• <strong>Banda 3 (Café):</strong> ×10</p>
+                                <p style="margin: 12px 0; font-size: 1.2em; font-weight: 800; color: #2ecc71;"><strong>Resultado:</strong> 33 × 10 = <strong>330Ω</strong></p>
                             </div>
                         `
                     },
@@ -2150,31 +2426,33 @@
         // Sistema de partículas de fondo
         function createBackgroundParticles() {
             const container = document.getElementById('bg-particles');
-            const particleCount = 20;
+            const particleCount = 25;
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.width = Math.random() * 12 + 6 + 'px';
                 particle.style.height = particle.style.width;
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.top = Math.random() * 100 + '%';
                 particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particle.style.opacity = Math.random() * 0.6 + 0.2;
                 container.appendChild(particle);
             }
         }
 
         // Crear confeti cuando se complete el circuito
         function createConfetti() {
-            const colors = ['#ff0080', '#ff8c00', '#40e0d0', '#f0f', '#0ff', '#ff0'];
-            const confettiCount = 50;
+            const colors = ['#ff0080', '#ff8c00', '#40e0d0', '#f0f', '#0ff', '#ff0', '#9400d3', '#ff1493'];
+            const confettiCount = 70;
             for (let i = 0; i < confettiCount; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 confetti.style.animationDelay = Math.random() * 3 + 's';
-                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
                 document.body.appendChild(confetti);
                 setTimeout(() => confetti.remove(), 5000);
             }
@@ -2210,10 +2488,12 @@
             });
             modalBody.innerHTML = html;
             modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             document.getElementById('info-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
 
         // Cerrar modal al hacer clic fuera del contenido
@@ -2245,20 +2525,20 @@
             const led = document.querySelector('.led');
             
             battery.style.position = 'absolute';
-            battery.style.left = '50px';
-            battery.style.top = 'calc(50% - 65px)';
+            battery.style.left = '60px';
+            battery.style.top = 'calc(50% - 75px)';
             
             switchEl.style.position = 'absolute';
-            switchEl.style.left = '220px';
-            switchEl.style.top = 'calc(50% - 30px)';
+            switchEl.style.left = '250px';
+            switchEl.style.top = 'calc(50% - 40px)';
             
             resistor.style.position = 'absolute';
-            resistor.style.left = '400px';
-            resistor.style.top = 'calc(50% - 15px)';
+            resistor.style.left = '450px';
+            resistor.style.top = 'calc(50% - 22px)';
             
             led.style.position = 'absolute';
-            led.style.left = 'calc(50% - 45px)';
-            led.style.top = 'calc(50% + 90px)';
+            led.style.left = 'calc(50% - 50px)';
+            led.style.top = 'calc(50% + 110px)';
         }
 
         function resizeCanvas() {
@@ -2343,10 +2623,10 @@
             let y = clientY - containerRect.top - offsetY;
             
             // Restringir el movimiento dentro del contenedor
-            const maxLeft = 0;
-            const maxRight = containerRect.width - draggedElement.offsetWidth;
-            const maxTop = 0;
-            const maxBottom = containerRect.height - draggedElement.offsetHeight;
+            const maxLeft = 10;
+            const maxRight = containerRect.width - draggedElement.offsetWidth - 10;
+            const maxTop = 10;
+            const maxBottom = containerRect.height - draggedElement.offsetHeight - 10;
             
             x = Math.max(maxLeft, Math.min(x, maxRight));
             y = Math.max(maxTop, Math.min(y, maxBottom));
@@ -2388,7 +2668,7 @@
             if (!selectedPoint) {
                 selectedPoint = point;
                 point.classList.add('selected');
-                showStatus('✓ Punto seleccionado, elige el destino', 'info');
+                showStatus('✓ Punto seleccionado - Elige el destino', 'info');
             } else {
                 if (selectedPoint === point) {
                     selectedPoint.classList.remove('selected');
@@ -2480,7 +2760,7 @@
 
             wires.push(wire);
             drawWire(wire);
-            showStatus(`🔌 Cable ${wires.length} conectado`, 'success');
+            showStatus(`🔌 Cable ${wires.length} conectado correctamente`, 'success');
         }
 
         function drawWire(wire) {
@@ -2499,15 +2779,16 @@
             const y2 = rect2.top - containerRect.top + rect2.height / 2;
             
             const dx = x2 - x1;
-            const curve = Math.abs(dx) * 0.3;
+            const curve = Math.abs(dx) * 0.35;
             const d = `M ${x1} ${y1} C ${x1 + curve} ${y1}, ${x2 - curve} ${y2}, ${x2} ${y2}`;
             
             path.setAttribute('d', d);
             path.setAttribute('stroke', wire.color);
-            path.setAttribute('stroke-width', '8');
+            path.setAttribute('stroke-width', '9');
             path.setAttribute('fill', 'none');
             path.setAttribute('stroke-linecap', 'round');
-            path.setAttribute('opacity', '0.9');
+            path.setAttribute('opacity', '0.95');
+            path.setAttribute('stroke-linejoin', 'round');
             
             canvas.appendChild(path);
         }
@@ -2651,7 +2932,7 @@
             statusEl.className = 'status-toast ' + type;
             
             setTimeout(() => statusEl.classList.add('show'), 100);
-            setTimeout(() => statusEl.classList.remove('show'), 4000);
+            setTimeout(() => statusEl.classList.remove('show'), 4500);
         }
     </script>
 </body>
