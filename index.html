@@ -14,17 +14,13 @@
             min-height: 100vh;
             padding: 15px;
             overflow-x: hidden;
-            touch-action: none;
             position: relative;
         }
 
-        /* Partículas de fondo animadas */
         .background-particles {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             z-index: 0;
             overflow: hidden;
@@ -32,7 +28,7 @@
 
         .particle {
             position: absolute;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255,255,255,0.3);
             border-radius: 50%;
             animation: float 15s infinite ease-in-out;
         }
@@ -50,170 +46,7 @@
             z-index: 1;
         }
 
-        /* NUEVA SECCIÓN: Guía de Componentes al Inicio - CORREGIDA Y CENTRADA */
-        .component-guide {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border-radius: 25px;
-            padding: 25px;
-            margin-bottom: 25px;
-            border: 5px solid #fff;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-            overflow: hidden;
-            position: relative;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .component-guide::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            border: 3px solid #ff9800;
-            border-radius: 27px;
-            pointer-events: none;
-            z-index: -1;
-            animation: guideBorder 3s linear infinite;
-        }
-
-        @keyframes guideBorder {
-            0% { transform: rotate(0deg); box-shadow: 0 0 15px rgba(255, 152, 0, 0.5); }
-            100% { transform: rotate(360deg); box-shadow: 0 0 25px rgba(255, 152, 0, 0.8); }
-        }
-
-        .guide-title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 2em;
-            color: #667eea;
-            text-shadow: 3px 3px 0 #fff, 0 0 20px #ff9800;
-            margin-bottom: 20px;
-            text-align: center;
-            position: relative;
-            letter-spacing: 1px;
-        }
-
-        .guide-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50%;
-            height: 4px;
-            background: linear-gradient(90deg, #ff9800, #ff5733, #ff9800);
-            border-radius: 2px;
-            box-shadow: 0 2px 10px rgba(255, 152, 0, 0.6);
-        }
-
-        .components-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 15px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .component-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px 20px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 4px solid #eaeaea;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            width: calc(25% - 20px);
-            min-width: 220px;
-            max-width: 280px;
-        }
-
-        .component-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, #ff9800, #ff5733, #ff9800);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
-        }
-
-        .component-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.35), 0 0 30px rgba(255, 152, 0, 0.3);
-            border-color: #ff9800;
-            z-index: 10;
-        }
-
-        .component-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .component-card:active {
-            transform: translateY(-5px) scale(0.98);
-        }
-
-        .component-icon {
-            font-size: 4em;
-            margin: 15px 0;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: block;
-            transition: transform 0.4s ease;
-        }
-
-        .component-card:hover .component-icon {
-            transform: scale(1.2) rotate(5deg);
-        }
-
-        .component-name {
-            font-size: 1.6em;
-            font-weight: 900;
-            color: #2c3e50;
-            margin-bottom: 12px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-            letter-spacing: 0.5px;
-        }
-
-        .component-description {
-            font-size: 1.05em;
-            color: #555;
-            font-weight: 600;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            min-height: 50px;
-        }
-
-        .component-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff9800 0%, #ff5733 100%);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-size: 1em;
-            font-weight: 800;
-            margin-top: 10px;
-            box-shadow: 0 4px 12px rgba(255, 120, 0, 0.4);
-            letter-spacing: 1px;
-            border: 2px solid white;
-        }
-
-        .component-card:hover .component-tag {
-            transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(255, 120, 0, 0.6);
-        }
-
+        /* ========== HEADER (antes sección rosa) - AHORA ARRIBA ========== */
         .game-header {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             border-radius: 25px;
@@ -230,27 +63,25 @@
         .game-header::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
             background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
             animation: shine 3s infinite;
         }
 
         @keyframes headerPulse {
             0%, 100% { box-shadow: 0 12px 35px rgba(0,0,0,0.35); }
-            50% { box-shadow: 0 18px 45px rgba(245, 87, 108, 0.7); }
+            50% { box-shadow: 0 18px 45px rgba(245,87,108,0.7); }
         }
 
         @keyframes shine {
-            0% { transform: rotate(0deg) translate(-50%, -50%); }
-            100% { transform: rotate(360deg) translate(-50%, -50%); }
+            0% { transform: rotate(0deg) translate(-50%,-50%); }
+            100% { transform: rotate(360deg) translate(-50%,-50%); }
         }
 
         .game-title {
             font-family: 'Press Start 2P', cursive;
-            font-size: 2.2em;
+            font-size: clamp(1.1em, 3vw, 2.2em);
             color: #fff;
             text-shadow: 5px 5px 0 #000, 0 0 25px #f5576c;
             margin-bottom: 12px;
@@ -267,7 +98,7 @@
 
         .game-subtitle {
             color: #fff;
-            font-size: 1.3em;
+            font-size: clamp(0.9em, 2vw, 1.3em);
             font-weight: 700;
             text-shadow: 3px 3px 5px rgba(0,0,0,0.4);
             position: relative;
@@ -275,6 +106,43 @@
             margin-top: 8px;
         }
 
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            margin: 15px 0 0;
+            overflow: hidden;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #84fab0 0%, #8fd3f4 100%);
+            border-radius: 10px;
+            transition: width 0.7s cubic-bezier(0.175,0.885,0.32,1.275);
+            box-shadow: 0 0 15px rgba(132,250,176,0.9);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: progressShine 2s infinite;
+        }
+
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* ========== SCORE PANEL ========== */
         .score-panel {
             display: flex;
             gap: 15px;
@@ -285,41 +153,15 @@
 
         .score-card {
             flex: 1;
-            min-width: 200px;
+            min-width: 150px;
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             border-radius: 20px;
-            padding: 22px;
+            padding: 18px;
             color: #fff;
             text-align: center;
             border: 4px solid #fff;
             box-shadow: 0 10px 25px rgba(0,0,0,0.35);
             transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .score-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
-            border-radius: 20px;
-            opacity: 0;
-            z-index: -1;
-            animation: rotateBorder 3s linear infinite;
-            transition: opacity 0.4s;
-        }
-
-        .score-card:hover::before {
-            opacity: 1;
-        }
-
-        @keyframes rotateBorder {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         .score-card:hover {
@@ -328,7 +170,7 @@
         }
 
         .score-label {
-            font-size: 0.95em;
+            font-size: clamp(0.75em, 1.5vw, 0.95em);
             font-weight: 700;
             text-transform: uppercase;
             text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
@@ -337,110 +179,77 @@
         }
 
         .score-value {
-            font-size: 2.8em;
+            font-size: clamp(1.4em, 3vw, 2.8em);
             font-weight: 900;
             text-shadow: 4px 4px 8px rgba(0,0,0,0.5);
-            animation: scoreUpdate 0.6s ease;
             font-family: 'Press Start 2P', cursive;
-            letter-spacing: 1px;
         }
 
-        @keyframes scoreUpdate {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.25); }
-            100% { transform: scale(1); }
-        }
-
+        /* ========== GAME GRID ========== */
         .game-grid {
             display: grid;
-            grid-template-columns: 420px 1fr;
+            grid-template-columns: 380px 1fr;
             gap: 22px;
+            margin-bottom: 22px;
         }
 
-        @media (max-width: 1150px) {
-            .game-grid {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 1100px) {
+            .game-grid { grid-template-columns: 1fr; }
         }
 
+        /* ========== PANELS ========== */
         .panel {
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(255,255,255,0.98);
             border-radius: 25px;
-            padding: 28px;
+            padding: 24px;
             border: 5px solid #fff;
             box-shadow: 0 12px 35px rgba(0,0,0,0.25);
-            animation: panelSlideIn 0.7s ease-out;
-        }
-
-        @keyframes panelSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .panel-title {
-            font-size: 1.6em;
+            font-size: clamp(1.1em, 2.5vw, 1.6em);
             font-weight: 900;
             color: #667eea;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
             text-align: center;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
             position: relative;
             padding-bottom: 12px;
-            letter-spacing: 1px;
         }
 
         .panel-title::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 50%;
+            bottom: 0; left: 50%;
             transform: translateX(-50%);
-            width: 70px;
-            height: 4px;
+            width: 70px; height: 4px;
             background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
             border-radius: 2px;
-            animation: titleUnderline 2s ease-in-out infinite;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5);
         }
 
-        @keyframes titleUnderline {
-            0%, 100% { width: 70px; box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5); }
-            50% { width: 110px; box-shadow: 0 2px 12px rgba(102, 126, 234, 0.8); }
-        }
-
+        /* ========== PROTOBOARD ========== */
         #protoboard-container {
             position: relative;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             border-radius: 25px;
-            padding: 65px 50px;
-            min-height: 680px;
             border: 6px solid #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 150px;
             box-shadow: 0 18px 50px rgba(0,0,0,0.5), inset 0 0 60px rgba(255,255,255,0.08);
             overflow: hidden;
             touch-action: none;
+            user-select: none;
             background-image: 
                 radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 20%),
                 radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 20%);
+            /* Altura fija para desktop */
+            min-height: 600px;
+            width: 100%;
         }
 
-        /* Efecto de cuadrícula de circuito */
+        /* Grid de circuito */
         #protoboard-container::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background-image:
                 repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 30px),
                 repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 30px);
@@ -450,1556 +259,901 @@
 
         #wire-canvas {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             z-index: 1;
         }
 
+        /* ========== COMPONENTES ========== */
         .component {
             position: absolute;
             z-index: 10;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
             cursor: grab;
             user-select: none;
+            touch-action: none;
             transition: filter 0.3s ease;
         }
 
-        .component:hover {
-            filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.7));
-            z-index: 15;
+        .component:hover { filter: drop-shadow(0 12px 25px rgba(0,0,0,0.7)); z-index: 15; }
+        .component:active { cursor: grabbing; }
+        .component.dragging {
+            opacity: 0.9;
+            z-index: 100;
+            transform: scale(1.1);
+            filter: drop-shadow(0 18px 35px rgba(0,0,0,0.7));
         }
 
-        .component:active {
-            cursor: grabbing;
-        }
-
-        /* Battery - Mejorada con animación */
-        .battery {
-            width: 100px;
-            text-align: center;
-            position: relative;
-        }
+        /* Batería */
+        .battery { width: 90px; text-align: center; position: relative; }
 
         .battery-body {
-            width: 90px;
-            height: 155px;
+            width: 78px; height: 130px;
             background: linear-gradient(180deg, #43e97b 0%, #38f9d7 40%, #2ecc71 100%);
-            border: 5px solid #2c3e50;
-            border-radius: 12px;
+            border: 4px solid #2c3e50;
+            border-radius: 10px;
             position: relative;
             margin: 0 auto;
-            box-shadow: inset 0 -25px 50px rgba(0,0,0,0.25), 0 10px 25px rgba(67, 233, 123, 0.4);
+            box-shadow: inset 0 -20px 40px rgba(0,0,0,0.25), 0 8px 20px rgba(67,233,123,0.4);
             animation: batteryGlow 3s ease-in-out infinite;
         }
 
         @keyframes batteryGlow {
-            0%, 100% { box-shadow: inset 0 -25px 50px rgba(0,0,0,0.25), 0 10px 25px rgba(67, 233, 123, 0.4); }
-            50% { box-shadow: inset 0 -25px 50px rgba(0,0,0,0.25), 0 10px 35px rgba(67, 233, 123, 0.7), 0 0 30px rgba(67, 233, 123, 0.5); }
+            0%, 100% { box-shadow: inset 0 -20px 40px rgba(0,0,0,0.25), 0 8px 20px rgba(67,233,123,0.4); }
+            50% { box-shadow: inset 0 -20px 40px rgba(0,0,0,0.25), 0 8px 30px rgba(67,233,123,0.7), 0 0 25px rgba(67,233,123,0.5); }
         }
 
         .battery-body::before {
             content: '';
             position: absolute;
-            top: -18px;
-            left: 50%;
+            top: -15px; left: 50%;
             transform: translateX(-50%);
-            width: 30px;
-            height: 18px;
+            width: 26px; height: 15px;
             background: #2c3e50;
-            border-radius: 6px 6px 0 0;
-            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.3);
+            border-radius: 5px 5px 0 0;
         }
 
         .battery-label {
-            text-align: center;
-            color: #fff;
-            font-weight: 900;
-            font-size: 2em;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            text-align: center; color: #fff;
+            font-weight: 900; font-size: 1.6em;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
             text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
-            animation: batteryPulse 2s ease-in-out infinite;
             font-family: 'Press Start 2P', cursive;
-            letter-spacing: 1px;
-        }
-
-        @keyframes batteryPulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.07); }
         }
 
         .battery-pin {
-            position: absolute;
-            left: 50%;
+            position: absolute; left: 50%;
             transform: translateX(-50%);
-            width: 7px;
-            background: linear-gradient(180deg, #e0e0e0 0%, #a0a0a0 50%, #606060 100%);
+            width: 6px;
             border-radius: 3px;
-            box-shadow: 3px 0 8px rgba(0,0,0,0.4), inset -2px 0 5px rgba(255,255,255,0.4);
             border: 2px solid #333;
         }
 
         .battery-pin-positive {
-            top: -18px;
-            height: 30px;
+            top: -15px; height: 25px;
             background: linear-gradient(180deg, #ff6b6b 0%, #ff4757 50%, #c0392b 100%);
-            box-shadow: 3px 0 8px rgba(255,71,87,0.6), inset -2px 0 5px rgba(255,255,255,0.4);
+            box-shadow: 3px 0 8px rgba(255,71,87,0.6);
         }
 
         .battery-pin-negative {
-            bottom: 0;
-            height: 30px;
+            bottom: 0; height: 25px;
             background: linear-gradient(180deg, #6c757d 0%, #495057 50%, #343a40 100%);
         }
 
         .battery-sign {
             position: absolute;
-            font-size: 1.3em;
-            font-weight: 900;
+            font-size: 1.1em; font-weight: 900;
             background: rgba(255,255,255,0.98);
-            width: 28px;
-            height: 28px;
+            width: 24px; height: 24px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.4), 0 0 12px rgba(0,0,0,0.2);
-            z-index: 5;
-            font-family: 'Press Start 2P', cursive;
-        }
-
-        .battery-sign-positive {
-            top: 8px;
-            right: 8px;
-            color: #c0392b;
-            border-color: #c0392b;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.4), 0 0 15px rgba(192, 57, 43, 0.6);
-        }
-
-        .battery-sign-negative {
-            bottom: 8px;
-            right: 8px;
-            color: #2c3e50;
-            border-color: #2c3e50;
-        }
-
-        /* Switch - Mejorado con animaciones avanzadas */
-        .switch {
-            width: 135px;
-            text-align: center;
-            position: relative;
-        }
-
-        .switch-body {
-            width: 115px;
-            height: 80px;
-            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
-            border: 5px solid #fff;
-            border-radius: 15px;
-            position: relative;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: inset 0 -12px 25px rgba(0,0,0,0.3), 0 10px 25px rgba(0,0,0,0.3);
-        }
-
-        .switch-toggle {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-            border: 5px solid #fff;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4em;
-            font-weight: 900;
-            color: #fff;
-            user-select: none;
-            box-shadow: 0 7px 20px rgba(0,0,0,0.5);
-            position: relative;
-            z-index: 15;
-            touch-action: manipulation;
-            font-family: 'Press Start 2P', cursive;
-            letter-spacing: 2px;
-        }
-
-        .switch-toggle:hover {
-            transform: scale(1.12) rotate(5deg);
-            box-shadow: 0 7px 20px rgba(0,0,0,0.5), 0 0 25px rgba(231, 76, 60, 0.7);
-        }
-
-        .switch-toggle:active {
-            transform: scale(0.95);
-        }
-
-        .switch.on .switch-toggle {
-            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-            box-shadow: 0 7px 20px rgba(0,0,0,0.5), 0 0 35px #2ecc71, 0 0 55px #2ecc71;
-            animation: switchGlow 1s ease-in-out infinite, switchRotate 0.6s ease-out;
-        }
-
-        @keyframes switchGlow {
-            0%, 100% { box-shadow: 0 7px 20px rgba(0,0,0,0.5), 0 0 35px #2ecc71; }
-            50% { box-shadow: 0 7px 20px rgba(0,0,0,0.5), 0 0 55px #2ecc71, 0 0 75px #2ecc71; }
-        }
-
-        @keyframes switchRotate {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(18deg); }
-            75% { transform: rotate(-18deg); }
-            100% { transform: rotate(0deg); }
-        }
-
-        .switch-label {
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #e74c3c;
-            color: #fff;
-            padding: 10px 22px;
-            border-radius: 30px;
-            font-size: 1.1em;
-            font-weight: 900;
-            border: 4px solid #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-            transition: all 0.4s ease;
-            font-family: 'Press Start 2P', cursive;
-            letter-spacing: 1px;
-        }
-
-        .switch.on .switch-label {
-            background: #2ecc71;
-            animation: labelPulse 1.5s ease-in-out infinite;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 25px rgba(46, 204, 113, 0.7);
-        }
-
-        @keyframes labelPulse {
-            0%, 100% { transform: translateX(-50%) scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 25px rgba(46, 204, 113, 0.7); }
-            50% { transform: translateX(-50%) scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 35px rgba(46, 204, 113, 0.9); }
-        }
-
-        /* Resistencia - Mejorada */
-        .resistor {
-            width: 145px;
-            text-align: center;
-            position: relative;
-        }
-
-        .resistor-body {
-            width: 125px;
-            height: 45px;
-            background: linear-gradient(90deg,
-                #FFD89B 0%, #FFF 12%, #FFD89B 22%, #8B4513 28%,
-                #FFD89B 33%, #FFEB3B 38%, #FFD89B 43%, #FF9800 50%,
-                #FFD89B 57%, #FFF 62%, #FFD89B 67%, #8B4513 72%,
-                #FFD89B 78%, #FFF 88%, #FFD89B 100%
-            );
-            border-radius: 12px;
-            border: 4px solid #8B4513;
-            position: relative;
-            margin: 0 auto;
-            box-shadow: 0 7px 20px rgba(0,0,0,0.35);
-            transition: transform 0.3s ease;
-        }
-
-        .resistor-body:hover {
-            transform: scale(1.07);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.45);
-        }
-
-        .resistor-label {
-            position: absolute;
-            top: -35px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ff9800;
-            color: #fff;
-            padding: 10px 22px;
-            border-radius: 30px;
-            font-size: 1.1em;
-            font-weight: 900;
-            border: 4px solid #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-            animation: resistorLabelFloat 3s ease-in-out infinite;
-            font-family: 'Press Start 2P', cursive;
-            letter-spacing: 1px;
-        }
-
-        @keyframes resistorLabelFloat {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        /* LED - Mejorado con efectos avanzados */
-        .led {
-            width: 100px;
-            text-align: center;
-            position: relative;
-        }
-
-        .led-body {
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle at 35% 35%, 
-                #ffcccc 0%, 
-                #ff9999 20%, 
-                #ff6b6b 40%, 
-                #ee5a6f 60%, 
-                #c92a2a 80%, 
-                #8b0000 100%
-            );
-            border-radius: 50% 50% 48% 48%;
-            position: relative;
-            margin: 0 auto;
-            border: 4px solid rgba(255,255,255,0.4);
-            box-shadow: 
-                0 8px 20px rgba(0,0,0,0.5),
-                inset 0 -8px 15px rgba(0,0,0,0.3),
-                inset 0 5px 15px rgba(255,255,255,0.4);
-            transition: all 0.3s ease;
-        }
-
-        .led-body::before {
-            content: '';
-            position: absolute;
-            top: 12px;
-            left: 15px;
-            width: 35px;
-            height: 35px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.3) 70%, transparent 100%);
-            border-radius: 50%;
-        }
-
-        .led-body::after {
-            content: '';
-            position: absolute;
-            top: 18px;
-            left: 20px;
-            width: 18px;
-            height: 18px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 50%;
-        }
-
-        .led.active .led-body {
-            background: radial-gradient(circle at 35% 35%, 
-                #ff6666 0%, 
-                #ff3333 20%, 
-                #ff0000 40%, 
-                #ff0000 60%, 
-                #cc0000 80%, 
-                #800000 100%
-            );
-            box-shadow: 
-                0 8px 20px rgba(0,0,0,0.5),
-                0 0 50px #ff0000,
-                0 0 80px #ff0000,
-                0 0 120px rgba(255, 0, 0, 0.7),
-                inset 0 -8px 15px rgba(0,0,0,0.3),
-                inset 0 5px 15px rgba(255,255,255,0.6);
-            animation: ledGlow 0.7s ease-in-out infinite, ledExpand 0.6s ease-out;
-        }
-
-        @keyframes ledGlow {
-            0%, 100% { filter: brightness(1.6) saturate(1.3); box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 50px #ff0000, 0 0 80px #ff0000, 0 0 120px rgba(255, 0, 0, 0.7), inset 0 -8px 15px rgba(0,0,0,0.3), inset 0 5px 15px rgba(255,255,255,0.6); }
-            50% { filter: brightness(2.3) saturate(1.6); box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 70px #ff0000, 0 0 100px #ff0000, 0 0 150px rgba(255, 0, 0, 0.9), inset 0 -8px 15px rgba(0,0,0,0.3), inset 0 5px 15px rgba(255,255,255,0.8); }
-        }
-
-        @keyframes ledExpand {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.18); }
-            100% { transform: scale(1); }
-        }
-
-        .led-pin {
-            position: absolute;
-            width: 6px;
-            background: linear-gradient(180deg, #e0e0e0 0%, #a0a0a0 50%, #606060 100%);
-            border-radius: 3px;
-            box-shadow: 3px 0 8px rgba(0,0,0,0.4), inset -2px 0 5px rgba(255,255,255,0.4);
-            border: 2px solid #333;
-        }
-
-        .led-pin-long {
-            top: 0;
-            left: 22px;
-            height: 32px;
-        }
-
-        .led-pin-short {
-            bottom: 0;
-            right: 22px;
-            height: 22px;
-        }
-
-        .led-sign {
-            position: absolute;
-            font-size: 1.2em;
-            font-weight: 900;
-            background: rgba(255,255,255,0.98);
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             border: 3px solid;
             box-shadow: 0 3px 8px rgba(0,0,0,0.4);
             z-index: 5;
             font-family: 'Press Start 2P', cursive;
         }
 
-        .led-sign-positive {
-            top: -10px;
-            left: 18px;
-            color: #c0392b;
-            border-color: #c0392b;
+        .battery-sign-positive { top: 6px; right: 5px; color: #c0392b; border-color: #c0392b; }
+        .battery-sign-negative { bottom: 6px; right: 5px; color: #2c3e50; border-color: #2c3e50; }
+
+        /* Interruptor */
+        .switch { width: 120px; text-align: center; position: relative; }
+
+        .switch-body {
+            width: 100px; height: 70px;
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            border: 4px solid #fff;
+            border-radius: 13px;
+            position: relative; margin: 0 auto;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.3), 0 8px 20px rgba(0,0,0,0.3);
         }
 
-        .led-sign-negative {
-            bottom: -10px;
-            right: 18px;
-            color: #2c3e50;
-            border-color: #2c3e50;
+        .switch-toggle {
+            width: 52px; height: 52px;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            border: 4px solid #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7em; font-weight: 900;
+            color: #fff;
+            user-select: none;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+            position: relative; z-index: 15;
+            touch-action: manipulation;
+            font-family: 'Press Start 2P', cursive;
         }
 
-        /* Puntos de conexión mejorados */
+        .switch-toggle:hover { transform: scale(1.1); }
+        .switch-toggle:active { transform: scale(0.95); }
+
+        .switch.on .switch-toggle {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.5), 0 0 30px #2ecc71, 0 0 50px #2ecc71;
+            animation: switchGlow 1s ease-in-out infinite;
+        }
+
+        @keyframes switchGlow {
+            0%, 100% { box-shadow: 0 6px 15px rgba(0,0,0,0.5), 0 0 30px #2ecc71; }
+            50% { box-shadow: 0 6px 15px rgba(0,0,0,0.5), 0 0 50px #2ecc71, 0 0 70px #2ecc71; }
+        }
+
+        .switch-label {
+            position: absolute;
+            bottom: -28px; left: 50%;
+            transform: translateX(-50%);
+            background: #e74c3c;
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.7em;
+            font-weight: 900;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            transition: all 0.4s ease;
+            font-family: 'Press Start 2P', cursive;
+            white-space: nowrap;
+        }
+
+        .switch.on .switch-label {
+            background: #2ecc71;
+            animation: labelPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes labelPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.08); }
+        }
+
+        /* Resistencia */
+        .resistor { width: 130px; text-align: center; position: relative; }
+
+        .resistor-body {
+            width: 110px; height: 40px;
+            background: linear-gradient(90deg,
+                #FFD89B 0%, #FFF 12%, #FFD89B 22%, #8B4513 28%,
+                #FFD89B 33%, #FFEB3B 38%, #FFD89B 43%, #FF9800 50%,
+                #FFD89B 57%, #FFF 62%, #FFD89B 67%, #8B4513 72%,
+                #FFD89B 78%, #FFF 88%, #FFD89B 100%
+            );
+            border-radius: 10px;
+            border: 3px solid #8B4513;
+            position: relative; margin: 0 auto;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+        }
+
+        .resistor-label {
+            position: absolute;
+            top: -32px; left: 50%;
+            transform: translateX(-50%);
+            background: #ff9800; color: #fff;
+            padding: 7px 18px;
+            border-radius: 25px;
+            font-size: 0.8em; font-weight: 900;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            font-family: 'Press Start 2P', cursive;
+            white-space: nowrap;
+        }
+
+        /* LED */
+        .led { width: 85px; text-align: center; position: relative; }
+
+        .led-body {
+            width: 70px; height: 70px;
+            background: radial-gradient(circle at 35% 35%, 
+                #ffcccc 0%, #ff9999 20%, #ff6b6b 40%, #ee5a6f 60%, #c92a2a 80%, #8b0000 100%
+            );
+            border-radius: 50% 50% 48% 48%;
+            position: relative; margin: 0 auto;
+            border: 4px solid rgba(255,255,255,0.4);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5), inset 0 -8px 15px rgba(0,0,0,0.3), inset 0 5px 15px rgba(255,255,255,0.4);
+            transition: all 0.3s ease;
+        }
+
+        .led-body::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 12px;
+            width: 30px; height: 30px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.3) 70%, transparent 100%);
+            border-radius: 50%;
+        }
+
+        .led-body::after {
+            content: '';
+            position: absolute;
+            top: 16px; left: 17px;
+            width: 15px; height: 15px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+        }
+
+        .led.active .led-body {
+            background: radial-gradient(circle at 35% 35%, 
+                #ff6666 0%, #ff3333 20%, #ff0000 40%, #ff0000 60%, #cc0000 80%, #800000 100%
+            );
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 50px #ff0000, 0 0 80px #ff0000, 0 0 120px rgba(255,0,0,0.7);
+            animation: ledGlow 0.7s ease-in-out infinite;
+        }
+
+        @keyframes ledGlow {
+            0%, 100% { filter: brightness(1.6) saturate(1.3); }
+            50% { filter: brightness(2.3) saturate(1.6); box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 70px #ff0000, 0 0 100px #ff0000, 0 0 150px rgba(255,0,0,0.9); }
+        }
+
+        .led-pin {
+            position: absolute; width: 5px;
+            background: linear-gradient(180deg, #e0e0e0 0%, #a0a0a0 50%, #606060 100%);
+            border-radius: 3px;
+            border: 2px solid #333;
+        }
+
+        .led-pin-long { top: 0; left: 20px; height: 28px; }
+        .led-pin-short { bottom: 0; right: 20px; height: 20px; }
+
+        .led-sign {
+            position: absolute; font-size: 1em; font-weight: 900;
+            background: rgba(255,255,255,0.98);
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 3px solid; box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+            z-index: 5; font-family: 'Press Start 2P', cursive;
+        }
+
+        .led-sign-positive { top: -8px; left: 15px; color: #c0392b; border-color: #c0392b; }
+        .led-sign-negative { bottom: -8px; right: 15px; color: #2c3e50; border-color: #2c3e50; }
+
+        /* ========== PUNTOS DE CONEXIÓN ========== */
         .connection-point {
             position: absolute;
-            width: 40px;
-            height: 40px;
+            width: 36px; height: 36px;
             background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            border: 5px solid #fff;
+            border: 4px solid #fff;
             border-radius: 50%;
             cursor: pointer;
             z-index: 15;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
             touch-action: manipulation;
         }
 
         .connection-point:hover {
             background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
-            transform: scale(1.6);
-            box-shadow: 0 0 30px rgba(255,215,0,1), 0 8px 20px rgba(0,0,0,0.6);
-            animation: pointHover 0.7s ease-in-out infinite;
-        }
-
-        @keyframes pointHover {
-            0%, 100% { transform: scale(1.6); }
-            50% { transform: scale(1.75); }
+            transform: scale(1.5);
+            box-shadow: 0 0 25px rgba(255,215,0,1), 0 6px 16px rgba(0,0,0,0.6);
         }
 
         .connection-point.connected {
             background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
             animation: connectedPulse 1.5s ease-in-out infinite;
-            box-shadow: 0 0 25px rgba(81, 207, 102, 0.9), 0 5px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 0 20px rgba(81,207,102,0.9);
         }
 
         @keyframes connectedPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(81, 207, 102, 0.9), 0 5px 15px rgba(0,0,0,0.5); }
-            50% { transform: scale(1.3); box-shadow: 0 0 40px rgba(81, 207, 102, 1.2), 0 8px 20px rgba(0,0,0,0.6); }
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(81,207,102,0.9); }
+            50% { transform: scale(1.25); box-shadow: 0 0 35px rgba(81,207,102,1.2); }
         }
 
         .connection-point.selected {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            animation: selectedJump 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-            box-shadow: 0 0 35px rgba(79, 172, 254, 1.1), 0 8px 20px rgba(0,0,0,0.6);
+            animation: selectedJump 0.7s cubic-bezier(0.68,-0.55,0.265,1.55) infinite;
+            box-shadow: 0 0 30px rgba(79,172,254,1.1);
         }
 
         @keyframes selectedJump {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.5) translateY(-8px); }
+            50% { transform: scale(1.4) translateY(-6px); }
         }
 
         .connection-point::after {
             content: attr(data-tooltip);
             position: absolute;
-            bottom: 110%;
-            left: 50%;
+            bottom: 110%; left: 50%;
             transform: translateX(-50%);
             background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 12px;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s;
-            margin-bottom: 10px;
-            font-weight: 700;
+            color: white; padding: 8px 12px;
+            border-radius: 10px; font-size: 12px;
+            white-space: nowrap; opacity: 0;
+            pointer-events: none; transition: opacity 0.4s;
+            margin-bottom: 8px; font-weight: 700;
             border: 3px solid #ffd700;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.4);
             font-family: 'Poppins', sans-serif;
         }
 
-        .connection-point:hover::after {
-            opacity: 1;
-            animation: tooltipPop 0.4s ease;
-        }
+        .connection-point:hover::after { opacity: 1; }
 
-        @keyframes tooltipPop {
-            0% { transform: translateX(-50%) scale(0.8); opacity: 0; }
-            100% { transform: translateX(-50%) scale(1); opacity: 1; }
-        }
-
-        /* Mission cards mejoradas */
+        /* ========== MISIONES ========== */
         .mission-card {
             background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 15px 0;
-            border: 4px solid #fff;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-            position: relative;
-            overflow: hidden;
-            font-size: 1em;
-        }
-
-        .mission-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-            transition: left 0.7s;
-        }
-
-        .mission-card:hover::before {
-            left: 100%;
+            border-radius: 12px; padding: 16px;
+            margin: 12px 0; border: 3px solid #fff;
+            transition: all 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+            position: relative; overflow: hidden;
+            display: flex; align-items: center;
         }
 
         .mission-card:hover {
-            transform: translateX(8px) scale(1.03);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+            transform: translateX(6px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             border-color: #667eea;
         }
 
         .mission-card.completed {
             background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-            box-shadow: 0 0 40px rgba(132, 250, 176, 0.8);
-            animation: missionComplete 0.7s ease-out;
+            box-shadow: 0 0 30px rgba(132,250,176,0.8);
             border-color: #51cf66;
-        }
-
-        @keyframes missionComplete {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.07); }
-            100% { transform: scale(1); }
         }
 
         .mission-number {
             display: inline-flex;
-            width: 45px;
-            height: 45px;
+            min-width: 40px; height: 40px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            font-weight: 900;
-            font-size: 1.4em;
-            border: 4px solid #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            color: #fff; border-radius: 50%;
+            align-items: center; justify-content: center;
+            margin-right: 12px; font-weight: 900;
+            font-size: 1.2em; border: 3px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
             transition: all 0.4s ease;
             font-family: 'Press Start 2P', cursive;
-            letter-spacing: 1px;
-        }
-
-        .mission-card:hover .mission-number {
-            transform: rotate(360deg) scale(1.1);
+            flex-shrink: 0;
         }
 
         .mission-card.completed .mission-number {
             background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
-            box-shadow: 0 0 25px rgba(81, 207, 102, 0.9);
-            animation: numberCelebrate 0.7s ease-out;
-        }
-
-        @keyframes numberCelebrate {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.3) rotate(15deg); }
-            75% { transform: scale(1.3) rotate(-15deg); }
-        }
-
-        .mission-card.completed .mission-number::after {
-            content: '✓';
-            font-size: 1.5em;
+            box-shadow: 0 0 20px rgba(81,207,102,0.9);
         }
 
         .mission-text {
-            font-weight: 700;
-            color: #2c3e50;
-            font-size: 1.05em;
-            line-height: 1.5;
+            font-weight: 700; color: #2c3e50;
+            font-size: clamp(0.85em, 1.5vw, 1em);
+            line-height: 1.4;
         }
 
-        /* Botones mejorados */
+        /* ========== BOTONES ========== */
         .btn-game {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: #fff;
-            border: none;
-            padding: 18px 30px;
-            border-radius: 60px;
-            cursor: pointer;
+            color: #fff; border: none;
+            padding: 16px 25px;
+            border-radius: 50px; cursor: pointer;
             font-family: 'Poppins', sans-serif;
-            font-weight: 900;
-            text-transform: uppercase;
-            border: 5px solid #fff;
-            width: 100%;
-            margin: 12px 0;
-            font-size: 1.2em;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 7px 20px rgba(0,0,0,0.35);
+            font-weight: 900; text-transform: uppercase;
+            border: 4px solid #fff; width: 100%;
+            margin: 10px 0; font-size: clamp(0.9em, 1.8vw, 1.1em);
+            transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
             touch-action: manipulation;
-            position: relative;
-            overflow: hidden;
-            letter-spacing: 1px;
-        }
-
-        .btn-game::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
-            transform: translate(-50%, -50%);
-            transition: width 0.8s, height 0.8s;
-        }
-
-        .btn-game:hover::before {
-            width: 300px;
-            height: 300px;
+            position: relative; overflow: hidden;
         }
 
         .btn-game:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.45), 0 0 30px rgba(245, 87, 108, 0.4);
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.4);
         }
 
-        .btn-game:active {
-            transform: translateY(2px) scale(0.98);
-        }
+        .btn-game:active { transform: translateY(2px) scale(0.98); }
 
-        .btn-success {
-            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-            box-shadow: 0 7px 20px rgba(132, 250, 176, 0.4);
-        }
+        .btn-success { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); color: #2c3e50; }
+        .btn-danger { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
 
-        .btn-success:hover {
-            box-shadow: 0 10px 25px rgba(132, 250, 176, 0.6), 0 0 30px rgba(143, 211, 244, 0.5);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            box-shadow: 0 7px 20px rgba(250, 112, 154, 0.4);
-        }
-
-        .btn-danger:hover {
-            box-shadow: 0 10px 25px rgba(250, 112, 154, 0.6), 0 0 30px rgba(254, 225, 64, 0.5);
-        }
-
-        /* Toast mejorado */
-        .status-toast {
-            position: fixed;
-            top: 100px;
-            right: 25px;
-            padding: 25px 35px;
-            border-radius: 25px;
-            font-weight: 800;
-            font-size: 1.2em;
-            border: 5px solid #fff;
-            z-index: 1000;
-            transform: translateX(600px);
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-width: 500px;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.45);
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: 0.5px;
-            text-align: center;
-        }
-
-        .status-toast.show {
-            transform: translateX(0);
-            animation: toastBounce 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes toastBounce {
-            0% { transform: translateX(600px); }
-            50% { transform: translateX(-15px); }
-            70% { transform: translateX(8px); }
-            100% { transform: translateX(0); }
-        }
-
-        .status-toast.success {
-            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-            color: #fff;
-            box-shadow: 0 12px 35px rgba(132, 250, 176, 0.6);
-        }
-
-        .status-toast.error {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            color: #fff;
-            box-shadow: 0 12px 35px rgba(250, 112, 154, 0.6);
-        }
-
-        .status-toast.info {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: #fff;
-            box-shadow: 0 12px 35px rgba(79, 172, 254, 0.6);
-        }
-
-        .status-toast.warning {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            color: #333;
-            box-shadow: 0 12px 35px rgba(255, 236, 210, 0.6);
-        }
-
-        .info-box {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        /* ========== INFO / WARNING BOXES ========== */
+        .info-box, .warning-box {
             border: 4px solid #fff;
-            border-radius: 20px;
-            padding: 22px;
-            margin: 20px 0;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-            transition: all 0.4s ease;
+            border-radius: 18px; padding: 20px;
+            margin: 18px 0;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.2);
         }
 
-        .info-box:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+        .info-box { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            animation: warningPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes warningPulse {
+            0%, 100% { box-shadow: 0 8px 22px rgba(0,0,0,0.2); }
+            50% { box-shadow: 0 12px 30px rgba(255,154,158,0.6); }
         }
 
         .info-title {
-            font-weight: 900;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
-            text-align: center;
-            position: relative;
-            padding-bottom: 10px;
-            letter-spacing: 1px;
+            font-weight: 900; color: #2c3e50;
+            margin-bottom: 12px; font-size: clamp(1em, 2vw, 1.3em);
+            text-align: center; position: relative; padding-bottom: 10px;
         }
 
         .info-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40%;
-            height: 3px;
+            content: ''; position: absolute;
+            bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 40%; height: 3px;
             background: linear-gradient(90deg, #ff9800, #ff5733);
             border-radius: 2px;
         }
 
         .info-text {
-            color: #444;
-            font-weight: 600;
-            font-size: 1.1em;
+            color: #444; font-weight: 600;
+            font-size: clamp(0.85em, 1.5vw, 1em);
             line-height: 1.7;
-            text-align: justify;
         }
 
-        .warning-box {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            border: 4px solid #fff;
-            border-radius: 20px;
-            padding: 22px;
-            margin: 20px 0;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-            animation: warningPulse 2s ease-in-out infinite;
-            position: relative;
-            overflow: hidden;
+        /* ========== TOAST ========== */
+        .status-toast {
+            position: fixed; top: 80px; right: 20px;
+            padding: 18px 28px; border-radius: 20px;
+            font-weight: 800; font-size: clamp(0.9em, 2vw, 1.1em);
+            border: 4px solid #fff; z-index: 9000;
+            transform: translateX(700px);
+            transition: transform 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+            max-width: min(90vw, 450px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
         }
 
-        .warning-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: warningShine 3s infinite;
-        }
+        .status-toast.show { transform: translateX(0); }
+        .status-toast.success { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); color: #1a5c2a; }
+        .status-toast.error { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #7a1c3a; }
+        .status-toast.info { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: #0a3d5c; }
+        .status-toast.warning { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: #7a3800; }
 
-        @keyframes warningShine {
-            0% { transform: rotate(0deg) translate(-50%, -50%); }
-            100% { transform: rotate(360deg) translate(-50%, -50%); }
-        }
-
-        @keyframes warningPulse {
-            0%, 100% { box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
-            50% { box-shadow: 0 12px 35px rgba(255, 154, 158, 0.6); }
-        }
-
-        /* Overlay de celebración mejorado */
+        /* ========== CELEBRATION OVERLAY - ARREGLADO ========== */
         .celebration-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(102,126,234,0.95) 100%);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
             z-index: 9999;
             display: none;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px);
+            padding: 20px;
+            overflow-y: auto;
         }
 
-        .celebration-overlay.active {
-            display: flex;
-            animation: fadeIn 0.6s ease;
-        }
+        .celebration-overlay.active { display: flex; animation: fadeIn 0.5s ease; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .celebration-content {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 60px;
-            border-radius: 40px;
+            padding: clamp(25px, 5vw, 50px) clamp(20px, 4vw, 45px);
+            border-radius: 35px;
             text-align: center;
-            border: 8px solid #fff;
-            max-width: 650px;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.6), 0 0 50px rgba(240, 147, 251, 0.5);
-            animation: celebrationPop 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 6px solid #fff;
+            width: 100%;
+            max-width: min(90vw, 600px);
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 70px rgba(0,0,0,0.6), 0 0 40px rgba(240,147,251,0.5);
+            animation: celebrationPop 0.6s cubic-bezier(0.175,0.885,0.32,1.275);
             position: relative;
-            overflow: hidden;
+            margin: auto;
         }
 
         @keyframes celebrationPop {
             0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
-            50% { transform: scale(1.1) rotate(5deg); }
+            50% { transform: scale(1.05) rotate(3deg); }
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
 
-        .celebration-content::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: celebrationShine 2s infinite;
-        }
-
-        @keyframes celebrationShine {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         .celebration-emoji {
-            font-size: 6em;
+            font-size: clamp(2.5em, 6vw, 5em);
             animation: celebrationBounce 1s ease-in-out infinite;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 0 20px rgba(255,255,255,0.8);
+            display: block; margin-bottom: 10px;
         }
 
         @keyframes celebrationBounce {
             0%, 100% { transform: translateY(0) scale(1); }
-            25% { transform: translateY(-25px) scale(1.15); }
-            75% { transform: translateY(-10px) scale(1.05); }
+            25% { transform: translateY(-20px) scale(1.1); }
+            75% { transform: translateY(-8px) scale(1.05); }
         }
 
         .celebration-title {
             font-family: 'Press Start 2P', cursive;
-            font-size: 2.8em;
+            font-size: clamp(1.4em, 4vw, 2.5em);
             color: #fff;
-            margin: 30px 0;
-            text-shadow: 6px 6px 0 #000, 0 0 40px #f5576c;
-            position: relative;
-            z-index: 1;
-            letter-spacing: 3px;
+            margin: 20px 0 15px;
+            text-shadow: 4px 4px 0 #000;
             animation: celebrationTitlePulse 1.2s ease-in-out infinite;
+            line-height: 1.3;
         }
 
         @keyframes celebrationTitlePulse {
-            0%, 100% { transform: scale(1); text-shadow: 6px 6px 0 #000, 0 0 40px #f5576c; }
-            50% { transform: scale(1.08); text-shadow: 6px 6px 0 #000, 0 0 60px #f5576c, 0 0 80px #f093fb; }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .celebration-text {
-            font-size: 1.5em;
-            color: #fff;
-            margin-bottom: 30px;
-            font-weight: 700;
-            line-height: 1.7;
-            position: relative;
-            z-index: 1;
+            font-size: clamp(0.9em, 2vw, 1.3em);
+            color: #fff; margin-bottom: 25px;
+            font-weight: 700; line-height: 1.7;
             text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
         }
 
-        /* Sistema de partículas de confeti */
+        /* Botón de cerrar X en la esquina del modal */
+        .celebration-close-x {
+            position: absolute;
+            top: 12px; right: 12px;
+            background: rgba(0,0,0,0.35);
+            color: white; border: 3px solid rgba(255,255,255,0.6);
+            width: 42px; height: 42px;
+            border-radius: 50%; font-size: 1.3em;
+            cursor: pointer; font-weight: 900;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease;
+            line-height: 1;
+            z-index: 10;
+        }
+
+        .celebration-close-x:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* ========== CONFETTI ========== */
         .confetti {
             position: fixed;
-            width: 12px;
-            height: 12px;
-            background: #f0f;
-            position: absolute;
-            animation: confettiFall 4s linear infinite;
-            border-radius: 2px;
-            opacity: 0.9;
+            width: 10px; height: 10px;
+            animation: confettiFall 4s linear forwards;
+            border-radius: 2px; z-index: 10000;
+            pointer-events: none;
         }
 
         @keyframes confettiFall {
-            0% { transform: translateY(-100vh) rotate(0deg) scale(0.5); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg) scale(1.2); opacity: 0; }
+            0% { transform: translateY(-10vh) rotate(0deg) scale(0.5); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg) scale(1.2); opacity: 0; }
         }
 
-        /* Indicador de progreso */
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 10px;
-            margin: 15px 0;
-            overflow: hidden;
-            box-shadow: inset 0 3px 6px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.5);
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #84fab0 0%, #8fd3f4 100%);
-            border-radius: 10px;
-            transition: width 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 0 15px rgba(132, 250, 176, 0.9);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: progressShine 2s infinite;
-        }
-
-        @keyframes progressShine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        /* Ajustes responsivos */
-        @media (max-width: 1200px) {
-            .game-grid {
-                grid-template-columns: 1fr;
-            }
-            #protoboard-container {
-                flex-direction: column;
-                gap: 130px;
-                padding: 55px 35px;
-            }
-            .game-title {
-                font-size: 1.9em;
-            }
-            .game-subtitle {
-                font-size: 1.15em;
-            }
-            .components-grid {
-                flex-direction: row;
-            }
-            .component-card {
-                width: calc(33.333% - 20px);
-                min-width: 200px;
-            }
-        }
-
-        @media (max-width: 900px) {
-            .components-grid {
-                flex-direction: row;
-            }
-            .component-card {
-                width: calc(50% - 20px);
-                min-width: 200px;
-            }
-            .game-title {
-                font-size: 1.7em;
-            }
-            .score-value {
-                font-size: 2.5em;
-            }
-            .panel-title {
-                font-size: 1.4em;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .game-title {
-                font-size: 1.5em;
-            }
-            .game-subtitle {
-                font-size: 1.05em;
-            }
-            .score-panel {
-                flex-direction: column;
-            }
-            #protoboard-container {
-                padding: 45px 25px;
-                min-height: 550px;
-                gap: 110px;
-            }
-            .battery-body {
-                width: 75px;
-                height: 125px;
-            }
-            .led-body {
-                width: 65px;
-                height: 65px;
-            }
-            .battery-pin-positive,
-            .battery-pin-negative {
-                height: 35px;
-            }
-            .led-pin-long {
-                height: 40px;
-            }
-            .led-pin-short {
-                height: 28px;
-            }
-            .connection-point {
-                width: 45px !important;
-                height: 45px !important;
-            }
-            .score-value {
-                font-size: 2.2em;
-            }
-            .panel-title {
-                font-size: 1.25em;
-            }
-            .mission-card {
-                padding: 16px 14px;
-            }
-            .mission-number {
-                width: 40px;
-                height: 40px;
-                font-size: 1.25em;
-            }
-            .mission-text {
-                font-size: 0.95em;
-            }
-            .btn-game {
-                padding: 15px 25px;
-                font-size: 1.05em;
-            }
-            .info-box, .warning-box {
-                padding: 18px;
-            }
-            .info-title {
-                font-size: 1.25em;
-            }
-            .info-text {
-                font-size: 1em;
-            }
-            .component-card {
-                width: calc(50% - 20px);
-                min-width: 190px;
-                padding: 20px 15px;
-            }
-            .component-name {
-                font-size: 1.45em;
-            }
-            .component-description {
-                font-size: 0.95em;
-                min-height: 45px;
-            }
-            .component-icon {
-                font-size: 3.5em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #protoboard-container {
-                padding: 35px 18px;
-                min-height: 480px;
-                gap: 90px;
-            }
-            .battery-body {
-                width: 65px;
-                height: 105px;
-            }
-            .led-body {
-                width: 55px;
-                height: 55px;
-            }
-            .battery-pin-positive,
-            .battery-pin-negative {
-                height: 30px;
-            }
-            .led-pin-long {
-                height: 35px;
-            }
-            .led-pin-short {
-                height: 24px;
-            }
-            .game-title {
-                font-size: 1.35em;
-            }
-            .game-subtitle {
-                font-size: 0.95em;
-            }
-            .score-value {
-                font-size: 2em;
-            }
-            .panel-title {
-                font-size: 1.15em;
-            }
-            .mission-card {
-                padding: 14px 12px;
-            }
-            .mission-number {
-                width: 35px;
-                height: 35px;
-                font-size: 1.15em;
-            }
-            .mission-text {
-                font-size: 0.9em;
-            }
-            .btn-game {
-                padding: 13px 22px;
-                font-size: 0.95em;
-            }
-            .info-title {
-                font-size: 1.15em;
-            }
-            .info-text {
-                font-size: 0.95em;
-            }
-            .component-card {
-                width: 100%;
-                min-width: auto;
-                max-width: none;
-            }
-            .component-name {
-                font-size: 1.4em;
-            }
-            .component-description {
-                font-size: 0.9em;
-                min-height: 40px;
-            }
-            .component-icon {
-                font-size: 3.2em;
-            }
-            .component-tag {
-                font-size: 0.95em;
-                padding: 7px 18px;
-            }
-            .status-toast {
-                font-size: 1.05em;
-                padding: 20px 25px;
-                right: 15px;
-            }
-            .celebration-title {
-                font-size: 2.3em;
-            }
-            .celebration-text {
-                font-size: 1.3em;
-            }
-            .celebration-emoji {
-                font-size: 5em;
-            }
-            .progress-bar {
-                height: 7px;
-            }
-        }
-
-        .component.dragging {
-            opacity: 0.85;
-            z-index: 100;
-            transform: scale(1.15);
-            filter: drop-shadow(0 18px 35px rgba(0, 0, 0, 0.7));
-            animation: dragPulse 0.5s ease-in-out infinite;
-        }
-
-        @keyframes dragPulse {
-            0%, 100% { transform: scale(1.15); }
-            50% { transform: scale(1.2); }
-        }
-
-        /* Efecto de electricidad en los cables */
-        .wire-electric {
-            stroke-dasharray: 5;
-            animation: electricFlow 1s linear infinite;
-        }
-
-        @keyframes electricFlow {
-            0% { stroke-dashoffset: 0; }
-            100% { stroke-dashoffset: 100; }
-        }
-
-        /* Modal educativo */
+        /* ========== MODAL EDUCATIVO ========== */
         .info-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.92);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(12px);
+            display: none; position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 10000;
+            align-items: center; justify-content: center;
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            overflow-y: auto;
         }
 
-        .info-modal.active {
-            display: flex;
-            animation: fadeIn 0.4s ease;
-        }
+        .info-modal.active { display: flex; animation: fadeIn 0.4s ease; }
 
         .modal-content {
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            border-radius: 30px;
-            padding: 45px;
-            max-width: 850px;
-            width: 95%;
-            max-height: 90vh;
-            overflow-y: auto;
-            border: 6px solid #667eea;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.65), 0 0 40px rgba(102, 126, 234, 0.5);
-            animation: modalPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
+            border-radius: 28px; padding: clamp(25px, 4vw, 45px);
+            max-width: min(95vw, 800px); width: 100%;
+            max-height: 88vh; overflow-y: auto;
+            border: 5px solid #667eea;
+            box-shadow: 0 20px 70px rgba(0,0,0,0.6);
+            animation: modalPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+            position: relative; margin: auto;
         }
 
         @keyframes modalPop {
-            0% { transform: scale(0.4) rotate(-10deg); opacity: 0; }
-            50% { transform: scale(1.05) rotate(5deg); }
+            0% { transform: scale(0.4) rotate(-8deg); opacity: 0; }
+            50% { transform: scale(1.03) rotate(3deg); }
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
 
         .modal-close {
-            position: absolute;
-            top: 18px;
-            right: 18px;
+            position: absolute; top: 14px; right: 14px;
             background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.8em;
-            cursor: pointer;
-            border: 4px solid white;
-            box-shadow: 0 7px 20px rgba(0,0,0,0.45);
-            transition: all 0.4s ease;
-            font-weight: bold;
-            line-height: 1;
-            z-index: 100;
+            color: white; border: none;
+            width: 45px; height: 45px;
+            border-radius: 50%; font-size: 1.5em;
+            cursor: pointer; border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            transition: all 0.4s ease; font-weight: bold;
+            line-height: 1; z-index: 100;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .modal-close:hover {
-            transform: rotate(180deg) scale(1.15);
-            background: linear-gradient(135deg, #c0392b, #a93226);
-            box-shadow: 0 7px 20px rgba(0,0,0,0.45), 0 0 30px rgba(192, 57, 43, 0.6);
-        }
+        .modal-close:hover { transform: rotate(180deg) scale(1.1); }
 
         .modal-title {
-            font-size: 2.2em;
-            font-weight: 900;
+            font-size: clamp(1.3em, 3vw, 2em); font-weight: 900;
             background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 25px;
-            text-align: center;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
-            position: relative;
-            padding-bottom: 15px;
-            letter-spacing: 1px;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 20px; text-align: center;
+            position: relative; padding-bottom: 12px;
         }
 
         .modal-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 4px;
+            content: ''; position: absolute;
+            bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 60%; height: 3px;
             background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
             border-radius: 2px;
-            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.6);
         }
 
-        .modal-symbol {
-            font-size: 5.5em;
-            text-align: center;
-            margin: 25px 0;
-            filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
-            animation: symbolRotate 3.5s ease-in-out infinite;
-            text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
-        }
-
-        @keyframes symbolRotate {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(8deg) scale(1.08); }
-        }
+        .modal-symbol { font-size: clamp(3em, 6vw, 5em); text-align: center; margin: 18px 0; display: block; }
 
         .modal-section {
-            margin: 25px 0;
-            padding: 20px;
-            background: white;
-            border-radius: 18px;
-            border-left: 7px solid #667eea;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            margin: 18px 0; padding: 18px;
+            background: white; border-radius: 15px;
+            border-left: 6px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .modal-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, rgba(102,126,234,0.03), transparent, rgba(102,126,234,0.03));
-            opacity: 0;
-            transition: opacity 0.4s;
-            z-index: -1;
-        }
-
-        .modal-section:hover {
-            transform: translateX(5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.18);
-            border-left-width: 10px;
-        }
-
-        .modal-section:hover::before {
-            opacity: 1;
-        }
+        .modal-section:hover { transform: translateX(4px); }
 
         .modal-section h3 {
-            color: #667eea;
-            font-weight: 900;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            position: relative;
-            padding-bottom: 8px;
-        }
-
-        .modal-section h3::before {
-            content: '▸';
-            color: #764ba2;
-            font-size: 1.8em;
-            position: absolute;
-            left: -15px;
-            opacity: 0.8;
+            color: #667eea; font-weight: 900;
+            margin-bottom: 12px; font-size: clamp(1em, 2vw, 1.4em);
         }
 
         .modal-section p {
-            color: #444;
-            line-height: 1.8;
-            font-weight: 600;
-            font-size: 1.1em;
-            margin-bottom: 12px;
+            color: #444; line-height: 1.8; font-weight: 600;
+            font-size: clamp(0.9em, 1.5vw, 1.05em); margin-bottom: 10px;
         }
 
-        .modal-section ul {
-            margin: 15px 0 15px 25px;
-            color: #444;
-            padding-left: 10px;
-        }
+        .modal-section ul { margin: 12px 0 12px 20px; color: #444; }
+        .modal-section li { margin: 10px 0; font-weight: 600; line-height: 1.6; font-size: clamp(0.88em, 1.5vw, 1em); }
+        .modal-section li::marker { color: #667eea; font-size: 1.2em; font-weight: bold; }
 
-        .modal-section li {
-            margin: 12px 0;
-            font-weight: 600;
-            line-height: 1.6;
-            position: relative;
-            padding-left: 10px;
-            font-size: 1.05em;
-        }
-
-        .modal-section li::marker {
-            color: #667eea;
-            font-size: 1.3em;
-            font-weight: bold;
-        }
-
-        /* Tabla de código de colores */
         .color-code-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            border-radius: 15px;
-            overflow: hidden;
-            background: white;
+            width: 100%; border-collapse: collapse;
+            margin: 15px 0; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
         }
 
         .color-code-table th {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            font-weight: 900;
-            text-align: left;
-            font-size: 1.15em;
+            color: white; padding: 12px; font-weight: 900;
+            text-align: left; font-size: clamp(0.85em, 1.5vw, 1.05em);
         }
 
         .color-code-table td {
-            padding: 14px 16px;
-            border-bottom: 3px solid #f5f7fa;
-            font-weight: 600;
-            font-size: 1.05em;
+            padding: 11px 14px; border-bottom: 2px solid #f5f7fa;
+            font-weight: 600; font-size: clamp(0.82em, 1.4vw, 0.98em);
         }
 
-        .color-code-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .color-code-table tr:hover {
-            background: #f8f9ff;
-            transform: scale(1.01);
-        }
+        .color-code-table tr:last-child td { border-bottom: none; }
+        .color-code-table tr:hover { background: #f8f9ff; }
 
         .color-sample {
-            display: inline-block;
-            width: 35px;
-            height: 25px;
-            border-radius: 8px;
-            margin-right: 12px;
-            border: 3px solid #333;
-            vertical-align: middle;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+            display: inline-block; width: 30px; height: 22px;
+            border-radius: 6px; margin-right: 10px;
+            border: 2px solid #333; vertical-align: middle;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
 
         .circuit-symbol-svg {
-            width: 100%;
-            max-width: 350px;
-            margin: 25px auto;
-            display: block;
-            filter: drop-shadow(0 7px 15px rgba(0,0,0,0.25));
-            background: white;
-            padding: 20px;
-            border-radius: 18px;
-            border: 3px solid #eaeaea;
+            width: 100%; max-width: 320px;
+            margin: 20px auto; display: block;
+            background: white; padding: 18px;
+            border-radius: 15px; border: 2px solid #eaeaea;
         }
 
-        .modal-content::-webkit-scrollbar {
-            width: 12px;
+        /* ========== GUÍA DE COMPONENTES - AHORA ABAJO ========== */
+        .component-guide {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 25px; padding: 25px;
+            margin-top: 22px;
+            border: 5px solid #fff;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+            position: relative; overflow: hidden;
         }
 
-        .modal-content::-webkit-scrollbar-track {
-            background: #f1f3f5;
+        .guide-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(1em, 2.5vw, 1.8em);
+            color: #667eea;
+            text-shadow: 3px 3px 0 #fff, 0 0 20px #ff9800;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 18px;
+        }
+
+        .guide-title::after {
+            content: ''; position: absolute;
+            bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 50%; height: 4px;
+            background: linear-gradient(90deg, #ff9800, #ff5733, #ff9800);
+            border-radius: 2px;
+        }
+
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        @media (max-width: 900px) {
+            .components-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .components-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+        }
+
+        .component-card {
+            background: white; border-radius: 18px;
+            padding: 20px 15px; text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+            border: 4px solid #eaeaea;
+            cursor: pointer; position: relative; overflow: hidden;
+        }
+
+        .component-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, #ff9800, #ff5733, #ff9800);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .component-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.3);
+            border-color: #ff9800;
+        }
+
+        .component-card:hover::before { transform: scaleX(1); }
+
+        .component-icon {
+            font-size: clamp(2em, 4vw, 3.5em);
+            margin: 10px 0; display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .component-card:hover .component-icon { transform: scale(1.15) rotate(5deg); }
+
+        .component-name {
+            font-size: clamp(1em, 2vw, 1.4em); font-weight: 900;
+            color: #2c3e50; margin-bottom: 8px;
+        }
+
+        .component-description {
+            font-size: clamp(0.8em, 1.3vw, 0.95em);
+            color: #555; font-weight: 600;
+            line-height: 1.4; margin-bottom: 12px;
+            min-height: 40px;
+        }
+
+        .component-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff9800 0%, #ff5733 100%);
+            color: white; padding: 6px 16px;
+            border-radius: 25px; font-size: clamp(0.75em, 1.3vw, 0.9em);
+            font-weight: 800; border: 2px solid white;
+            box-shadow: 0 3px 10px rgba(255,120,0,0.4);
+        }
+
+        /* ========== RESPONSIVE ESPECÍFICO PARA MÓVIL ========== */
+
+        /* El protoboard en móvil: scroll horizontal si es necesario */
+        .protoboard-wrapper {
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 20px;
+            touch-action: pan-x pan-y;
+        }
+
+        /* En pantallas pequeñas, el protoboard es más grande para que quepan los componentes */
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+
+            #protoboard-container {
+                min-height: 500px;
+                min-width: 650px; /* ancho mínimo para que los componentes quepan */
+            }
+
+            .protoboard-wrapper {
+                width: 100%;
+            }
+
+            .score-panel { flex-direction: column; }
+
+            .score-card { min-width: auto; padding: 14px; }
+
+            .mission-card { padding: 13px; }
+
+            .btn-game { padding: 14px 20px; }
+
+            .info-box, .warning-box { padding: 16px; }
+
+            .status-toast { right: 10px; top: 70px; }
+
+            .celebration-content {
+                padding: 25px 20px;
+                border-radius: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 8px; }
+
+            .game-header { padding: 18px 14px; border-radius: 18px; }
+
+            .panel { padding: 16px; border-radius: 18px; }
+
+            .component-guide { padding: 18px 12px; }
+
+            .score-card { padding: 12px; border-radius: 15px; }
+
+            .celebration-title { font-size: 1.3em; }
+
+            .celebration-text { font-size: 0.88em; }
+        }
+
+        /* Scrollbar del protoboard */
+        .protoboard-wrapper::-webkit-scrollbar { height: 8px; }
+        .protoboard-wrapper::-webkit-scrollbar-track { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        .protoboard-wrapper::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.5); border-radius: 10px; }
+
+        /* Hint de scroll en móvil */
+        .scroll-hint {
+            display: none;
+            text-align: center;
+            color: rgba(255,255,255,0.85);
+            font-size: 0.82em;
+            font-weight: 700;
+            padding: 8px;
+            background: rgba(0,0,0,0.2);
             border-radius: 10px;
-            border: 2px solid #e9ecef;
-        }
-
-        .modal-content::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 10px;
-            border: 2px solid #f8f9fa;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5);
-        }
-
-        .modal-content::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #764ba2, #667eea);
-            box-shadow: 0 2px 12px rgba(102, 126, 234, 0.7);
+            margin-bottom: 8px;
         }
 
         @media (max-width: 768px) {
-            .modal-content {
-                padding: 30px 20px;
-                max-height: 92vh;
-            }
-            .modal-title {
-                font-size: 1.8em;
-            }
-            .modal-symbol {
-                font-size: 4.2em;
-            }
-            .modal-section {
-                padding: 16px;
-            }
-            .color-code-table th,
-            .color-code-table td {
-                padding: 10px 12px;
-                font-size: 0.95em;
-            }
-            .modal-section h3 {
-                font-size: 1.3em;
-            }
-            .modal-section p, 
-            .modal-section li {
-                font-size: 1em;
-            }
+            .scroll-hint { display: block; }
+        }
+
+        /* Instrucción de toque en móvil */
+        .touch-instruction {
+            display: none;
+            background: rgba(255,215,0,0.2);
+            border: 2px solid rgba(255,215,0,0.5);
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 12px;
+            text-align: center;
+            font-size: 0.85em;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        @media (max-width: 900px) {
+            .touch-instruction { display: block; }
         }
     </style>
 </head>
 <body>
-    <!-- Partículas de fondo -->
     <div class="background-particles" id="bg-particles"></div>
     
-    <!-- NUEVA SECCIÓN: Guía de Componentes al Inicio - CORREGIDA Y CENTRADA -->
-    <div class="component-guide">
-        <h2 class="guide-title">Guía de Componentes Interactiva</h2>
-        <div class="components-grid">
-            <div class="component-card" onclick="showComponentInfo('battery')">
-                <div class="component-icon" style="color: #43e97b;">🔋</div>
-                <h3 class="component-name">Batería</h3>
-                <p class="component-description">Fuente de energía eléctrica que impulsa el circuito</p>
-                <span class="component-tag">9V</span>
-            </div>
-            
-            <div class="component-card" onclick="showComponentInfo('switch')">
-                <div class="component-icon" style="color: #e74c3c;">⚡</div>
-                <h3 class="component-name">Interruptor</h3>
-                <p class="component-description">Controla el flujo de corriente eléctrica</p>
-                <span class="component-tag">ON/OFF</span>
-            </div>
-            
-            <div class="component-card" onclick="showComponentInfo('resistor')">
-                <div class="component-icon" style="color: #ff9800; font-size: 3.5em; margin: 10px 0;">━━┯━━</div>
-                <h3 class="component-name">Resistencia</h3>
-                <p class="component-description">Protege el LED limitando la corriente</p>
-                <span class="component-tag">330Ω</span>
-            </div>
-            
-            <div class="component-card" onclick="showComponentInfo('led')">
-                <div class="component-icon" style="color: #ff6b6b;">💡</div>
-                <h3 class="component-name">LED</h3>
-                <p class="component-description">Emite luz cuando recibe corriente eléctrica</p>
-                <span class="component-tag">Rojo</span>
-            </div>
-        </div>
-    </div>
-    
     <div class="container">
+
+        <!-- ===== HEADER ARRIBA (antes era abajo) ===== -->
         <div class="game-header">
             <div class="game-title">⚡ CIRCUITO CON INTERRUPTOR ⚡</div>
             <div class="game-subtitle">🎯 Controla cuando encender y apagar el LED</div>
@@ -2008,6 +1162,7 @@
             </div>
         </div>
         
+        <!-- ===== SCORE PANEL ===== -->
         <div class="score-panel">
             <div class="score-card">
                 <div class="score-label">🔌 Cables Conectados</div>
@@ -2023,7 +1178,10 @@
             </div>
         </div>
         
+        <!-- ===== GAME GRID ===== -->
         <div class="game-grid">
+
+            <!-- Panel de misiones -->
             <div class="panel">
                 <div class="panel-title">🎯 TU MISIÓN</div>
                 
@@ -2048,11 +1206,11 @@
                 </div>
                 
                 <div class="warning-box">
-                    <div class="info-title">⚠️ INSTRUCCIONES IMPORTANTES</div>
+                    <div class="info-title">⚠️ INSTRUCCIONES</div>
                     <div class="info-text">
-                        <strong>🎯 Necesitas conectar exactamente 4 cables</strong> para completar el circuito.<br><br>
-                        <strong>⚡ El interruptor debe estar en ON</strong> para que el LED se encienda después de verificar.<br><br>
-                        <strong>💡 Recuerda:</strong> El LED solo funciona si se conecta con la polaridad correcta (pata larga al positivo).
+                        <strong>🎯 Necesitas conectar exactamente 4 cables.</strong><br><br>
+                        <strong>⚡ El interruptor debe estar en ON</strong> para que el LED se encienda.<br><br>
+                        <strong>💡 Recuerda:</strong> La pata larga del LED va al positivo.
                     </div>
                 </div>
                 
@@ -2060,128 +1218,173 @@
                 <button class="btn-game btn-danger" onclick="clearWires()">🔄 REINICIAR TODO</button>
             </div>
             
+            <!-- Panel del protoboard -->
             <div class="panel">
                 <div class="panel-title">🔧 ÁREA DE TRABAJO</div>
-                
-                <div id="protoboard-container">
-                    <svg id="wire-canvas"></svg>
-                    
-                    <!-- Batería con pines corregidos -->
-                    <div class="component battery">
-                        <div class="battery-pin battery-pin-positive"></div>
-                        <div class="connection-point" 
-                             data-component="battery" 
-                             data-terminal="positive"
-                             data-tooltip="+ Positivo Batería"
-                             style="top: -32px; left: 50%; transform: translateX(-50%);"></div>
+
+                <div class="touch-instruction">
+                    📱 Toca un punto dorado → luego toca otro para conectar un cable
+                </div>
+
+                <div class="scroll-hint">
+                    ↔️ Desliza horizontalmente para ver todos los componentes
+                </div>
+
+                <div class="protoboard-wrapper">
+                    <div id="protoboard-container">
+                        <svg id="wire-canvas"></svg>
                         
-                        <div class="battery-body">
-                            <div class="battery-label">9V</div>
-                            <div class="battery-sign battery-sign-positive">+</div>
-                            <div class="battery-sign battery-sign-negative">−</div>
+                        <!-- Batería -->
+                        <div class="component battery" id="comp-battery" style="position:absolute; left:55px; top:calc(50% - 65px);">
+                            <div class="battery-pin battery-pin-positive"></div>
+                            <div class="connection-point" 
+                                 data-component="battery" 
+                                 data-terminal="positive"
+                                 data-tooltip="+ Positivo Batería"
+                                 style="top:-28px; left:50%; transform:translateX(-50%);"></div>
+                            
+                            <div class="battery-body">
+                                <div class="battery-label">9V</div>
+                                <div class="battery-sign battery-sign-positive">+</div>
+                                <div class="battery-sign battery-sign-negative">−</div>
+                            </div>
+                            
+                            <div class="connection-point" 
+                                 data-component="battery" 
+                                 data-terminal="negative"
+                                 data-tooltip="− Negativo Batería"
+                                 style="bottom:-28px; left:50%; transform:translateX(-50%);"></div>
+                            <div class="battery-pin battery-pin-negative"></div>
                         </div>
-                        
-                        <div class="connection-point" 
-                             data-component="battery" 
-                             data-terminal="negative"
-                             data-tooltip="− Negativo Batería"
-                             style="bottom: -32px; left: 50%; transform: translateX(-50%);"></div>
-                        <div class="battery-pin battery-pin-negative"></div>
-                    </div>
 
-                    <!-- Interruptor -->
-                    <div class="component switch">
-                        <div class="connection-point" 
-                             data-component="switch" 
-                             data-terminal="in"
-                             data-tooltip="Entrada Interruptor"
-                             style="top: 50%; left: -25px; transform: translateY(-50%);"></div>
-                        
-                        <div class="switch-body">
-                            <div class="switch-toggle" onclick="toggleSwitch(event)">OFF</div>
+                        <!-- Interruptor -->
+                        <div class="component switch" id="comp-switch" style="position:absolute; left:200px; top:calc(50% - 35px);">
+                            <div class="connection-point" 
+                                 data-component="switch" 
+                                 data-terminal="in"
+                                 data-tooltip="Entrada Interruptor"
+                                 style="top:50%; left:-22px; transform:translateY(-50%);"></div>
+                            
+                            <div class="switch-body">
+                                <div class="switch-toggle" onclick="toggleSwitch(event)">OFF</div>
+                            </div>
+                            <div class="switch-label">APAGADO</div>
+                            
+                            <div class="connection-point" 
+                                 data-component="switch" 
+                                 data-terminal="out"
+                                 data-tooltip="Salida Interruptor"
+                                 style="top:50%; right:-22px; transform:translateY(-50%);"></div>
                         </div>
-                        <div class="switch-label">APAGADO</div>
-                        
-                        <div class="connection-point" 
-                             data-component="switch" 
-                             data-terminal="out"
-                             data-tooltip="Salida Interruptor"
-                             style="top: 50%; right: -25px; transform: translateY(-50%);"></div>
-                    </div>
 
-                    <!-- Resistencia -->
-                    <div class="component resistor">
-                        <div class="connection-point" 
-                             data-component="resistor" 
-                             data-terminal="left"
-                             data-tooltip="Lado Izquierdo Resistencia"
-                             style="top: 50%; left: -25px; transform: translateY(-50%);"></div>
-                        
-                        <div class="resistor-body"></div>
-                        <div class="resistor-label">330Ω</div>
-                        
-                        <div class="connection-point" 
-                             data-component="resistor" 
-                             data-terminal="right"
-                             data-tooltip="Lado Derecho Resistencia"
-                             style="top: 50%; right: -25px; transform: translateY(-50%);"></div>
-                    </div>
+                        <!-- Resistencia -->
+                        <div class="component resistor" id="comp-resistor" style="position:absolute; left:370px; top:calc(50% - 20px);">
+                            <div class="connection-point" 
+                                 data-component="resistor" 
+                                 data-terminal="left"
+                                 data-tooltip="Lado Izquierdo Resistencia"
+                                 style="top:50%; left:-22px; transform:translateY(-50%);"></div>
+                            
+                            <div class="resistor-body"></div>
+                            <div class="resistor-label">330Ω</div>
+                            
+                            <div class="connection-point" 
+                                 data-component="resistor" 
+                                 data-terminal="right"
+                                 data-tooltip="Lado Derecho Resistencia"
+                                 style="top:50%; right:-22px; transform:translateY(-50%);"></div>
+                        </div>
 
-                    <!-- LED con patas corregidas -->
-                    <div class="component led">
-                        <!-- Pata larga (positivo) - IZQUIERDA -->
-                        <div class="led-pin led-pin-long"></div>
-                        <div class="led-sign led-sign-positive">+</div>
-                        <div class="connection-point" 
-                             data-component="led" 
-                             data-terminal="positive"
-                             data-tooltip="+ Positivo LED (pata larga)"
-                             style="top: -35px; left: 22px;"></div>
-                        
-                        <div class="led-body"></div>
-                        
-                        <!-- Pata corta (negativo) - DERECHA -->
-                        <div class="connection-point" 
-                             data-component="led" 
-                             data-terminal="negative"
-                             data-tooltip="− Negativo LED (pata corta)"
-                             style="bottom: -25px; right: 22px;"></div>
-                        <div class="led-sign led-sign-negative">−</div>
-                        <div class="led-pin led-pin-short"></div>
+                        <!-- LED -->
+                        <div class="component led" id="comp-led" style="position:absolute; left:540px; top:calc(50% - 35px);">
+                            <div class="led-pin led-pin-long"></div>
+                            <div class="led-sign led-sign-positive">+</div>
+                            <div class="connection-point" 
+                                 data-component="led" 
+                                 data-terminal="positive"
+                                 data-tooltip="+ Positivo LED (pata larga)"
+                                 style="top:-30px; left:16px;"></div>
+                            
+                            <div class="led-body"></div>
+                            
+                            <div class="connection-point" 
+                                 data-component="led" 
+                                 data-terminal="negative"
+                                 data-tooltip="− Negativo LED (pata corta)"
+                                 style="bottom:-22px; right:16px;"></div>
+                            <div class="led-sign led-sign-negative">−</div>
+                            <div class="led-pin led-pin-short"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
+        <!-- ===== INFO BOX ===== -->
         <div class="info-box">
             <div class="info-title">🔍 ¿CÓMO FUNCIONA EL CIRCUITO?</div>
             <div class="info-text">
-                El <strong>interruptor</strong> actúa como una puerta para la electricidad. Cuando está <strong>ENCENDIDO (ON)</strong>, permite que la corriente fluya desde la batería, a través de la resistencia y finalmente al LED, haciéndolo brillar. Cuando está <strong>APAGADO (OFF)</strong>, bloquea el flujo de corriente y el LED se apaga.<br><br>
-                
-                La <strong>resistencia</strong> es crucial porque limita la cantidad de corriente que llega al LED, protegiéndolo de quemarse. Sin ella, el LED recibiría demasiada energía y se dañaría instantáneamente.<br><br>
-                
-                El <strong>LED</strong> tiene polaridad, lo que significa que solo funciona si se conecta en la dirección correcta: la pata larga (+) debe ir hacia el lado positivo del circuito y la pata corta (-) hacia el negativo.
+                El <strong>interruptor</strong> actúa como una puerta para la electricidad. Cuando está <strong>ENCENDIDO (ON)</strong>, permite que la corriente fluya desde la batería, a través de la resistencia y finalmente al LED. Cuando está <strong>APAGADO (OFF)</strong>, bloquea el flujo y el LED se apaga.<br><br>
+                La <strong>resistencia</strong> limita la corriente al LED, protegiéndolo de quemarse. El <strong>LED</strong> tiene polaridad: la pata larga (+) al positivo y la corta (−) al negativo.
             </div>
         </div>
-    </div>
+
+        <!-- ===== GUÍA DE COMPONENTES ABAJO (antes era arriba) ===== -->
+        <div class="component-guide">
+            <h2 class="guide-title">Guía de Componentes Interactiva</h2>
+            <div class="components-grid">
+                <div class="component-card" onclick="showComponentInfo('battery')">
+                    <span class="component-icon" style="color:#43e97b;">🔋</span>
+                    <h3 class="component-name">Batería</h3>
+                    <p class="component-description">Fuente de energía eléctrica que impulsa el circuito</p>
+                    <span class="component-tag">9V</span>
+                </div>
+                
+                <div class="component-card" onclick="showComponentInfo('switch')">
+                    <span class="component-icon" style="color:#e74c3c;">⚡</span>
+                    <h3 class="component-name">Interruptor</h3>
+                    <p class="component-description">Controla el flujo de corriente eléctrica</p>
+                    <span class="component-tag">ON/OFF</span>
+                </div>
+                
+                <div class="component-card" onclick="showComponentInfo('resistor')">
+                    <span class="component-icon" style="color:#ff9800; font-size:2.5em; margin:8px 0;">━━┯━━</span>
+                    <h3 class="component-name">Resistencia</h3>
+                    <p class="component-description">Protege el LED limitando la corriente</p>
+                    <span class="component-tag">330Ω</span>
+                </div>
+                
+                <div class="component-card" onclick="showComponentInfo('led')">
+                    <span class="component-icon" style="color:#ff6b6b;">💡</span>
+                    <h3 class="component-name">LED</h3>
+                    <p class="component-description">Emite luz cuando recibe corriente eléctrica</p>
+                    <span class="component-tag">Rojo</span>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /container -->
     
+    <!-- TOAST -->
     <div class="status-toast" id="status-toast"></div>
     
+    <!-- CELEBRATION - ARREGLADO: no tapa toda la pantalla, con botón X -->
     <div class="celebration-overlay" id="celebration">
         <div class="celebration-content">
-            <div class="celebration-emoji">🎉💡✨🎊</div>
-            <div class="celebration-title">¡MISIÓN CUMPLIDA!</div>
+            <button class="celebration-close-x" onclick="closeCelebration()" title="Cerrar">✕</button>
+            <span class="celebration-emoji">🎉💡✨🎊</span>
+            <div class="celebration-title">¡MISIÓN<br>CUMPLIDA!</div>
             <div class="celebration-text">
                 🌟 ¡Excelente trabajo, futuro ingeniero! 🌟<br><br>
                 Has completado correctamente el circuito eléctrico.<br><br>
-                Ahora haz clic en el <strong>interruptor</strong> para encender el LED y ver tu creación en acción.<br><br>
-                💡 <strong>¡La electrónica es increíble cuando la entiendes!</strong> 💡
+                Ahora haz clic en el <strong>interruptor</strong> para encender el LED.<br><br>
+                💡 <strong>¡La electrónica es increíble!</strong> 💡
             </div>
             <button class="btn-game" onclick="closeCelebration()">🚀 CONTINUAR APRENDIENDO</button>
         </div>
     </div>
     
-    <!-- Modal de información educativa de componentes -->
+    <!-- MODAL EDUCATIVO -->
     <div class="info-modal" id="info-modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">×</button>
@@ -2190,6 +1393,9 @@
     </div>
 
     <script>
+        // ============================================================
+        // VARIABLES GLOBALES
+        // ============================================================
         let wires = [];
         let selectedPoint = null;
         let wireColors = ['#ff4757', '#4ecdc4', '#45b7d1', '#f9ca24'];
@@ -2200,292 +1406,113 @@
         let draggedElement = null;
         let offsetX, offsetY;
         let isDragging = false;
-        let touchIdentifier = null;
-        
-        // Información educativa completa de componentes
+        let touchId = null;
+
+        // ============================================================
+        // DATOS EDUCATIVOS DE COMPONENTES
+        // ============================================================
         const componentInfo = {
             battery: {
                 title: '🔋 Batería - Fuente de Energía Eléctrica',
                 symbol: '🔋',
                 sections: [
-                    {
-                        title: '¿Qué es una Batería?',
-                        content: 'Una batería es un dispositivo que almacena <strong>energía química</strong> y la convierte en <strong>energía eléctrica</strong>. Es como el corazón del circuito que bombea electricidad a través de los componentes.'
-                    },
-                    {
-                        title: '¿Cómo Funciona?',
-                        content: 'Una batería tiene dos terminales:',
-                        list: [
-                            '<strong>Terminal Positivo (+):</strong> Generalmente marcado en rojo. Es de donde "sale" la corriente eléctrica hacia el circuito.',
-                            '<strong>Terminal Negativo (−):</strong> Generalmente marcado en negro. Es a donde "regresa" la corriente después de pasar por el circuito.',
-                            '<strong>Voltaje (9V):</strong> Mide la "fuerza" con la que la batería empuja los electrones. Mientras más voltios, más fuerte es el empuje.',
-                            'Los electrones fluyen desde el polo negativo hacia el positivo, creando la corriente eléctrica.'
-                        ]
-                    },
-                    {
-                        title: 'Símbolo en Circuitos Eléctricos',
-                        content: 'En los diagramas de circuitos, la batería se representa con dos líneas paralelas: una línea larga representa el terminal positivo (+) y una corta representa el negativo (−).',
-                        svg: '<svg class="circuit-symbol-svg" viewBox="0 0 100 60"><line x1="10" y1="30" x2="35" y2="30" stroke="#333" stroke-width="3"/><line x1="35" y1="15" x2="35" y2="45" stroke="#c0392b" stroke-width="5"/><line x1="45" y1="20" x2="45" y2="40" stroke="#333" stroke-width="3"/><line x1="55" y1="15" x2="55" y2="45" stroke="#c0392b" stroke-width="5"/><line x1="65" y1="20" x2="65" y2="40" stroke="#333" stroke-width="3"/><line x1="65" y1="30" x2="90" y2="30" stroke="#333" stroke-width="3"/><text x="35" y="12" font-size="14" font-weight="bold" fill="#c0392b" text-anchor="middle">+</text><text x="65" y="58" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">−</text></svg>'
-                    },
-                    {
-                        title: 'Tipos de Baterías',
-                        content: 'Existen muchos tipos de baterías:',
-                        list: [
-                            '<strong>Alcalinas (AA, AAA, 9V):</strong> Las más comunes para juguetes y dispositivos.',
-                            '<strong>Recargables (NiMH, Li-ion):</strong> Se pueden recargar miles de veces.',
-                            '<strong>De Litio:</strong> Muy potentes, usadas en celulares y laptops.',
-                            '<strong>De Coche:</strong> Grandes y potentes, para arrancar motores.'
-                        ]
-                    },
-                    {
-                        title: '⚠️ Reglas de Seguridad',
-                        content: '<strong>¡MUY IMPORTANTE!</strong> Nunca conectes directamente los dos polos de una batería sin componentes en medio. Esto crea un "cortocircuito" y la batería se puede calentar muchísimo, dañarse o incluso explotar.'
-                    }
+                    { title: '¿Qué es una Batería?', content: 'Una batería almacena <strong>energía química</strong> y la convierte en <strong>energía eléctrica</strong>. Es el corazón del circuito.' },
+                    { title: '¿Cómo Funciona?', content: 'Tiene dos terminales:', list: ['<strong>Terminal Positivo (+):</strong> Marcado en rojo. De aquí "sale" la corriente.','<strong>Terminal Negativo (−):</strong> Marcado en negro. Aquí "regresa" la corriente.','<strong>Voltaje (9V):</strong> Mide la "fuerza" con la que empuja los electrones.','Los electrones fluyen del negativo al positivo.'] },
+                    { title: 'Símbolo en Circuitos', content: 'Se representa con líneas largas (+) y cortas (−) alternadas.', svg: '<svg class="circuit-symbol-svg" viewBox="0 0 100 60"><line x1="10" y1="30" x2="35" y2="30" stroke="#333" stroke-width="3"/><line x1="35" y1="15" x2="35" y2="45" stroke="#c0392b" stroke-width="5"/><line x1="45" y1="20" x2="45" y2="40" stroke="#333" stroke-width="3"/><line x1="55" y1="15" x2="55" y2="45" stroke="#c0392b" stroke-width="5"/><line x1="65" y1="20" x2="65" y2="40" stroke="#333" stroke-width="3"/><line x1="65" y1="30" x2="90" y2="30" stroke="#333" stroke-width="3"/><text x="35" y="12" font-size="14" font-weight="bold" fill="#c0392b" text-anchor="middle">+</text><text x="65" y="58" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">−</text></svg>' },
+                    { title: 'Tipos de Baterías', content: 'Existen muchos tipos:', list: ['<strong>Alcalinas (AA, AAA, 9V):</strong> Las más comunes.','<strong>Recargables (Li-ion):</strong> Para celulares y laptops.','<strong>De Litio:</strong> Muy potentes y duraderas.'] },
+                    { title: '⚠️ Reglas de Seguridad', content: '<strong>¡Nunca conectes los dos polos directamente!</strong> Esto crea un cortocircuito que puede calentar o dañar la batería.' }
                 ]
             },
             switch: {
                 title: '⚡ Interruptor - La Puerta de la Electricidad',
                 symbol: '⚡',
                 sections: [
-                    {
-                        title: '¿Qué es un Interruptor?',
-                        content: 'Un interruptor es como una <strong>puerta</strong> para la electricidad. Puede estar abierto (OFF) permitiendo que NO pase corriente, o cerrado (ON) permitiendo que SÍ pase la corriente.'
-                    },
-                    {
-                        title: '¿Cómo Funciona?',
-                        content: 'Un interruptor tiene dos estados principales:',
-                        list: [
-                            '<strong>OFF - Abierto:</strong> El circuito está interrumpido, la corriente NO puede pasar. Es como tener la puerta cerrada.',
-                            '<strong>ON - Cerrado:</strong> El circuito está completo, la corriente SÍ puede pasar libremente. Es como tener la puerta abierta.',
-                            'Es exactamente igual al interruptor de la luz que tienes en tu casa: cuando lo presionas, permites o bloqueas el paso de electricidad.',
-                            'Tiene dos terminales: una entrada y una salida de corriente.'
-                        ]
-                    },
-                    {
-                        title: 'Tipos Comunes de Interruptores',
-                        content: 'Hay muchos tipos de interruptores según su función:',
-                        list: [
-                            '<strong>Pulsador:</strong> Solo funciona mientras lo mantienes presionado (como el timbre de una casa).',
-                            '<strong>De Palanca:</strong> Se queda en la posición hasta que lo cambies (como este del circuito).',
-                            '<strong>Deslizante:</strong> Se desliza de un lado a otro para encender/apagar.',
-                            '<strong>Rotatorio:</strong> Se gira para cambiar de posición.',
-                            '<strong>Táctil:</strong> Se activa solo tocándolo (como las pantallas de los celulares).'
-                        ]
-                    },
-                    {
-                        title: 'Símbolo en Circuitos',
-                        content: 'Se representa con una línea que se puede "abrir" o "cerrar":',
-                        svg: '<svg class="circuit-symbol-svg" viewBox="0 0 110 70"><line x1="10" y1="35" x2="35" y2="35" stroke="#333" stroke-width="4"/><circle cx="35" cy="35" r="5" fill="#333"/><line x1="35" y1="35" x2="70" y2="20" stroke="#e74c3c" stroke-width="4"/><circle cx="75" cy="35" r="5" fill="#333"/><line x1="75" y1="35" x2="100" y2="35" stroke="#333" stroke-width="4"/><text x="55" y="60" font-size="11" font-weight="bold" fill="#666" text-anchor="middle">Interruptor Abierto (OFF)</text></svg>'
-                    },
-                    {
-                        title: '🎓 Dato Curioso',
-                        content: 'Los interruptores modernos pueden encender y apagar la corriente miles de veces sin desgastarse. ¡Algunos pueden durar más de 100,000 accionamientos!'
-                    }
+                    { title: '¿Qué es un Interruptor?', content: 'Es como una <strong>puerta</strong> para la electricidad. Abierto (OFF) = no pasa corriente. Cerrado (ON) = sí pasa.' },
+                    { title: '¿Cómo Funciona?', content: 'Dos estados principales:', list: ['<strong>OFF - Abierto:</strong> El circuito está interrumpido.','<strong>ON - Cerrado:</strong> El circuito está completo.','Igual al interruptor de luz en tu casa.'] },
+                    { title: 'Tipos Comunes', content: 'Hay varios tipos:', list: ['<strong>Pulsador:</strong> Solo funciona mientras lo presionas.','<strong>De Palanca:</strong> Se queda en posición (como este).','<strong>Deslizante:</strong> Se desliza de lado a lado.','<strong>Táctil:</strong> Solo con tocarlo.'] },
+                    { title: 'Símbolo en Circuitos', content: 'Una línea que puede "abrirse" o "cerrarse":',svg: '<svg class="circuit-symbol-svg" viewBox="0 0 110 70"><line x1="10" y1="35" x2="35" y2="35" stroke="#333" stroke-width="4"/><circle cx="35" cy="35" r="5" fill="#333"/><line x1="35" y1="35" x2="70" y2="20" stroke="#e74c3c" stroke-width="4"/><circle cx="75" cy="35" r="5" fill="#333"/><line x1="75" y1="35" x2="100" y2="35" stroke="#333" stroke-width="4"/><text x="55" y="60" font-size="10" font-weight="bold" fill="#666" text-anchor="middle">Interruptor Abierto (OFF)</text></svg>' }
                 ]
             },
             resistor: {
                 title: '━━┯━━ Resistencia - El Protector del Circuito',
                 symbol: '━━┯━━',
                 sections: [
-                    {
-                        title: '¿Qué es una Resistencia?',
-                        content: 'Una resistencia es un componente electrónico que <strong>dificulta el paso de la corriente eléctrica</strong>. Imagina que la electricidad es agua fluyendo por una tubería: la resistencia sería como hacer la tubería más estrecha para reducir el flujo.'
-                    },
-                    {
-                        title: '¿Para qué Sirve en Este Circuito?',
-                        content: 'En nuestro circuito, la resistencia tiene una función crucial:',
-                        list: [
-                            'Protege al LED de recibir demasiada corriente y <strong>quemarse</strong>.',
-                            'Sin la resistencia, el LED recibiría 9V directos y se dañaría en segundos.',
-                            'Reduce la cantidad de corriente que fluye hacia el LED a un nivel seguro.',
-                            'La resistencia "sacrifica" parte de la energía convirtiéndola en calor (por eso se calientan un poco).'
-                        ]
-                    },
-                    {
-                        title: 'Medición: Ohmios (Ω)',
-                        content: 'Las resistencias se miden en <strong>Ohmios (Ω)</strong>:',
-                        list: [
-                            'Esta resistencia es de <strong>330Ω</strong> (330 ohmios).',
-                            'Mientras más ohmios, más dificulta el paso de corriente.',
-                            'Las resistencias vienen en valores estándar: 100Ω, 220Ω, 330Ω, 1KΩ (1000Ω), etc.'
-                        ]
-                    },
-                    {
-                        title: '🎨 Código de Colores de Resistencias',
-                        content: 'Las resistencias usan <strong>bandas de colores</strong> para indicar su valor. Aquí está la tabla completa:',
-                        table: `
-                            <table class="color-code-table">
-                                <thead>
-                                    <tr>
-                                        <th>Color</th>
-                                        <th>Dígito</th>
-                                        <th>Multiplicador</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td><span class="color-sample" style="background: #000;"></span>Negro</td><td>0</td><td>×1</td></tr>
-                                    <tr><td><span class="color-sample" style="background: #8B4513;"></span>Café/Marrón</td><td>1</td><td>×10</td></tr>
-                                    <tr><td><span class="color-sample" style="background: #FF0000;"></span>Rojo</td><td>2</td><td>×100</td></tr>
-                                    <tr><td><span class="color-sample" style="background: #FFA500;"></span>Naranja</td><td>3</td><td>×1,000 (1K)</td></tr>
-                                    <tr><td><span class="color-sample" style="background: #FFFF00;"></span>Amarillo</td><td>4</td><td>×10,000 (10K)</td></tr>
-                                    <tr><td><span class="color-sample" style="background: #00FF00;"></span>Verde</td><td>5</td><td>×100,000 (100K)</td></tr>
-                                    <tr><td><span class="color-sample" style="background: #0000FF;"></span>Azul</td><td>6</td><td>×1,000,000 (1M)</td></tr>
-                                    <tr><td><span class="color-sample" style="background: #9400D3;"></span>Violeta</td><td>7</td><td>-</td></tr>
-                                    <tr><td><span class="color-sample" style="background: #808080;"></span>Gris</td><td>8</td><td>-</td></tr>
-                                    <tr><td><span class="color-sample" style="background: #FFF; border-color: #000;"></span>Blanco</td><td>9</td><td>-</td></tr>
-                                </tbody>
-                            </table>
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 15px; margin-top: 15px; border: 2px solid #e9ecef;">
-                                <p style="margin: 10px 0; font-size: 1.1em; font-weight: 700;"><strong>📌 Ejemplo de lectura:</strong></p>
-                                <p style="margin: 8px 0; font-size: 1.05em;">Nuestra resistencia de 330Ω tiene:</p>
-                                <p style="margin: 8px 0; font-size: 1.05em;">• <strong>Banda 1 (Naranja):</strong> 3</p>
-                                <p style="margin: 8px 0; font-size: 1.05em;">• <strong>Banda 2 (Naranja):</strong> 3</p>
-                                <p style="margin: 8px 0; font-size: 1.05em;">• <strong>Banda 3 (Café):</strong> ×10</p>
-                                <p style="margin: 12px 0; font-size: 1.2em; font-weight: 800; color: #2ecc71;"><strong>Resultado:</strong> 33 × 10 = <strong>330Ω</strong></p>
-                            </div>
-                        `
-                    },
-                    {
-                        title: 'Símbolo en Circuitos',
-                        content: 'Se representa con un zigzag o un rectángulo:',
-                        svg: '<svg class="circuit-symbol-svg" viewBox="0 0 140 70"><line x1="10" y1="35" x2="30" y2="35" stroke="#333" stroke-width="4"/><rect x="30" y="22" width="80" height="26" fill="none" stroke="#ff9800" stroke-width="4" rx="4"/><line x1="110" y1="35" x2="130" y2="35" stroke="#333" stroke-width="4"/><text x="70" y="60" font-size="11" font-weight="bold" fill="#666" text-anchor="middle">Resistencia 330Ω</text></svg>'
-                    },
-                    {
-                        title: '🎓 ¿Sabías que...?',
-                        content: 'Las resistencias son uno de los componentes más simples pero más importantes de la electrónica. Prácticamente TODOS los circuitos electrónicos tienen resistencias. ¡Tu celular tiene cientos de ellas!'
-                    }
+                    { title: '¿Qué es una Resistencia?', content: 'Dificulta el paso de la corriente eléctrica. Como estrechar una tubería para reducir el flujo de agua.' },
+                    { title: '¿Para qué Sirve?', content: 'En este circuito:', list: ['Protege al LED de recibir demasiada corriente.','Sin ella, el LED se quemaría en segundos.','Convierte el exceso de energía en calor.'] },
+                    { title: 'Medición: Ohmios (Ω)', content: 'Se mide en <strong>Ohmios (Ω)</strong>. Esta resistencia es de <strong>330Ω</strong>. Más ohmios = más dificulta la corriente.' },
+                    { title: '🎨 Código de Colores', content: 'Las bandas de colores indican el valor:', table: `<table class="color-code-table"><thead><tr><th>Color</th><th>Dígito</th><th>Multiplicador</th></tr></thead><tbody><tr><td><span class="color-sample" style="background:#000;"></span>Negro</td><td>0</td><td>×1</td></tr><tr><td><span class="color-sample" style="background:#8B4513;"></span>Café</td><td>1</td><td>×10</td></tr><tr><td><span class="color-sample" style="background:#FF0000;"></span>Rojo</td><td>2</td><td>×100</td></tr><tr><td><span class="color-sample" style="background:#FFA500;"></span>Naranja</td><td>3</td><td>×1K</td></tr><tr><td><span class="color-sample" style="background:#FFFF00;"></span>Amarillo</td><td>4</td><td>×10K</td></tr><tr><td><span class="color-sample" style="background:#00FF00;"></span>Verde</td><td>5</td><td>×100K</td></tr></tbody></table><div style="background:#f8f9fa;padding:14px;border-radius:12px;margin-top:12px;border:2px solid #e9ecef;"><p style="font-weight:800;">📌 330Ω = Naranja(3) + Naranja(3) + Café(×10) = 33×10 = 330Ω</p></div>` },
+                    { title: '🎓 ¿Sabías que...?', content: '¡Tu celular tiene cientos de resistencias! Son uno de los componentes más utilizados en toda la electrónica.' }
                 ]
             },
             led: {
                 title: '💡 LED - Luz del Futuro',
                 symbol: '💡',
                 sections: [
-                    {
-                        title: '¿Qué Significa LED?',
-                        content: '<strong>LED</strong> significa <em>"Light Emitting Diode"</em> en inglés, que se traduce como <strong>"Diodo Emisor de Luz"</strong>. Es un componente electrónico que convierte electricidad en luz de manera muy eficiente, consumiendo mucha menos energía que las bombillas tradicionales.'
-                    },
-                    {
-                        title: '¿Cómo Funciona un LED?',
-                        content: 'El LED tiene características especiales:',
-                        list: [
-                            '<strong>Polaridad:</strong> El LED solo funciona si se conecta en la dirección correcta (tiene polaridad).',
-                            '<strong>Pata Larga (+) - ÁNODO:</strong> Esta es la pata positiva, se conecta hacia el lado positivo del circuito.',
-                            '<strong>Pata Corta (−) - CÁTODO:</strong> Esta es la pata negativa, se conecta hacia el lado negativo del circuito.',
-                            'Si lo conectas al revés, simplemente NO funcionará (pero no se daña).',
-                            'Cuando la corriente pasa en la dirección correcta, el LED emite luz.',
-                            'Consume MUY poca energía comparado con bombillas incandescentes.'
-                        ]
-                    },
-                    {
-                        title: '🌈 Colores y Tipos de LED',
-                        content: 'Los LEDs vienen en muchos colores y cada uno tiene características diferentes:',
-                        list: [
-                            '<strong>LED Rojo:</strong> El más común y económico. Voltaje de funcionamiento ≈ 1.8-2.2V',
-                            '<strong>LED Verde/Amarillo:</strong> Colores estándar. Voltaje ≈ 2.0-2.5V',
-                            '<strong>LED Azul/Blanco:</strong> Más modernos. Voltaje más alto ≈ 3.0-3.5V',
-                            '<strong>LED RGB:</strong> Puede cambiar de color porque tiene 3 LEDs internos (Rojo, Verde, Azul)',
-                            '<strong>LED Infrarrojo:</strong> Emite luz invisible, usado en controles remotos de TV',
-                            '<strong>LED Ultravioleta (UV):</strong> También invisible, usado para detectar billetes falsos'
-                        ]
-                    },
-                    {
-                        title: '⚠️ ¡MUY IMPORTANTE!',
-                        content: 'Un LED <strong>SIEMPRE necesita una resistencia</strong> para protegerse. Sin resistencia:',
-                        list: [
-                            'El LED recibiría demasiada corriente de la batería.',
-                            'Se calentaría muchísimo en segundos.',
-                            'Se quemaría y dejaría de funcionar permanentemente.',
-                            'La resistencia limita la corriente a un nivel seguro (generalmente 10-20mA).'
-                        ]
-                    },
-                    {
-                        title: 'Símbolo en Circuitos',
-                        content: 'Se representa como un triángulo con una línea y flechas que simbolizan luz:',
-                        svg: '<svg class="circuit-symbol-svg" viewBox="0 0 130 90"><line x1="10" y1="45" x2="40" y2="45" stroke="#333" stroke-width="4"/><polygon points="40,28 40,62 75,45" fill="none" stroke="#ff6b6b" stroke-width="4"/><line x1="75" y1="28" x2="75" y2="62" stroke="#ff6b6b" stroke-width="4"/><line x1="75" y1="45" x2="105" y2="45" stroke="#333" stroke-width="4"/><polyline points="65,18 72,10 70,10 72,5" fill="none" stroke="#ffed4e" stroke-width="3" stroke-linecap="round"/><polyline points="75,18 82,10 80,10 82,5" fill="none" stroke="#ffed4e" stroke-width="3" stroke-linecap="round"/><text x="40" y="82" font-size="12" font-weight="bold" fill="#c0392b" text-anchor="middle">+ ÁNODO</text><text x="75" y="82" font-size="12" font-weight="bold" fill="#333" text-anchor="middle">− CÁTODO</text></svg>'
-                    },
-                    {
-                        title: 'Ventajas de los LEDs',
-                        content: 'Los LEDs han revolucionado la iluminación por estas razones:',
-                        list: [
-                            '<strong>Eficiencia:</strong> Convierten casi toda la energía en luz, no en calor.',
-                            '<strong>Duración:</strong> Pueden durar más de 50,000 horas (¡más de 5 años encendidos continuamente!)',
-                            '<strong>Tamaño:</strong> Son muy pequeños y compactos.',
-                            '<strong>Ecológicos:</strong> No contienen mercurio ni materiales tóxicos.',
-                            '<strong>Resistentes:</strong> No tienen filamentos que se puedan romper.',
-                            '<strong>Económicos:</strong> Aunque cuestan más, ahorran mucha electricidad a largo plazo.'
-                        ]
-                    },
-                    {
-                        title: '🎓 Historia y Datos Curiosos',
-                        content: 'El primer LED fue inventado en 1962 por Nick Holonyak Jr. Originalmente solo había LEDs rojos. Los LEDs azules (inventados en 1990) fueron tan importantes que sus creadores ganaron el Premio Nobel de Física en 2014. ¡Hoy en día los LEDs están en todas partes: pantallas, semáforos, lámparas, celulares y hasta en los autos!'
-                    }
+                    { title: '¿Qué Significa LED?', content: '<strong>LED</strong> = <em>Light Emitting Diode</em> = <strong>Diodo Emisor de Luz</strong>. Convierte electricidad en luz de forma muy eficiente.' },
+                    { title: '¿Cómo Funciona?', content: 'Características clave:', list: ['<strong>Pata Larga (+) ÁNODO:</strong> Terminal positiva.','<strong>Pata Corta (−) CÁTODO:</strong> Terminal negativa.','Si lo conectas al revés NO funcionará (pero no se daña).','Solo consume una fracción de la energía de una bombilla normal.'] },
+                    { title: '🌈 Colores y Tipos', content: 'Existen muchos colores:', list: ['<strong>Rojo:</strong> El más común. ≈ 1.8-2.2V','<strong>Verde/Amarillo:</strong> ≈ 2.0-2.5V','<strong>Azul/Blanco:</strong> ≈ 3.0-3.5V','<strong>RGB:</strong> Puede cambiar de color (3 LEDs internos)','<strong>Infrarrojo:</strong> Invisible, usado en controles remotos'] },
+                    { title: '⚠️ IMPORTANTE', content: 'Un LED <strong>SIEMPRE necesita una resistencia</strong>. Sin ella recibiría demasiada corriente y se quemaría de inmediato.' },
+                    { title: 'Símbolo en Circuitos', content: 'Triángulo con una línea y flechas de luz:', svg: '<svg class="circuit-symbol-svg" viewBox="0 0 130 90"><line x1="10" y1="45" x2="40" y2="45" stroke="#333" stroke-width="4"/><polygon points="40,28 40,62 75,45" fill="none" stroke="#ff6b6b" stroke-width="4"/><line x1="75" y1="28" x2="75" y2="62" stroke="#ff6b6b" stroke-width="4"/><line x1="75" y1="45" x2="105" y2="45" stroke="#333" stroke-width="4"/><polyline points="65,18 72,10 70,10 72,5" fill="none" stroke="#ffed4e" stroke-width="3" stroke-linecap="round"/><polyline points="75,18 82,10 80,10 82,5" fill="none" stroke="#ffed4e" stroke-width="3" stroke-linecap="round"/><text x="40" y="82" font-size="12" font-weight="bold" fill="#c0392b" text-anchor="middle">+ ÁNODO</text><text x="75" y="82" font-size="12" font-weight="bold" fill="#333" text-anchor="middle">− CÁTODO</text></svg>' },
+                    { title: '🎓 Historia', content: 'El primer LED fue inventado en 1962. Los LEDs azules (1990) fueron tan revolucionarios que sus creadores ganaron el Premio Nobel de Física en 2014.' }
                 ]
             }
         };
 
-        // Sistema de partículas de fondo
+        // ============================================================
+        // PARTÍCULAS DE FONDO
+        // ============================================================
         function createBackgroundParticles() {
             const container = document.getElementById('bg-particles');
-            const particleCount = 25;
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.width = Math.random() * 12 + 6 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                particle.style.opacity = Math.random() * 0.6 + 0.2;
-                container.appendChild(particle);
+            for (let i = 0; i < 20; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.width = (Math.random() * 12 + 6) + 'px';
+                p.style.height = p.style.width;
+                p.style.left = Math.random() * 100 + '%';
+                p.style.top = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 15 + 's';
+                p.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                p.style.opacity = Math.random() * 0.5 + 0.2;
+                container.appendChild(p);
             }
         }
 
-        // Crear confeti cuando se complete el circuito
+        // ============================================================
+        // CONFETTI
+        // ============================================================
         function createConfetti() {
-            const colors = ['#ff0080', '#ff8c00', '#40e0d0', '#f0f', '#0ff', '#ff0', '#9400d3', '#ff1493'];
-            const confettiCount = 70;
-            for (let i = 0; i < confettiCount; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animationDelay = Math.random() * 3 + 's';
-                confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
-                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                document.body.appendChild(confetti);
-                setTimeout(() => confetti.remove(), 5000);
+            const colors = ['#ff0080','#ff8c00','#40e0d0','#f0f','#0ff','#ff0','#9400d3','#ff1493'];
+            for (let i = 0; i < 60; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = Math.random() * 100 + '%';
+                c.style.top = '-20px';
+                c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                c.style.animationDelay = Math.random() * 3 + 's';
+                c.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                c.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(c);
+                setTimeout(() => c.remove(), 6000);
             }
         }
 
-        // Funciones para mostrar información educativa de componentes
+        // ============================================================
+        // MODAL EDUCATIVO
+        // ============================================================
         function showComponentInfo(component) {
             const modal = document.getElementById('info-modal');
             const modalBody = document.getElementById('modal-body');
             const info = componentInfo[component];
-            let html = `
-                <div class="modal-title">${info.title}</div>
-                <div class="modal-symbol">${info.symbol}</div>
-            `;
-            info.sections.forEach(section => {
-                html += `<div class="modal-section">`;
-                html += `<h3>${section.title}</h3>`;
-                html += `<p>${section.content}</p>`;
-                if (section.list) {
-                    html += '<ul>';
-                    section.list.forEach(item => {
-                        html += `<li>${item}</li>`;
-                    });
-                    html += '</ul>';
-                }
-                if (section.svg) {
-                    html += section.svg;
-                }
-                if (section.table) {
-                    html += section.table;
-                }
-                html += `</div>`;
+
+            let html = `<div class="modal-title">${info.title}</div><span class="modal-symbol">${info.symbol}</span>`;
+            info.sections.forEach(s => {
+                html += `<div class="modal-section"><h3>${s.title}</h3><p>${s.content}</p>`;
+                if (s.list) { html += '<ul>'; s.list.forEach(i => { html += `<li>${i}</li>`; }); html += '</ul>'; }
+                if (s.svg) html += s.svg;
+                if (s.table) html += s.table;
+                html += '</div>';
             });
+
             modalBody.innerHTML = html;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -2496,14 +1523,14 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Cerrar modal al hacer clic fuera del contenido
         document.addEventListener('click', function(e) {
-            const modal = document.getElementById('info-modal');
-            if (e.target === modal) {
-                closeModal();
-            }
+            if (e.target === document.getElementById('info-modal')) closeModal();
+            if (e.target === document.getElementById('celebration')) closeCelebration();
         });
 
+        // ============================================================
+        // INICIALIZACIÓN
+        // ============================================================
         document.addEventListener('DOMContentLoaded', () => {
             createBackgroundParticles();
             setupConnectionPoints();
@@ -2511,144 +1538,27 @@
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
             updateUI();
-            positionComponents();
         });
-
-        function positionComponents() {
-            const container = document.getElementById('protoboard-container');
-            const containerWidth = container.offsetWidth;
-            const containerHeight = container.offsetHeight;
-            
-            const battery = document.querySelector('.battery');
-            const switchEl = document.querySelector('.switch');
-            const resistor = document.querySelector('.resistor');
-            const led = document.querySelector('.led');
-            
-            battery.style.position = 'absolute';
-            battery.style.left = '60px';
-            battery.style.top = 'calc(50% - 75px)';
-            
-            switchEl.style.position = 'absolute';
-            switchEl.style.left = '250px';
-            switchEl.style.top = 'calc(50% - 40px)';
-            
-            resistor.style.position = 'absolute';
-            resistor.style.left = '450px';
-            resistor.style.top = 'calc(50% - 22px)';
-            
-            led.style.position = 'absolute';
-            led.style.left = 'calc(50% - 50px)';
-            led.style.top = 'calc(50% + 110px)';
-        }
 
         function resizeCanvas() {
             const container = document.getElementById('protoboard-container');
             const canvas = document.getElementById('wire-canvas');
-            canvas.setAttribute('width', container.offsetWidth);
-            canvas.setAttribute('height', container.offsetHeight);
+            canvas.setAttribute('width', container.scrollWidth || container.offsetWidth);
+            canvas.setAttribute('height', container.scrollHeight || container.offsetHeight);
             redrawWires();
-            positionComponents();
         }
 
+        // ============================================================
+        // PUNTOS DE CONEXIÓN
+        // ============================================================
         function setupConnectionPoints() {
-            const points = document.querySelectorAll('.connection-point');
-            points.forEach(point => {
+            document.querySelectorAll('.connection-point').forEach(point => {
                 point.addEventListener('click', handlePointClick);
-                point.addEventListener('touchstart', handlePointTouchStart, { passive: false });
+                point.addEventListener('touchstart', handlePointTouch, { passive: false });
             });
         }
 
-        function setupDragAndDrop() {
-            const components = document.querySelectorAll('.component');
-            components.forEach(component => {
-                component.addEventListener('mousedown', startDrag);
-                component.addEventListener('touchstart', startDrag, { passive: false });
-            });
-            
-            document.addEventListener('mousemove', drag);
-            document.addEventListener('touchmove', drag, { passive: false });
-            document.addEventListener('mouseup', stopDrag);
-            document.addEventListener('touchend', stopDrag);
-            document.addEventListener('touchcancel', stopDrag);
-        }
-
-        function startDrag(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Verificar si el clic/touch es en el interruptor
-            if (e.target && e.target.classList.contains('switch-toggle')) {
-                return;
-            }
-            
-            draggedElement = this;
-            isDragging = true;
-            draggedElement.classList.add('dragging');
-            
-            const rect = draggedElement.getBoundingClientRect();
-            
-            if (e.type === 'touchstart') {
-                const touch = e.touches[0];
-                offsetX = touch.clientX - rect.left;
-                offsetY = touch.clientY - rect.top;
-                touchIdentifier = touch.identifier;
-            } else {
-                offsetX = e.clientX - rect.left;
-                offsetY = e.clientY - rect.top;
-            }
-        }
-
-        function drag(e) {
-            if (!isDragging || !draggedElement) return;
-            e.preventDefault();
-            e.stopPropagation();
-            
-            let clientX, clientY;
-            
-            if (e.type === 'touchmove') {
-                const touch = Array.from(e.touches).find(t => t.identifier === touchIdentifier);
-                if (!touch) return;
-                clientX = touch.clientX;
-                clientY = touch.clientY;
-            } else {
-                clientX = e.clientX;
-                clientY = e.clientY;
-            }
-            
-            const container = document.getElementById('protoboard-container');
-            const containerRect = container.getBoundingClientRect();
-            
-            // Calcular nueva posición
-            let x = clientX - containerRect.left - offsetX;
-            let y = clientY - containerRect.top - offsetY;
-            
-            // Restringir el movimiento dentro del contenedor
-            const maxLeft = 10;
-            const maxRight = containerRect.width - draggedElement.offsetWidth - 10;
-            const maxTop = 10;
-            const maxBottom = containerRect.height - draggedElement.offsetHeight - 10;
-            
-            x = Math.max(maxLeft, Math.min(x, maxRight));
-            y = Math.max(maxTop, Math.min(y, maxBottom));
-            
-            draggedElement.style.left = x + 'px';
-            draggedElement.style.top = y + 'px';
-            
-            // Actualizar las conexiones en tiempo real
-            redrawWires();
-        }
-
-        function stopDrag(e) {
-            if (isDragging && draggedElement) {
-                isDragging = false;
-                draggedElement.classList.remove('dragging');
-                redrawWires();
-            }
-            draggedElement = null;
-            touchIdentifier = null;
-        }
-
-        function handlePointTouchStart(e) {
+        function handlePointTouch(e) {
             e.preventDefault();
             e.stopPropagation();
             handlePointClick(e);
@@ -2657,14 +1567,16 @@
         function handlePointClick(e) {
             e.preventDefault();
             e.stopPropagation();
-            
-            const point = e.target;
-            
+
+            if (isDragging) return; // no conectar si estaba arrastrando
+
+            const point = e.currentTarget || e.target;
+
             if (wires.length >= MAX_WIRES && !selectedPoint) {
                 showStatus('⚠️ Ya usaste los 4 cables disponibles', 'warning');
                 return;
             }
-            
+
             if (!selectedPoint) {
                 selectedPoint = point;
                 point.classList.add('selected');
@@ -2676,163 +1588,275 @@
                     showStatus('❌ Selección cancelada', 'info');
                     return;
                 }
-
                 if (selectedPoint.dataset.component === point.dataset.component) {
                     selectedPoint.classList.remove('selected');
                     selectedPoint = null;
                     showStatus('❌ No puedes conectar el mismo componente consigo mismo', 'error');
                     return;
                 }
-                
                 createWire(selectedPoint, point);
                 selectedPoint.classList.remove('selected');
                 point.classList.add('connected');
                 selectedPoint.classList.add('connected');
                 selectedPoint = null;
-                
                 updateUI();
                 updateProgress();
                 checkMissions();
             }
         }
 
-        function toggleSwitch(e) {
-            if (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-            
-            if (!circuitComplete) {
-                showStatus('⚠️ Primero completa el circuito correctamente', 'warning');
-                return;
-            }
-            
-            switchState = !switchState;
-            const switchEl = document.querySelector('.switch');
-            const switchToggle = document.querySelector('.switch-toggle');
-            const switchLabel = document.querySelector('.switch-label');
-            
-            if (switchState) {
-                switchEl.classList.add('on');
-                switchToggle.textContent = 'ON';
-                switchLabel.textContent = 'ENCENDIDO';
-                showStatus('⚡ Interruptor ENCENDIDO - ¡El LED debería encenderse!', 'success');
-            } else {
-                switchEl.classList.remove('on');
-                switchToggle.textContent = 'OFF';
-                switchLabel.textContent = 'APAGADO';
-                showStatus('⚡ Interruptor APAGADO - El LED se apaga', 'info');
-            }
-            
-            updateUI();
-            updateLED();
+        // ============================================================
+        // DRAG & DROP
+        // ============================================================
+        function setupDragAndDrop() {
+            document.querySelectorAll('.component').forEach(comp => {
+                comp.addEventListener('mousedown', startDrag);
+                comp.addEventListener('touchstart', startDrag, { passive: false });
+            });
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('touchmove', drag, { passive: false });
+            document.addEventListener('mouseup', stopDrag);
+            document.addEventListener('touchend', stopDrag);
+            document.addEventListener('touchcancel', stopDrag);
         }
 
-        function createWire(point1, point2) {
-            const container = document.getElementById('protoboard-container');
-            const containerRect = container.getBoundingClientRect();
-            
-            const rect1 = point1.getBoundingClientRect();
-            const rect2 = point2.getBoundingClientRect();
-            
-            // Determinar color según la conexión
-            let wireColor;
-            const terminal1 = point1.dataset.terminal;
-            const terminal2 = point2.dataset.terminal;
-            
-            if ((terminal1 === 'positive' && terminal2 === 'positive') || 
-                (terminal1 === 'in' && terminal2 === 'positive') ||
-                (terminal1 === 'positive' && terminal2 === 'in')) {
-                wireColor = '#ff4757'; // Rojo para positivo
-            } else if ((terminal1 === 'negative' && terminal2 === 'negative') ||
-                      (terminal1 === 'negative' && terminal2 === 'out') ||
-                      (terminal1 === 'out' && terminal2 === 'negative')) {
-                wireColor = '#2f3542'; // Negro para negativo
-            } else {
-                wireColor = wireColors[currentColorIndex++ % wireColors.length];
-            }
-            
-            const wire = {
-                point1: point1,
-                point2: point2,
-                color: wireColor
-            };
+        function startDrag(e) {
+            if (e.target && (e.target.classList.contains('switch-toggle') || e.target.classList.contains('connection-point'))) return;
 
-            wires.push(wire);
-            drawWire(wire);
-            showStatus(`🔌 Cable ${wires.length} conectado correctamente`, 'success');
+            e.preventDefault();
+            draggedElement = this || e.currentTarget;
+            isDragging = false; // se confirma en drag()
+
+            const rect = draggedElement.getBoundingClientRect();
+            if (e.type === 'touchstart') {
+                const touch = e.touches[0];
+                offsetX = touch.clientX - rect.left;
+                offsetY = touch.clientY - rect.top;
+                touchId = touch.identifier;
+            } else {
+                offsetX = e.clientX - rect.left;
+                offsetY = e.clientY - rect.top;
+            }
+        }
+
+        function drag(e) {
+            if (!draggedElement) return;
+            e.preventDefault();
+
+            let clientX, clientY;
+            if (e.type === 'touchmove') {
+                const touch = Array.from(e.touches).find(t => t.identifier === touchId);
+                if (!touch) return;
+                clientX = touch.clientX;
+                clientY = touch.clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+
+            isDragging = true;
+            draggedElement.classList.add('dragging');
+
+            const container = document.getElementById('protoboard-container');
+            const cr = container.getBoundingClientRect();
+
+            let x = clientX - cr.left - offsetX;
+            let y = clientY - cr.top - offsetY;
+
+            const maxX = container.scrollWidth - draggedElement.offsetWidth - 10;
+            const maxY = container.scrollHeight - draggedElement.offsetHeight - 10;
+
+            x = Math.max(10, Math.min(x, maxX));
+            y = Math.max(10, Math.min(y, maxY));
+
+            draggedElement.style.left = x + 'px';
+            draggedElement.style.top = y + 'px';
+            redrawWires();
+        }
+
+        function stopDrag(e) {
+            if (draggedElement) {
+                draggedElement.classList.remove('dragging');
+                redrawWires();
+            }
+            setTimeout(() => { isDragging = false; }, 50);
+            draggedElement = null;
+            touchId = null;
+        }
+
+        // ============================================================
+        // CABLES
+        // ============================================================
+        function createWire(p1, p2) {
+            const t1 = p1.dataset.terminal, t2 = p2.dataset.terminal;
+            let color;
+            if ((t1 === 'positive' || t1 === 'in') && (t2 === 'positive' || t2 === 'in')) color = '#ff4757';
+            else if ((t1 === 'negative' || t1 === 'out') && (t2 === 'negative' || t2 === 'out')) color = '#2f3542';
+            else color = wireColors[currentColorIndex++ % wireColors.length];
+
+            wires.push({ point1: p1, point2: p2, color });
+            redrawWires();
+            showStatus(`🔌 Cable ${wires.length} conectado`, 'success');
         }
 
         function drawWire(wire) {
             const canvas = document.getElementById('wire-canvas');
-            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            
             const container = document.getElementById('protoboard-container');
-            const containerRect = container.getBoundingClientRect();
-            
-            const rect1 = wire.point1.getBoundingClientRect();
-            const rect2 = wire.point2.getBoundingClientRect();
-            
-            const x1 = rect1.left - containerRect.left + rect1.width / 2;
-            const y1 = rect1.top - containerRect.top + rect1.height / 2;
-            const x2 = rect2.left - containerRect.left + rect2.width / 2;
-            const y2 = rect2.top - containerRect.top + rect2.height / 2;
-            
+            const cr = container.getBoundingClientRect();
+
+            const r1 = wire.point1.getBoundingClientRect();
+            const r2 = wire.point2.getBoundingClientRect();
+
+            const x1 = r1.left - cr.left + r1.width / 2;
+            const y1 = r1.top - cr.top + r1.height / 2;
+            const x2 = r2.left - cr.left + r2.width / 2;
+            const y2 = r2.top - cr.top + r2.height / 2;
+
             const dx = x2 - x1;
-            const curve = Math.abs(dx) * 0.35;
+            const curve = Math.abs(dx) * 0.35 + 30;
             const d = `M ${x1} ${y1} C ${x1 + curve} ${y1}, ${x2 - curve} ${y2}, ${x2} ${y2}`;
-            
+
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
             path.setAttribute('d', d);
             path.setAttribute('stroke', wire.color);
-            path.setAttribute('stroke-width', '9');
+            path.setAttribute('stroke-width', '8');
             path.setAttribute('fill', 'none');
             path.setAttribute('stroke-linecap', 'round');
             path.setAttribute('opacity', '0.95');
-            path.setAttribute('stroke-linejoin', 'round');
-            
             canvas.appendChild(path);
         }
 
         function redrawWires() {
-            const canvas = document.getElementById('wire-canvas');
-            canvas.innerHTML = '';
-            
-            wires.forEach(wire => {
-                drawWire(wire);
-            });
+            document.getElementById('wire-canvas').innerHTML = '';
+            wires.forEach(w => drawWire(w));
+        }
+
+        // ============================================================
+        // INTERRUPTOR
+        // ============================================================
+        function toggleSwitch(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            if (!circuitComplete) {
+                showStatus('⚠️ Primero completa el circuito correctamente', 'warning');
+                return;
+            }
+            switchState = !switchState;
+            const sw = document.querySelector('.switch');
+            const btn = document.querySelector('.switch-toggle');
+            const lbl = document.querySelector('.switch-label');
+            if (switchState) {
+                sw.classList.add('on');
+                btn.textContent = 'ON';
+                lbl.textContent = 'ENCENDIDO';
+                showStatus('⚡ Interruptor ENCENDIDO - ¡El LED brilla!', 'success');
+            } else {
+                sw.classList.remove('on');
+                btn.textContent = 'OFF';
+                lbl.textContent = 'APAGADO';
+                showStatus('⚡ Interruptor APAGADO', 'info');
+            }
+            updateUI();
+            updateLED();
         }
 
         function updateLED() {
-            const ledEl = document.querySelector('.led');
-            
-            if (circuitComplete && switchState) {
-                ledEl.classList.add('active');
+            const led = document.querySelector('.led');
+            circuitComplete && switchState ? led.classList.add('active') : led.classList.remove('active');
+            updateUI();
+        }
+
+        // ============================================================
+        // UI Y PROGRESO
+        // ============================================================
+        function updateUI() {
+            document.getElementById('wire-count').textContent = wires.length + ' / ' + MAX_WIRES;
+            document.getElementById('switch-status').textContent = switchState ? '✅ ON' : '❌ OFF';
+            const on = document.querySelector('.led').classList.contains('active');
+            document.getElementById('led-status').textContent = on ? '✅ ON' : '❌ OFF';
+        }
+
+        function updateProgress() {
+            document.getElementById('progress-fill').style.width = (wires.length / MAX_WIRES * 100) + '%';
+        }
+
+        // ============================================================
+        // MISIONES
+        // ============================================================
+        function checkMissions() {
+            const conn = {};
+            wires.forEach(w => {
+                const k1 = w.point1.dataset.component + '-' + w.point1.dataset.terminal;
+                const k2 = w.point2.dataset.component + '-' + w.point2.dataset.terminal;
+                if (!conn[k1]) conn[k1] = [];
+                if (!conn[k2]) conn[k2] = [];
+                conn[k1].push(k2);
+                conn[k2].push(k1);
+            });
+
+            const m1 = chk(conn, 'battery-positive', 'switch-in');
+            const m2 = chk(conn, 'switch-out', 'resistor-left') || chk(conn, 'switch-out', 'resistor-right');
+            const m3 = (chk(conn, 'resistor-left', 'led-positive') && !chk(conn, 'resistor-right', 'led-positive')) ||
+                       (chk(conn, 'resistor-right', 'led-positive') && !chk(conn, 'resistor-left', 'led-positive'));
+            const m4 = chk(conn, 'led-negative', 'battery-negative');
+
+            ['mission1','mission2','mission3','mission4'].forEach((id, i) => {
+                document.getElementById(id).classList.toggle('completed', [m1,m2,m3,m4][i]);
+            });
+        }
+
+        // ============================================================
+        // VERIFICAR
+        // ============================================================
+        function verifyCircuit() {
+            if (wires.length < MAX_WIRES) {
+                showStatus(`❌ Te faltan ${MAX_WIRES - wires.length} cable(s) por conectar`, 'error');
+                return;
+            }
+            const conn = {};
+            wires.forEach(w => {
+                const k1 = w.point1.dataset.component + '-' + w.point1.dataset.terminal;
+                const k2 = w.point2.dataset.component + '-' + w.point2.dataset.terminal;
+                if (!conn[k1]) conn[k1] = [];
+                if (!conn[k2]) conn[k2] = [];
+                conn[k1].push(k2);
+                conn[k2].push(k1);
+            });
+
+            const m1 = chk(conn, 'battery-positive', 'switch-in');
+            const m2 = chk(conn, 'switch-out', 'resistor-left') || chk(conn, 'switch-out', 'resistor-right');
+            const m3 = (chk(conn, 'resistor-left', 'led-positive') && !chk(conn, 'resistor-right', 'led-positive')) ||
+                       (chk(conn, 'resistor-right', 'led-positive') && !chk(conn, 'resistor-left', 'led-positive'));
+            const m4 = chk(conn, 'led-negative', 'battery-negative');
+
+            if (m1 && m2 && m3 && m4) {
+                circuitComplete = true;
+                document.getElementById('celebration').classList.add('active');
+                createConfetti();
+                showStatus('✅ ¡CIRCUITO CORRECTO! Toca el interruptor para encender el LED', 'success');
             } else {
-                ledEl.classList.remove('active');
+                circuitComplete = false;
+                document.querySelector('.led').classList.remove('active');
+                let msg = '❌ Circuito incorrecto. ';
+                if (!m1) msg += '🔴 Batería(+) → Interruptor. ';
+                if (!m2) msg += '🟡 Interruptor → Resistencia. ';
+                if (!m3) msg += '🟠 Resistencia → LED(+). ';
+                if (!m4) msg += '⚫ LED(−) → Batería(−).';
+                showStatus(msg, 'error');
             }
             updateUI();
         }
 
-        function updateUI() {
-            document.getElementById('wire-count').textContent = wires.length + ' / ' + MAX_WIRES;
-            document.getElementById('switch-status').textContent = switchState ? '✅ ON' : '❌ OFF';
-            const ledActive = document.querySelector('.led').classList.contains('active');
-            document.getElementById('led-status').textContent = ledActive ? '✅ ON' : '❌ OFF';
+        function chk(conn, a, b) {
+            return conn[a] ? conn[a].includes(b) : false;
         }
 
-        function updateProgress() {
-            const progress = (wires.length / MAX_WIRES) * 100;
-            document.getElementById('progress-fill').style.width = progress + '%';
-        }
-
+        // ============================================================
+        // REINICIAR
+        // ============================================================
         function clearWires() {
             wires = [];
             document.getElementById('wire-canvas').innerHTML = '';
-            
-            document.querySelectorAll('.connection-point').forEach(point => {
-                point.classList.remove('connected', 'selected');
-            });
-            
+            document.querySelectorAll('.connection-point').forEach(p => p.classList.remove('connected','selected'));
             selectedPoint = null;
             document.querySelector('.led').classList.remove('active');
             circuitComplete = false;
@@ -2840,99 +1864,30 @@
             document.querySelector('.switch').classList.remove('on');
             document.querySelector('.switch-toggle').textContent = 'OFF';
             document.querySelector('.switch-label').textContent = 'APAGADO';
-            
-            ['mission1', 'mission2', 'mission3', 'mission4'].forEach(id => {
-                document.getElementById(id).classList.remove('completed');
-            });
-            
+            ['mission1','mission2','mission3','mission4'].forEach(id => document.getElementById(id).classList.remove('completed'));
             updateUI();
             updateProgress();
             showStatus('🔄 Circuito reiniciado - ¡Intenta de nuevo!', 'info');
         }
 
-        function checkMissions() {
-            const connections = {};
-            wires.forEach(wire => {
-                const key1 = wire.point1.dataset.component + '-' + wire.point1.dataset.terminal;
-                const key2 = wire.point2.dataset.component + '-' + wire.point2.dataset.terminal;
-                
-                if (!connections[key1]) connections[key1] = [];
-                if (!connections[key2]) connections[key2] = [];
-                
-                connections[key1].push(key2);
-                connections[key2].push(key1);
-            });
-
-            const m1 = checkPath(connections, 'battery-positive', 'switch-in');
-            const m2 = checkPath(connections, 'switch-out', 'resistor-left') || checkPath(connections, 'switch-out', 'resistor-right');
-            const m3 = (checkPath(connections, 'resistor-left', 'led-positive') && !checkPath(connections, 'resistor-right', 'led-positive')) ||
-                       (checkPath(connections, 'resistor-right', 'led-positive') && !checkPath(connections, 'resistor-left', 'led-positive'));
-            const m4 = checkPath(connections, 'led-negative', 'battery-negative');
-
-            document.getElementById('mission1').classList.toggle('completed', m1);
-            document.getElementById('mission2').classList.toggle('completed', m2);
-            document.getElementById('mission3').classList.toggle('completed', m3);
-            document.getElementById('mission4').classList.toggle('completed', m4);
-        }
-
-        function verifyCircuit() {
-            if (wires.length < MAX_WIRES) {
-                showStatus(`❌ Te faltan ${MAX_WIRES - wires.length} cable(s) por conectar`, 'error');
-                return;
-            }
-
-            const connections = {};
-            wires.forEach(wire => {
-                const key1 = wire.point1.dataset.component + '-' + wire.point1.dataset.terminal;
-                const key2 = wire.point2.dataset.component + '-' + wire.point2.dataset.terminal;
-                
-                if (!connections[key1]) connections[key1] = [];
-                if (!connections[key2]) connections[key2] = [];
-                
-                connections[key1].push(key2);
-                connections[key2].push(key1);
-            });
-
-            const m1 = checkPath(connections, 'battery-positive', 'switch-in');
-            const m2 = checkPath(connections, 'switch-out', 'resistor-left') || checkPath(connections, 'switch-out', 'resistor-right');
-            const m3 = (checkPath(connections, 'resistor-left', 'led-positive') && !checkPath(connections, 'resistor-right', 'led-positive')) ||
-                       (checkPath(connections, 'resistor-right', 'led-positive') && !checkPath(connections, 'resistor-left', 'led-positive'));
-            const m4 = checkPath(connections, 'led-negative', 'battery-negative');
-
-            if (m1 && m2 && m3 && m4) {
-                circuitComplete = true;
-                document.getElementById('celebration').classList.add('active');
-                createConfetti();
-                showStatus('✅ ¡CIRCUITO CORRECTO! Ahora haz clic en el interruptor para encender el LED', 'success');
-            } else {
-                circuitComplete = false;
-                document.querySelector('.led').classList.remove('active');
-                let message = '❌ Circuito incorrecto. ';
-                if (!m1) message += '🔴 Conecta batería (+) con interruptor. ';
-                if (!m2) message += '🟡 Conecta interruptor con resistencia. ';
-                if (!m3) message += '🟠 Conecta resistencia con LED (+). ';
-                if (!m4) message += '⚫ Conecta LED (-) con batería (-).';
-                showStatus(message, 'error');
-            }
-            updateUI();
-        }
-
-        function checkPath(connections, start, end) {
-            if (!connections[start]) return false;
-            return connections[start].includes(end);
-        }
-
+        // ============================================================
+        // CELEBRATION
+        // ============================================================
         function closeCelebration() {
             document.getElementById('celebration').classList.remove('active');
         }
 
-        function showStatus(message, type) {
-            const statusEl = document.getElementById('status-toast');
-            statusEl.textContent = message;
-            statusEl.className = 'status-toast ' + type;
-            
-            setTimeout(() => statusEl.classList.add('show'), 100);
-            setTimeout(() => statusEl.classList.remove('show'), 4500);
+        // ============================================================
+        // TOAST
+        // ============================================================
+        let toastTimer;
+        function showStatus(msg, type) {
+            const el = document.getElementById('status-toast');
+            el.textContent = msg;
+            el.className = 'status-toast ' + type;
+            clearTimeout(toastTimer);
+            setTimeout(() => el.classList.add('show'), 50);
+            toastTimer = setTimeout(() => el.classList.remove('show'), 4500);
         }
     </script>
 </body>
